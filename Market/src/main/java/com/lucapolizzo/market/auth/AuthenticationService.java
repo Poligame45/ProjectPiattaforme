@@ -1,8 +1,8 @@
 package com.lucapolizzo.market.auth;
 
 import com.lucapolizzo.market.config.JwtService;
-import com.lucapolizzo.market.user.User;
-import com.lucapolizzo.market.user.UserRepository;
+import com.lucapolizzo.market.entities.User;
+import com.lucapolizzo.market.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
