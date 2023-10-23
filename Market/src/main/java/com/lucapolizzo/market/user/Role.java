@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.entities;
+package com.lucapolizzo.market.user;
 
 public enum Role {
     ADMIN,

@@ -1,6 +1,6 @@
 package com.lucapolizzo.market.auth;
 
-import com.lucapolizzo.market.entities.Role;
+import com.lucapolizzo.market.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,5 @@
-package com.lucapolizzo.market.entities;
+package com.lucapolizzo.market.user;
 
-import com.lucapolizzo.market.entities.Role;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -23,19 +22,11 @@ public class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ID",nullable = false)
   private Integer id;
-
-  @Column(name = "firstname",nullable = false)
   private String firstname;
-
-  @Column(name = "lastname",nullable = false)
   private String lastname;
-
   @Column(name = "email",nullable = false,unique = true)
   private String email;
-
-  @Column(name = "password",nullable = false)
   private String password;
 
   @Enumerated(EnumType.STRING)
