@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "631aa1af-0764-405f-b7e1-3240df3f7a55",
+		"name": "Market Luca Polizzo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26380256",
+		"_collection_link": "https://warped-meadow-534826.postman.co/workspace/Team-Workspace~8d74fb9f-951a-4d3d-86ef-27193cd0ef32/collection/26380256-631aa1af-0764-405f-b7e1-3240df3f7a55?action=share&source=collection_link&creator=26380256"
+	},
+	"item": [
+		{
+			"name": "demo",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Registrazione",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gigi@yahoo.it\",\r\n    \"firstname\":\"Luca\",\r\n    \"password\":\"jonny\",\r\n    \"lastname\":\"Polizzo\",\r\n    \"role\":\"CUSTOMER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gigi@yahoo.it\",\r\n    \"password\":\"jonny\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
