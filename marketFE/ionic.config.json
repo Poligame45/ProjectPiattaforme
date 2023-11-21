@@ -1,0 +1,7 @@
+{
+  "name": "marketFE",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
