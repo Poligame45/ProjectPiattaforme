@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
@@ -12,13 +12,13 @@ export class LoginPage implements OnInit {
   myForm!: FormGroup;
   token: String = "";
 
-  constructor(private serviceLogin: LoginService) { }
+  constructor(private serviceLogin: LoginService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
-    })
+    });
   }
 
   onSubmit() {
@@ -33,6 +33,10 @@ export class LoginPage implements OnInit {
       this.token = prova.accessToken;
       console.log(this.token);
     });
+  }
+
+  goToRegisterPage() {
+    this.router.navigate(['register']);
   }
 
 }

@@ -1,6 +1,6 @@
 package com.lucapolizzo.market.auth;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lucapolizzo.market.models.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
   private String accessToken;
+  private User user;
 }

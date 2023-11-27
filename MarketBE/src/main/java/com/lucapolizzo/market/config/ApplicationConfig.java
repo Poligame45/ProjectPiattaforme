@@ -1,6 +1,6 @@
 package com.lucapolizzo.market.config;
 
-import com.lucapolizzo.market.user.UserRepository;
+import com.lucapolizzo.market.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

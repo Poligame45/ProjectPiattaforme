@@ -1,6 +1,8 @@
-package com.lucapolizzo.market.user;
+package com.lucapolizzo.market.repositories;
 
 import java.util.Optional;
+
+import com.lucapolizzo.market.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 

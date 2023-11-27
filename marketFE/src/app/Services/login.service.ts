@@ -13,4 +13,7 @@ export class LoginService {
   login(body:any): Observable<any> {
     return this.httpClient.post<any>("http://localhost:8080/api/auth/authenticate",body);
   }
+  register(body:any): Observable<any> {
+    return this.httpClient.post<any>("http://localhost:8080/api/auth/register",body);
+  }
 }

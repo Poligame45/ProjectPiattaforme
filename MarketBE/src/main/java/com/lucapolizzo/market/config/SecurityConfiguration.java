@@ -28,11 +28,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req ->req
-                                .requestMatchers("/api/auth/**").permitAll()
-                                .anyRequest()
-                                .authenticated()
+                .cors(cors -> cors.configure(http))
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/products/**").hasAuthority("CUSTOMER")
+                        .anyRequest()
+                        .authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
