@@ -1,0 +1,7 @@
+Front end:
+- Creazione home page con la lista dei prodotti
+- Creazione pagina dettaglio di un prodotto tramite query param e/o path param
+
+Back end:
+- Test API prodotto
+- Introdurre API lato admin per poter effettuare operazioni CRUD sui prodotti.
