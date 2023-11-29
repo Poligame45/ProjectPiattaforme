@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     const obj: any = {
       email: this.myForm.value.email,
       password: this.myForm.value.password
@@ -29,10 +30,8 @@ export class LoginPage implements OnInit {
     if (this.myForm.invalid) {
       console.log('form invalido');
     }
-    this.serviceLogin.login(obj).subscribe(prova => {
-      this.token = prova.accessToken;
-      console.log(this.token);
-    });
+    this.token = await firstValueFrom(this.serviceLogin.register(obj));
+
   }
 
   goToRegisterPage() {

@@ -14,7 +14,10 @@ import lombok.NoArgsConstructor;
 @Table(name="Product")
 public class StoredProduct {
 
+    public static int nProdotti = 0;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="codice",nullable = false)
     private int codice;
 
@@ -33,5 +36,4 @@ public class StoredProduct {
     //capire il campo version
     @Version
     private long version;
-
 }
