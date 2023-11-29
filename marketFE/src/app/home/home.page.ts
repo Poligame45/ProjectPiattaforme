@@ -18,6 +18,7 @@ export class HomePage extends Paginator implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.list = await super.loadProducts();
+    //Prove
     let prodotto: StoredProduct = {
       descrizione: "prova",
       img: "",

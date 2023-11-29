@@ -2,6 +2,8 @@ import { StoredProductService } from "../Services/stored-product.service";
 import { Utility } from "./Utility";
 
 export class Paginator extends Utility {
+    //Fixare comportamento del paginatore prevedendo di disabilitare i pulsanti e di abilitarli a seconda dei
+    //valori hasNext, hasPrevious ecc.
     constructor(storedProductService: StoredProductService) {
         super(storedProductService);
         this.paginator.hasPrevious = false;
@@ -32,12 +34,12 @@ export class Paginator extends Utility {
 
     goToLastPage() {
         if (this.paginator.current == this.totProdotti / this.paginator.current) return;
-        this.paginator.current = 0;
+        this.paginator.current = this.totProdotti /(this.paginator.take );
         this.paginator.take = 10;
         this.paginator.hasNext = false;
     }
     goToNextPage() {
-        if (this.paginator.current <= this.totProdotti / this.paginator.current) {
+        if (this.paginator.current <= this.totProdotti / this.paginator.current + 1 ) {
             this.paginator.current = this.paginator.current + 1;
             this.paginator.take = 10;
             this.paginator.hasPrevious = true;
