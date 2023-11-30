@@ -1,4 +1,5 @@
 export class StoredProduct{
+    nome!:String;
     descrizione!:String;
     prezzo!:number;
     qta!:number;

@@ -1,8 +1,5 @@
 package com.lucapolizzo.market.demo;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
+/*
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,4 +44,4 @@ public class ManagementController {
     public String delete() {
         return "DELETE:: management controller";
     }
-}
+}*/

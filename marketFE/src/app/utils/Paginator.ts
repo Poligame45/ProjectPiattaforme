@@ -33,24 +33,32 @@ export class Paginator extends Utility {
     }
 
     goToLastPage() {
-        if (this.paginator.current == this.totProdotti / this.paginator.current) return;
+        if (  this.paginator.current == this.totProdotti / this.paginator.current) return;
         this.paginator.current = this.totProdotti /(this.paginator.take );
         this.paginator.take = 10;
         this.paginator.hasNext = false;
+        console.log(this.paginator);
+
     }
     goToNextPage() {
-        if (this.paginator.current <= this.totProdotti / this.paginator.current + 1 ) {
+        if (this.paginator.hasNext || (this.paginator.current == 0 && this.totProdotti>this.paginator.take)) {
             this.paginator.current = this.paginator.current + 1;
             this.paginator.take = 10;
             this.paginator.hasPrevious = true;
-            console.log(this.paginator);
+            if(this.paginator.current <= this.totProdotti / this.paginator.current + 1 ){
+                this.paginator.hasNext = false;
+            }
         }
+        console.log(this.paginator);
+
     }
     goToPreviousPage() {
         if (this.paginator.hasPrevious == false || this.paginator.current == 0) return;
         this.paginator.current = this.paginator.current - 1;
         this.paginator.take = 10;
         this.paginator.hasNext = true;
+        console.log(this.paginator);
+
     }
     goToFirstPage() {
         if (this.paginator.current == 0) {
@@ -59,6 +67,7 @@ export class Paginator extends Utility {
         this.paginator.current = 0;
         this.paginator.take = 10;
         this.paginator.hasPrevious = false;
+        console.log(this.paginator);
     }
 
 }

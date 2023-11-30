@@ -1,4 +1,4 @@
-export class GetCommandProduct{
+export class GenericSearchCommand{
     current!:number;
     take!:number;
 }

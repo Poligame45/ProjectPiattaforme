@@ -1,6 +1,6 @@
 import { StoredProductService } from "../Services/stored-product.service";
 import { firstValueFrom } from 'rxjs';
-import { GetCommandProduct } from "../models/command/GetCommandProduct";
+import { SearchCommandStoredProduct } from "../models/command/SearchCommandStoredProduct";
 import { ListStoredProductsDTO } from "../models/dto/ListStoredProductsDTO";
 import { PaginatorModel } from "../models/PaginatorModel";
 
@@ -11,10 +11,11 @@ export class Utility {
     constructor(public storedProductService: StoredProductService) { }
 
     async loadProducts() {
-        let commandSearch: GetCommandProduct = new GetCommandProduct();
+        let commandSearch: SearchCommandStoredProduct = new SearchCommandStoredProduct();
         commandSearch.current = this.paginator.current;
         commandSearch.take = this.paginator.take;
-        this.resp = await firstValueFrom(this.storedProductService.getAllProducts(commandSearch));
+        this.resp = await firstValueFrom(this.storedProductService.searchAll(commandSearch));
+        console.log(this.resp);
         this.totProdotti = this.resp.totProdotti;
         return this.resp.storedProductList;
     }
