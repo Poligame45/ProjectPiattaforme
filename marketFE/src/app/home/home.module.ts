@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { PaginatorModule } from '../components/paginator/paginator.module';
+import { HeaderModule } from '../components/header/header.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { PaginatorModule } from '../components/paginator/paginator.module';
     FormsModule,
     IonicModule,
     PaginatorModule,
+    HeaderModule,
     HomePageRoutingModule
   ],
   declarations: [HomePage]

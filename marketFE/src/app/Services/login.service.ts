@@ -16,4 +16,11 @@ export class LoginService {
   register(body:any): Observable<any> {
     return this.httpClient.post<any>("http://localhost:8080/api/auth/register",body);
   }
+
+  getAuthorizationToken(){
+    return sessionStorage.getItem("token");
+  }
+  getCurrentUser(){
+    return sessionStorage.getItem("userId");
+  }
 }

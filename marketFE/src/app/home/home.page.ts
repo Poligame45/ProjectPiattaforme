@@ -4,6 +4,7 @@ import { SearchCommandStoredProduct } from '../models/command/SearchCommandStore
 import { StoredProduct } from '../models/StoredProduct';
 import { firstValueFrom } from 'rxjs';
 import { Utility } from '../utils/Utility';
+import { ActivatedRoute, ActivatedRouteSnapshot, Route } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomePage extends Utility implements OnInit {
     console.log(this.list)
   }
 
-   async changePage(event: any){
+  async changePage(event: any) {
     this.list = await super.changePaginatorValue(event);
   }
 

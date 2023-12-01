@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/Services/login.service';
 })
 export class RegisterPage implements OnInit {
   myForm!: FormGroup;
-  token: String = "";
+  token!: any;
   
 
   constructor(private serviceRegister: LoginService, private router:Router, private activatedRoute:ActivatedRoute) { }
@@ -52,8 +52,11 @@ export class RegisterPage implements OnInit {
     }
 
     this.token = await firstValueFrom(this.serviceRegister.register(obj));
-    console.log(this.token);
-    //Naviga verso una pagina
+    sessionStorage.setItem("token", this.token.accessToken);
+    sessionStorage.setItem("userId",this.token.user.id);
+    sessionStorage.setItem("userRole",this.token.user.role);
+
+    //Naviga verso una pagina 
   }
 
   goToLoginPage(){

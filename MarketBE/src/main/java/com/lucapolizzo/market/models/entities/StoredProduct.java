@@ -42,6 +42,7 @@ public class StoredProduct {
     //capire il campo version
     //@Version
     //private long version;
+
     public StoredProduct(String nome, String descrizione, double prezzo, int qta, String img) {
         this.nome = nome;
         this.descrizione = descrizione;

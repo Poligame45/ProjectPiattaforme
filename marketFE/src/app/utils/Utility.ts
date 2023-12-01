@@ -1,5 +1,5 @@
 import { StoredProductService } from "../Services/stored-product.service";
-import { firstValueFrom } from 'rxjs';
+import { Subject, firstValueFrom } from 'rxjs';
 import { SearchCommandStoredProduct } from "../models/command/SearchCommandStoredProduct";
 import { ListStoredProductsDTO } from "../models/dto/ListStoredProductsDTO";
 import { PaginatorModel } from "../models/PaginatorModel";
@@ -16,8 +16,9 @@ export class Utility {
         commandSearch.current = current;
         commandSearch.take = take;
         this.resp = await firstValueFrom(this.storedProductService.search(commandSearch));
-        console.log(this.resp.storedProductList)
+        console.log(this.resp.storedProductList);
         return this.resp.storedProductList;
+
 
     }
 

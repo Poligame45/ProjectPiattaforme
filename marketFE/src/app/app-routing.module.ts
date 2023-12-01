@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './Services/guards.service';
 
 const routes: Routes = [
   {
@@ -9,14 +10,22 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
+    data:{titolo:"prova titolo"},
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./Pages/login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./Pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'user-details',
+    canActivate:[authGuard], 
+    data:{authorities:'CUSTOMER'},
+    loadChildren: () => import('./Pages/user-details/user-details.module').then( m => m.UserDetailsPageModule)
   },
 
 ];
