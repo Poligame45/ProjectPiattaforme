@@ -1,27 +1,28 @@
 import { StoredProductService } from './../../Services/stored-product.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Paginator } from 'src/app/utils/Paginator';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Utility } from 'src/app/utils/Utility';
 
 @Component({
   selector: 'paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent extends Paginator implements OnInit   {
+export class PaginatorComponent extends Utility implements OnInit {
   @Output() changePage: EventEmitter<any> = new EventEmitter();
+  @Input() current!: number;
+  @Input() nProdotti!: number;
+  @Input() take!: number;
+  totPagine!:number;
 
-  constructor( storedProductService:StoredProductService) {
+  constructor(storedProductService: StoredProductService) {
     super(storedProductService);
-    if(this.totProdotti > 0){
-      this.paginator.hasNext = true;
-    }
   }
 
-  ngOnInit() { }
-
-  emitChangePage(event:any) {
-      this.changePage.emit(event);
+  ngOnInit() {
   }
-  
+
+  emitChangePage(event: any) {
+    this.changePage.emit(event);
+  }
 
 }

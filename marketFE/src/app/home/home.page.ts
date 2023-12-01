@@ -1,37 +1,28 @@
 import { StoredProductService } from './../Services/stored-product.service';
-import { Component, OnInit } from '@angular/core';
-import { Paginator } from '../utils/Paginator';
+import { Component, Input, OnInit } from '@angular/core';
 import { SearchCommandStoredProduct } from '../models/command/SearchCommandStoredProduct';
 import { StoredProduct } from '../models/StoredProduct';
 import { firstValueFrom } from 'rxjs';
+import { Utility } from '../utils/Utility';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage extends Paginator implements OnInit {
-  list!: any;
+export class HomePage extends Utility implements OnInit {
+
   constructor(storedProductService: StoredProductService) {
     super(storedProductService);
   }
 
   async ngOnInit(): Promise<void> {
     this.list = await super.loadProducts();
-    // Prove
-    // let prodotto: StoredProduct = {
-    //   nome:"prod452",
-    //   descrizione: "prodotto 452",
-    //   img: "",
-    //   prezzo: 20.5,
-    //   qta: 10
-    // }
-    // this.resp = await firstValueFrom(this.storedProductService.addProduct(prodotto));
+    console.log(this.list)
   }
 
-  async changePage(event: any) {
-    super.changePaginatorValue(event);
-    this.list = await super.loadProducts();
+   async changePage(event: any){
+    this.list = await super.changePaginatorValue(event);
   }
 
 

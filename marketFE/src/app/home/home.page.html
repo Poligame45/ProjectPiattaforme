@@ -1,9 +1,9 @@
 <ion-row>
     <ion-col *ngFor="let prodotto of list">
         <ion-card>
-            <img src={{prodotto.img}}>
+            <!-- <img src={{prodotto.img}}> -->
             <ion-card-header>
-                <ion-card-title>{{prodotto.descrizione}}</ion-card-title>
+                <ion-card-title>{{prodotto.nome}}</ion-card-title>
                 <ion-card-subtitle>{{prodotto.descrizione}}</ion-card-subtitle>
             </ion-card-header>
             <ion-row>
@@ -17,4 +17,4 @@
         </ion-card>
     </ion-col>
 </ion-row>
-<paginator (changePage)="changePage($event)"></paginator>
+<paginator (changePage)="changePage($event)" ></paginator>

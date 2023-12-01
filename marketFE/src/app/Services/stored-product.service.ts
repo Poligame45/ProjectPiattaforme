@@ -11,12 +11,12 @@ export class StoredProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  searchAll(body:SearchCommandStoredProduct): Observable<any> {
+  search(body:SearchCommandStoredProduct): Observable<any> {
     return this.httpClient.post<any>("http://localhost:8080/products", body);
   }
 
-  //prova delle api
   addProduct(body:AddUpdateCommandStoredProduct): Observable<any> {
     return this.httpClient.post<any>("http://localhost:8080/products/addStoredProduct", body);
   }
+  
 }
