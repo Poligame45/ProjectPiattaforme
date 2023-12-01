@@ -45,6 +45,17 @@ public class StoredProductController {
         StoredProductDTO storedProduct = productService.updateStoredProduct(command);
         return new ResponseEntity<>(storedProduct, HttpStatus.OK);
     }
+    @PostMapping("/getStoredProduct")
+    public ResponseEntity<StoredProductDTO> getStoredProduct(@RequestBody GetDeleteStoredProductCommand command) {
+        StoredProductDTO storedProduct = productService.getStoredProduct(command);
+        return new ResponseEntity<>(storedProduct, HttpStatus.OK);
+    }
+
+    @PostMapping("/searchAllStoredProducts")
+    public ResponseEntity<ListStoredProductsDTO> searchAllStoredProducts(@RequestBody SearchStoredProductCommand searchStoredProductCommand) {
+        ListStoredProductsDTO listStoredProductsDTO = productService.searchAll();
+        return new ResponseEntity<>(listStoredProductsDTO, HttpStatus.OK);
+    }
 
 
 }

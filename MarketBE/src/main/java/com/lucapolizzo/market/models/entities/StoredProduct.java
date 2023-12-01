@@ -13,22 +13,15 @@ import java.io.Serial;
 import java.util.Random;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "Product")
 
 public class StoredProduct {
 
-    public static int nProdotti = 0;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "codice", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "codice", nullable = false, unique = true)
     private int codice;
 
     @Column(name = "nome", nullable = false)
@@ -49,6 +42,14 @@ public class StoredProduct {
     //capire il campo version
     //@Version
     //private long version;
+    public StoredProduct(String nome, String descrizione, double prezzo, int qta, String img) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.prezzo = prezzo;
+        this.qta = qta;
+        this.img = img;
+    }
 
-
+    public StoredProduct() {
+    }
 }

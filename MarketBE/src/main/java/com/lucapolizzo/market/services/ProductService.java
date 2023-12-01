@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import static com.lucapolizzo.market.models.entities.StoredProduct.nProdotti;
 
 
 @Service
@@ -31,21 +30,19 @@ public class ProductService {
     private StoredProductQuery query;
 
     @Transactional
-    public StoredProduct getStoredProduct(GetDeleteStoredProductCommand getDeleteStoredProductCommand) {
-        return storedProductRepository.findById(getDeleteStoredProductCommand.getCodice()).orElseThrow();
+    public StoredProductDTO getStoredProduct(GetDeleteStoredProductCommand getDeleteStoredProductCommand) {
+        StoredProduct storedProduct = storedProductRepository.findById(getDeleteStoredProductCommand.getCodice()).orElseThrow();
+        return convertToDTO(storedProduct);
     }
 
     @Transactional
     public StoredProductDTO addStoredProduct(AddUpdateCommandProduct addUpdateCommandProduct) {
         StoredProduct stored = new StoredProduct();
-        int code = (int) (Math.random() * 100000) + 1;
-        stored.setCodice(code);
         stored.setNome(addUpdateCommandProduct.getNome());
         stored.setDescrizione(addUpdateCommandProduct.getDescrizione());
         stored.setPrezzo(addUpdateCommandProduct.getPrezzo());
         stored.setImg(addUpdateCommandProduct.getImg());
         stored.setQta(addUpdateCommandProduct.getQta());
-        nProdotti++;
         storedProductRepository.save(stored);
         return convertToDTO(stored);
     }
@@ -62,7 +59,21 @@ public class ProductService {
                 returnList.add(convertToDTO(storedProduct));
             }
         }
-        return new ListStoredProductsDTO(returnList,nProdotti);
+        return new ListStoredProductsDTO(returnList, (int) storedProductRepository.count());
+    }
+
+    public ListStoredProductsDTO searchAll() {
+        ListStoredProductsDTO returnListDTO = new ListStoredProductsDTO();
+        List<StoredProduct> list = storedProductRepository.findAll();
+        List<StoredProductDTO> listDTO = new ArrayList<>();
+        if (!list.isEmpty()) {
+            for (StoredProduct storedProduct : list) {
+                listDTO.add(convertToDTO(storedProduct));
+            }
+        }
+        returnListDTO.setStoredProductList(listDTO);
+        returnListDTO.setTotProdotti(returnListDTO.getStoredProductList().size());
+        return returnListDTO;
     }
 
     @Transactional
@@ -80,9 +91,7 @@ public class ProductService {
     @Transactional
     public StoredProductDTO deleteStoredProduct(GetDeleteStoredProductCommand command) {
         StoredProduct stored = storedProductRepository.findByCodice(command.getCodice()).orElseThrow();
-        System.out.println("Prova");
         storedProductRepository.delete(stored);
-        nProdotti--;
         return convertToDTO(stored);
     }
 

@@ -15,4 +15,5 @@ public interface StoredProductRepository extends JpaRepository<StoredProduct, In
 
     Page<StoredProduct> findAll(Specification<StoredProduct> specification, Pageable pageable);
     Optional<StoredProduct> findByCodice(int codice);
+
 }
