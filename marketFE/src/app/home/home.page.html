@@ -1,21 +1,6 @@
-<header></header>
-<ion-row>
-    <ion-col *ngFor="let prodotto of list">
-        <ion-card>
-            <!-- <img src={{prodotto.img}}> -->
-            <ion-card-header>
-                <ion-card-title>{{prodotto.nome}}</ion-card-title>
-                <ion-card-subtitle>{{prodotto.descrizione}}</ion-card-subtitle>
-            </ion-card-header>
-            <ion-row>
-                <ion-col size="3">
-                    <ion-button style="font-size:10px;">Aggiungi al carrello</ion-button>
-                </ion-col>
-                <ion-col size="3">
-                    <ion-button>Acquista</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-card>
-    </ion-col>
-</ion-row>
-<paginator (changePage)="changePage($event)" ></paginator>
+<ion-content [fullscreen]="true">
+    <header (searchBarEvent)="searchProducts($event)" [isLogged]="this.isLogged"></header>
+    <main-content [list]="this.list"></main-content>
+    <paginator (changePage)="changePage($event)" [current]="this.command.current" [itemsPerPages]="this.command.take"
+        (changeSize)="changeSize($event)"></paginator>
+</ion-content>

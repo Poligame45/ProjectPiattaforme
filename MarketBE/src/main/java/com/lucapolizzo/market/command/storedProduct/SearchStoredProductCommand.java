@@ -1,6 +1,6 @@
-package com.lucapolizzo.market.models.entities.command;
+package com.lucapolizzo.market.command.storedProduct;
 
-import com.lucapolizzo.market.models.entities.Generic.command.GenericSearchCommand;
+import com.lucapolizzo.market.command.generic.GenericSearchCommand;
 import lombok.Data;
 
 @Data

@@ -1,11 +1,11 @@
 package com.lucapolizzo.market.controller;
 
 
-import com.lucapolizzo.market.models.entities.command.AddUpdateCommandProduct;
-import com.lucapolizzo.market.models.entities.command.GetDeleteStoredProductCommand;
-import com.lucapolizzo.market.models.entities.command.SearchStoredProductCommand;
-import com.lucapolizzo.market.models.entities.dto.ListStoredProductsDTO;
-import com.lucapolizzo.market.models.entities.dto.StoredProductDTO;
+import com.lucapolizzo.market.command.storedProduct.AddUpdateCommandStoredProduct;
+import com.lucapolizzo.market.command.storedProduct.GetDeleteStoredProductCommand;
+import com.lucapolizzo.market.command.storedProduct.SearchStoredProductCommand;
+import com.lucapolizzo.market.dto.storedProduct.ListStoredProductsDTO;
+import com.lucapolizzo.market.dto.storedProduct.StoredProductDTO;
 import com.lucapolizzo.market.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +30,8 @@ public class StoredProductController {
 
 
     @PostMapping("/addStoredProduct")
-    public ResponseEntity<StoredProductDTO> addStoredProduct(@RequestBody AddUpdateCommandProduct addUpdateCommandProduct) {
-        StoredProductDTO storedProduct = productService.addStoredProduct(addUpdateCommandProduct);
+    public ResponseEntity<StoredProductDTO> addStoredProduct(@RequestBody AddUpdateCommandStoredProduct addUpdateCommandStoredProduct) {
+        StoredProductDTO storedProduct = productService.addStoredProduct(addUpdateCommandStoredProduct);
         return new ResponseEntity<>(storedProduct, HttpStatus.OK);
     }
 
@@ -41,7 +41,7 @@ public class StoredProductController {
         return new ResponseEntity<>(storedProduct, HttpStatus.OK);
     }
     @PostMapping("/updateStoredProduct")
-    public ResponseEntity<StoredProductDTO> updateStoredProduct(@RequestBody AddUpdateCommandProduct command) {
+    public ResponseEntity<StoredProductDTO> updateStoredProduct(@RequestBody AddUpdateCommandStoredProduct command) {
         StoredProductDTO storedProduct = productService.updateStoredProduct(command);
         return new ResponseEntity<>(storedProduct, HttpStatus.OK);
     }

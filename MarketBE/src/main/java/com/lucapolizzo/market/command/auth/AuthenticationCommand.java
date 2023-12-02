@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.auth;
+package com.lucapolizzo.market.command.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class AuthenticationCommand {
 
   private String email;
   String password;

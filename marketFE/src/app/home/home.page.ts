@@ -1,31 +1,48 @@
 import { StoredProductService } from './../Services/stored-product.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { SearchCommandStoredProduct } from '../models/command/SearchCommandStoredProduct';
-import { StoredProduct } from '../models/StoredProduct';
-import { firstValueFrom } from 'rxjs';
 import { Utility } from '../utils/Utility';
-import { ActivatedRoute, ActivatedRouteSnapshot, Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SearchCommandStoredProduct } from '../models/command/SearchCommandStoredProduct';
+import { ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage extends Utility implements OnInit {
+export class HomePage extends Utility implements OnInit, ViewWillLeave {
+  isLogged!: boolean
 
-  constructor(storedProductService: StoredProductService) {
+  constructor(storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) {
     super(storedProductService);
+  }
+  ionViewWillLeave(): void {
+    this.activatedRoute.snapshot.queryParamMap.get('isLogged') ? this.isLogged = true : this.isLogged = false;
+    console.log(this.isLogged)
   }
 
   async ngOnInit(): Promise<void> {
-    this.list = await super.loadProducts();
-    console.log(this.list)
+    this.activatedRoute.snapshot.queryParamMap.get('isLogged') ? this.isLogged = true : this.isLogged = false;
+    this.list = await super.startSearch();
   }
 
   async changePage(event: any) {
     this.list = await super.changePaginatorValue(event);
   }
 
+  async searchProducts(command: SearchCommandStoredProduct) {
+    this.list = await this.startSearch(command);
+    console.log(this.list);
+  }
+
+  async changeSize(event: any) {
+    console.log(event.target.value);
+    this.command.take = event.target.value;
+    this.command.current = 0;
+    this.list = await this.startSearch();
+  }
 
 
 }

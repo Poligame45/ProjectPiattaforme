@@ -1,10 +1,10 @@
-package com.lucapolizzo.market.models.entities.command;
+package com.lucapolizzo.market.command.storedProduct;
 
 
 import lombok.Data;
 
 @Data
-public class AddUpdateCommandProduct {
+public class AddUpdateCommandStoredProduct {
 
     private int codice;
     private String nome;

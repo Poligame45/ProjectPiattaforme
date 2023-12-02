@@ -1,23 +1,21 @@
 package com.lucapolizzo.market.services;
 
-import com.lucapolizzo.market.models.entities.command.AddUpdateCommandProduct;
+import com.lucapolizzo.market.command.storedProduct.AddUpdateCommandStoredProduct;
 import com.lucapolizzo.market.models.entities.StoredProduct;
-import com.lucapolizzo.market.models.entities.command.GetDeleteStoredProductCommand;
-import com.lucapolizzo.market.models.entities.command.SearchStoredProductCommand;
-import com.lucapolizzo.market.models.entities.dto.ListStoredProductsDTO;
-import com.lucapolizzo.market.models.entities.dto.StoredProductDTO;
+import com.lucapolizzo.market.command.storedProduct.GetDeleteStoredProductCommand;
+import com.lucapolizzo.market.command.storedProduct.SearchStoredProductCommand;
+import com.lucapolizzo.market.dto.storedProduct.ListStoredProductsDTO;
+import com.lucapolizzo.market.dto.storedProduct.StoredProductDTO;
 import com.lucapolizzo.market.queries.StoredProductQuery;
 import com.lucapolizzo.market.repositories.StoredProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
 
 
 @Service
@@ -36,19 +34,18 @@ public class ProductService {
     }
 
     @Transactional
-    public StoredProductDTO addStoredProduct(AddUpdateCommandProduct addUpdateCommandProduct) {
+    public StoredProductDTO addStoredProduct(AddUpdateCommandStoredProduct addUpdateCommandStoredProduct) {
         StoredProduct stored = new StoredProduct();
-        stored.setNome(addUpdateCommandProduct.getNome());
-        stored.setDescrizione(addUpdateCommandProduct.getDescrizione());
-        stored.setPrezzo(addUpdateCommandProduct.getPrezzo());
-        stored.setImg(addUpdateCommandProduct.getImg());
-        stored.setQta(addUpdateCommandProduct.getQta());
+        stored.setNome(addUpdateCommandStoredProduct.getNome());
+        stored.setDescrizione(addUpdateCommandStoredProduct.getDescrizione());
+        stored.setPrezzo(addUpdateCommandStoredProduct.getPrezzo());
+        stored.setImg(addUpdateCommandStoredProduct.getImg());
+        stored.setQta(addUpdateCommandStoredProduct.getQta());
         storedProductRepository.save(stored);
         return convertToDTO(stored);
     }
 
     public ListStoredProductsDTO search(SearchStoredProductCommand command) {
-        ListStoredProductsDTO listDTO = new ListStoredProductsDTO();
         Page<StoredProduct> searchList = query.all(command);
         List<StoredProductDTO> returnList = new ArrayList<>();
 
@@ -59,7 +56,7 @@ public class ProductService {
                 returnList.add(convertToDTO(storedProduct));
             }
         }
-        return new ListStoredProductsDTO(returnList, (int) storedProductRepository.count());
+        return new ListStoredProductsDTO(returnList, query.count(command));
     }
 
     public ListStoredProductsDTO searchAll() {
@@ -77,7 +74,7 @@ public class ProductService {
     }
 
     @Transactional
-    public StoredProductDTO updateStoredProduct(AddUpdateCommandProduct command) {
+    public StoredProductDTO updateStoredProduct(AddUpdateCommandStoredProduct command) {
         StoredProduct stored = storedProductRepository.findByCodice(command.getCodice()).orElseThrow();
         stored.setNome(command.getNome());
         stored.setDescrizione(command.getDescrizione());

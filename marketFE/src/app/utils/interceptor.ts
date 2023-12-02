@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { Observable, catchError, of, throwError } from "rxjs";
 import { LoginService } from '../Services/login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,7 @@ import { LoginService } from '../Services/login.service';
 export class JwtInterceptor implements HttpInterceptor {
 
 
-    constructor(private loginService: LoginService) {
+    constructor(private loginService: LoginService, private router: Router) {
 
     }
 
@@ -24,6 +25,19 @@ export class JwtInterceptor implements HttpInterceptor {
                 }
             });
         }
-        return next.handle(request);
+        return next.handle(request).pipe(catchError(x => this.handleError(x)));
+    }
+    private handleError(err: HttpErrorResponse): Observable<any> {
+        console.log(err);
+        if (err.status === 401) {
+            sessionStorage.clear();
+            alert("Email o password sbagliati");
+            this.router.navigateByUrl(`/login`);
+            return of(err.message);
+        }else if(err.status === 403){
+            alert("Non hai l'autorizzazione per visualizzare questa pagina");
+            this.router.navigateByUrl(`/home`);
+        }
+        return throwError(() => err);
     }
 }

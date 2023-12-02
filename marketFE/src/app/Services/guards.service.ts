@@ -17,7 +17,7 @@ export class AuthGuard {
     if (currentUser) {
       // check if route is restricted by role
       if (route.data && route.data["authorities"] !== sessionStorage.getItem("userRole")) {
-        console.log("Accesso negato per questo ruolo");
+        alert("Accesso negato per questo ruolo");
         // role not authorised so redirect to home page
         this.router.navigate(['/']);
         return false;
@@ -26,7 +26,7 @@ export class AuthGuard {
       return true;
     }
 
-    console.log("Need log in");
+    alert("Need log in");
     // not logged in so redirect to login page with the return url{queryParams: {returnUrl: state.url}}
     this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;

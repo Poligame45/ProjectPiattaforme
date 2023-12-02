@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.auth;
+package com.lucapolizzo.market.command.auth;
 
 import com.lucapolizzo.market.user.Role;
 import lombok.AllArgsConstructor;

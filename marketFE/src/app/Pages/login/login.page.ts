@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { LoginService } from 'src/app/Services/login.service';
+import { AuthenticationCommand } from 'src/app/models/command/AuthenticationCommand';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,6 @@ import { LoginService } from 'src/app/Services/login.service';
 export class LoginPage implements OnInit {
   myForm!: FormGroup;
   token!: any;
-
   constructor(private serviceLogin: LoginService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -23,21 +23,32 @@ export class LoginPage implements OnInit {
   }
 
   async onSubmit() {
-    const obj: any = {
+    const user: AuthenticationCommand = {
       email: this.myForm.value.email,
       password: this.myForm.value.password
     }
-    if (this.myForm.invalid) {
-      console.log('form invalido');
+    this.token = await firstValueFrom(this.serviceLogin.login(user));
+    if (!!this.token && !!this.token.user) {
+      sessionStorage.setItem("token", this.token.accessToken);
+      sessionStorage.setItem("userId", this.token.user.id);
+      sessionStorage.setItem("userRole", this.token.user.role);
+      this.serviceLogin.isLogged = true;
+    } else {
+      alert('email o password sbagliate');
     }
-    this.token = await firstValueFrom(this.serviceLogin.login(obj));
-    sessionStorage.setItem("token", this.token.accessToken);
-    sessionStorage.setItem("userId",this.token.user.id);
-    sessionStorage.setItem("userRole",this.token.user.role);
+    if (!!this.serviceLogin.isLogged) {
+      this.goToHome();
+    }
+  }
+
+
+  goToHome() {
+    this.router.navigate(['home'], { queryParams: { isLogged: this.serviceLogin.isLogged } });
   }
 
   goToRegisterPage() {
     this.router.navigate(['register']);
   }
+
 
 }

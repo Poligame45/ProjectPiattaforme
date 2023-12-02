@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.dto;
+package com.lucapolizzo.market.dto.storedProduct;
 
 import lombok.Data;
 

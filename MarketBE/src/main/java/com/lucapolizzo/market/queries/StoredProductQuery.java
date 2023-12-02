@@ -1,7 +1,7 @@
 package com.lucapolizzo.market.queries;
 
 import com.lucapolizzo.market.models.entities.StoredProduct;
-import com.lucapolizzo.market.models.entities.command.SearchStoredProductCommand;
+import com.lucapolizzo.market.command.storedProduct.SearchStoredProductCommand;
 import com.lucapolizzo.market.repositories.StoredProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,6 +55,10 @@ public class StoredProductQuery {
     public Page<StoredProduct> all(SearchStoredProductCommand command){
         this.command = command;
         return storedProductRepository.findAll(where(),getPageable(command));
+    }
+    public int count(SearchStoredProductCommand command){
+        this.command = command;
+        return storedProductRepository.count(where());
     }
 
     public Pageable getPageable(SearchStoredProductCommand searchStoredProductCommand){

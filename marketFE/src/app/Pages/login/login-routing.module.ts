@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginPage } from './login.page';
 import { RegisterPage } from '../register/register.page';
+import { UserDetailsPage } from '../user-details/user-details.page';
+import { HomePage } from 'src/app/home/home.page';
 
 const routes: Routes = [
   {
@@ -10,8 +12,12 @@ const routes: Routes = [
     component: LoginPage
   },
   {
-    path:'register',
+    path: 'register',
     component: RegisterPage
+  },
+  {
+    path: 'home',
+    component: HomePage
   }
 ];
 
@@ -19,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LoginPageRoutingModule {}
+export class LoginPageRoutingModule { }

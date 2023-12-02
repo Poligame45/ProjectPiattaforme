@@ -14,6 +14,9 @@ import java.util.Optional;
 public interface StoredProductRepository extends JpaRepository<StoredProduct, Integer> {
 
     Page<StoredProduct> findAll(Specification<StoredProduct> specification, Pageable pageable);
+
+    int count (Specification<StoredProduct> specification);
+
     Optional<StoredProduct> findByCodice(int codice);
 
 }

@@ -39,6 +39,7 @@ export class RegisterPage implements OnInit {
       alert('password diverse');
       return;
     }
+    
     const obj: any = {
       firstname: this.myForm.value.firstname,
       lastname: this.myForm.value.lastname,
@@ -47,6 +48,7 @@ export class RegisterPage implements OnInit {
       password: this.myForm.value.password,
       role: "CUSTOMER"
     }
+
     if (this.myForm.invalid) {
       console.log('form invalido');
     }

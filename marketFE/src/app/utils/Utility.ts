@@ -1,32 +1,31 @@
 import { StoredProductService } from "../Services/stored-product.service";
-import { Subject, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { SearchCommandStoredProduct } from "../models/command/SearchCommandStoredProduct";
 import { ListStoredProductsDTO } from "../models/dto/ListStoredProductsDTO";
-import { PaginatorModel } from "../models/PaginatorModel";
+import { StoredProduct } from "../models/StoredProduct";
 
 export class Utility {
-    paginator: PaginatorModel = new PaginatorModel();
     totProdotti!: number;
     resp!: ListStoredProductsDTO;
-    list!: any;
+    list!: Array<StoredProduct>;
+    command!: SearchCommandStoredProduct;
+
     constructor(public storedProductService: StoredProductService) { }
 
-    async startSearch(take: number, current: number) {
-        let commandSearch: SearchCommandStoredProduct = new SearchCommandStoredProduct();
-        commandSearch.current = current;
-        commandSearch.take = take;
-        this.resp = await firstValueFrom(this.storedProductService.search(commandSearch));
-        console.log(this.resp.storedProductList);
-        return this.resp.storedProductList;
-
-
-    }
-
-    async loadProducts() {
-        await this.startSearch(this.paginator.take, this.paginator.current);
+    async startSearch(filtri?: SearchCommandStoredProduct) {
+        if (!!filtri) {
+            this.command = filtri;
+            await this.startSearch();
+        } else if (!!this.command) {
+            this.resp = await firstValueFrom(this.storedProductService.search(this.command));
+        } else {
+            this.command = new SearchCommandStoredProduct();
+            await this.startSearch();
+        }
         this.totProdotti = this.resp.totProdotti;
         return this.resp.storedProductList;
     }
+
 
     async changePaginatorValue(event: any) {
         switch (event) {
@@ -54,18 +53,17 @@ export class Utility {
     }
 
     async goToLastPage() {
-        if (this.paginator.current === Math.floor(this.totProdotti / this.paginator.take)) return;
-        this.paginator.current = Math.floor(this.totProdotti / this.paginator.take);
-        console.log(this.paginator.current);
-
-        await this.startSearch(this.paginator.take, this.paginator.current);
+        if (this.command.current === Math.floor(this.totProdotti / this.command.take)) return;
+        this.command.current = Math.floor(this.totProdotti / this.command.take);
+        await this.startSearch();
+        console.log(this.command.current);
     }
 
     async goToNextPage() {
-        if (this.paginator.take < this.totProdotti / (this.paginator.current + 1)) {
-            this.paginator.current = this.paginator.current + 1;
-            console.log(this.paginator.current);
-            await this.startSearch(this.paginator.take, this.paginator.current);
+        if (this.command.take < this.totProdotti / (this.command.current + 1)) {
+            this.command.current = this.command.current + 1;
+            await this.startSearch();
+            console.log(this.command.current);
 
         } else {
             return;
@@ -73,18 +71,18 @@ export class Utility {
 
     }
     async goToPreviousPage() {
-        if (this.paginator.current === 0) return;
-        this.paginator.current = this.paginator.current - 1;
-        console.log(this.paginator.current);
-        await this.startSearch(this.paginator.take, this.paginator.current);
+        if (this.command.current === 0) return;
+        this.command.current = this.command.current - 1;
+        await this.startSearch();
+        console.log(this.command.current);
+
     }
 
     async goToFirstPage() {
-        if (this.paginator.current == 0) return;
-        this.paginator.current = 0;
-        console.log(this.paginator.current);
-
-        await this.startSearch(this.paginator.take, this.paginator.current);
+        if (this.command.current == 0) return;
+        this.command.current = 0;
+        await this.startSearch();
+        console.log(this.command.current);
     }
 
 
