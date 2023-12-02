@@ -1,1 +1,11 @@
-<ion-searchbar></ion-searchbar>
+<ion-row>
+    <ion-col>
+        <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+    </ion-col>
+    <ion-col>
+        <ion-button *ngIf="isLogged" (click)="logout()">Logout</ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button *ngIf="!isLogged" (click)="login()">Login</ion-button>
+    </ion-col>
+</ion-row>

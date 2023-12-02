@@ -24,8 +24,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    //Redirect to login??
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponse register(RegisterCommand request) {
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .address(request.getAddress())

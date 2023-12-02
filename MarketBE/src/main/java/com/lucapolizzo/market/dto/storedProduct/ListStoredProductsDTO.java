@@ -1,6 +1,5 @@
-package com.lucapolizzo.market.models.entities.dto;
+package com.lucapolizzo.market.dto;
 
-import com.lucapolizzo.market.models.entities.StoredProduct;
 import lombok.Data;
 
 import java.util.ArrayList;

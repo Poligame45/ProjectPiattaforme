@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.models.entities.Generic.command;
+package com.lucapolizzo.market.command;
 
 import lombok.Data;
 

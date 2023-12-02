@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.models.entities.dto;
+package com.lucapolizzo.market.dto;
 
 import lombok.Data;
 
