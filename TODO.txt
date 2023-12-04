@@ -1,7 +1,13 @@
 Front end:
-- Creazione home page con la lista dei prodotti
+- Sistemare i pulsanti login e logout
 - Creazione pagina dettaglio di un prodotto tramite query param e/o path param
+- Creazione pagina area personale utente
+- Creazione pagine dell'admin per la gestione prodotti e ordini
 
 Back end:
 - Test API prodotto
 - Introdurre API lato admin per poter effettuare operazioni CRUD sui prodotti.
+- Gestione carrello
+- Gestione ordini
+- Gestione acquisti
+- Gestione admin

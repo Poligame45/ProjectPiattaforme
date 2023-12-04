@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class AuthenticationDTO {
   private String accessToken;
   private User user;
+  private String state;
 }

@@ -1,17 +1,26 @@
 package com.lucapolizzo.market.models.entities;
 
-import com.lucapolizzo.market.models.BasketItem;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Data
+@Table(name = "basket")
 public class Basket {
-    private double totale;
-    private List<BasketItem> list;
 
-    public Basket(){
-        totale = 0;
-        list = new LinkedList<>();
-    }
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    @OneToMany(mappedBy = "carrello")
+    private List<BasketItem> basketItems = new ArrayList<>();
+
+    @OneToOne(mappedBy = "basket", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private User customer;
 }

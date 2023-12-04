@@ -11,7 +11,6 @@ import com.lucapolizzo.market.repositories.StoredProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.List;
 
 
 @Service
-public class ProductService {
+public class ProductStoredService {
     //Possibile utilizzo di DTO e Command inoltre verificare chi può utilizzare service e chi no
     @Autowired
     private StoredProductRepository storedProductRepository;

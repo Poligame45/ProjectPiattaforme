@@ -2,15 +2,9 @@ package com.lucapolizzo.market.models.entities;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.Store;
-import org.hibernate.annotations.GenericGenerator;
 
-import java.io.Serial;
-import java.util.Random;
+import java.util.List;
 
 @Data
 @Entity
@@ -38,6 +32,9 @@ public class StoredProduct {
 
     @Column(name = "img")
     private String img;
+
+    @OneToMany(mappedBy = "storedProduct")
+    List<BasketItem> basketItems;
 
     //capire il campo version
     //@Version

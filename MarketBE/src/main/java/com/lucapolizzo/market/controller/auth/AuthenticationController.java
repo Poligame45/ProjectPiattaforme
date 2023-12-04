@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.controller;
+package com.lucapolizzo.market.controller.auth;
 
 import com.lucapolizzo.market.dto.auth.AuthenticationDTO;
 import com.lucapolizzo.market.services.AuthenticationService;
@@ -35,7 +35,6 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationDTO> authenticate(@RequestBody AuthenticationCommand request) {
 
         AuthenticationDTO authenticationDTO = service.authenticate(request);
-        System.out.println(authenticationDTO.getAccessToken()+"CIAO");
 
         if (authenticationDTO.getAccessToken() == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

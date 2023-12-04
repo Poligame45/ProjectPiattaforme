@@ -30,15 +30,14 @@ public class StoredProductQuery {
         }
         if (command.getNome() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.like(root.get("nome"), "%"+command.getNome()+"%");
+                return criteriaBuilder.like(root.get("nome"), "%" + command.getNome() + "%");
 
             });
         }
-        if (command.getQta() != null) {
-            specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.equal(root.get("qta"), command.getQta());
-            });
-        }
+        specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
+            return criteriaBuilder.gt(root.get("qta"), 0);
+        });
+
         if (command.getPrezzo() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
                 return criteriaBuilder.equal(root.get("prezzo"), command.getPrezzo());
@@ -52,21 +51,22 @@ public class StoredProductQuery {
         return specification;
     }
 
-    public Page<StoredProduct> all(SearchStoredProductCommand command){
+    public Page<StoredProduct> all(SearchStoredProductCommand command) {
         this.command = command;
-        return storedProductRepository.findAll(where(),getPageable(command));
+        return storedProductRepository.findAll(where(), getPageable(command));
     }
-    public int count(SearchStoredProductCommand command){
+
+    public int count(SearchStoredProductCommand command) {
         this.command = command;
         return storedProductRepository.count(where());
     }
 
-    public Pageable getPageable(SearchStoredProductCommand searchStoredProductCommand){
+    public Pageable getPageable(SearchStoredProductCommand searchStoredProductCommand) {
         Pageable pageable;
-        if(searchStoredProductCommand != null && searchStoredProductCommand.getCurrent()!= null && searchStoredProductCommand.getTake() != null){
-            pageable = PageRequest.of(command.getCurrent(),command.getTake());
-        }else{
-            pageable = PageRequest.of(0,10);
+        if (searchStoredProductCommand != null && searchStoredProductCommand.getCurrent() != null && searchStoredProductCommand.getTake() != null) {
+            pageable = PageRequest.of(command.getCurrent(), command.getTake());
+        } else {
+            pageable = PageRequest.of(0, 10);
         }
         return pageable;
     }

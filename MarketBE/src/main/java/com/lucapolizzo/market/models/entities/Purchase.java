@@ -7,9 +7,8 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
+/*@Getter
 @Setter
-@Entity
 public class Purchase {
 
     @Id
@@ -28,9 +27,6 @@ public class Purchase {
     @JoinColumn(name="acquirente")
     private User acquirente;
 
-    public User getAcquirente(){
-        return acquirente;
-    }
     public void setAcquirente(User acquirente){
         this.acquirente=acquirente;
     }
@@ -50,4 +46,4 @@ public class Purchase {
     public int hashCode() {
         return Objects.hash(ID);
     }
-}
+}*/

@@ -33,8 +33,9 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/products/**").permitAll()
+                        .requestMatchers("/**").permitAll()
+                        //.requestMatchers("/products/**").permitAll()
+                        //.requestMatchers("/basket/**").permitAll()
                         //.requestMatchers("/products/addStoredProduct", "/products/updateStoredProduct").hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated()
