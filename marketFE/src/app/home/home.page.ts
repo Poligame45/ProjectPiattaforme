@@ -18,9 +18,10 @@ export class HomePage extends Utility implements OnInit, ViewWillLeave {
   constructor(storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) {
     super(storedProductService);
   }
-  ionViewWillLeave(): void {
+  async ionViewWillLeave(): Promise<void> {
     this.activatedRoute.snapshot.queryParamMap.get('isLogged') ? this.isLogged = true : this.isLogged = false;
-    console.log(this.isLogged)
+    this.list = await super.startSearch();
+
   }
 
   async ngOnInit(): Promise<void> {

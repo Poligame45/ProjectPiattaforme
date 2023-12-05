@@ -1,5 +1,6 @@
 package com.lucapolizzo.market.dto.basket;
 
+import com.lucapolizzo.market.dto.basketItem.BasketItemDTO;
 import com.lucapolizzo.market.models.entities.BasketItem;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.OneToMany;
@@ -11,5 +12,5 @@ import java.util.List;
 public class BasketDTO {
     private Integer id;
 
-    private List<BasketItem> basketItems;
+    private List<BasketItemDTO> basketItems;
 }

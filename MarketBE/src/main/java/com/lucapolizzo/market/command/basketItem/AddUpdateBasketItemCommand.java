@@ -1,4 +1,4 @@
-package com.lucapolizzo.market.command;
+package com.lucapolizzo.market.command.basketItem;
 
 import lombok.Data;
 
@@ -6,4 +6,5 @@ import lombok.Data;
 public class AddUpdateBasketItemCommand {
     private Integer codiceStoredProduct;
     private Integer codiceBasket;
+    private Integer quantita;
 }

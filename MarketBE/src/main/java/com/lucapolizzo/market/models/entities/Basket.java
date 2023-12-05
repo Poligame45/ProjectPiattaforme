@@ -1,5 +1,6 @@
 package com.lucapolizzo.market.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -18,9 +19,11 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "carrello")
+    @JsonIgnore
+    @OneToMany(mappedBy = "carrello", fetch = FetchType.LAZY)
     private List<BasketItem> basketItems = new ArrayList<>();
 
-    @OneToOne(mappedBy = "basket", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToOne(mappedBy = "basket", fetch = FetchType.LAZY)
     private User customer;
 }

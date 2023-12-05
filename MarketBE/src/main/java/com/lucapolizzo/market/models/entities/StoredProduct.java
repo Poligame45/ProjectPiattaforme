@@ -1,6 +1,7 @@
 package com.lucapolizzo.market.models.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,7 +34,8 @@ public class StoredProduct {
     @Column(name = "img")
     private String img;
 
-    @OneToMany(mappedBy = "storedProduct")
+    @JsonIgnore
+    @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.ALL)
     List<BasketItem> basketItems;
 
     //capire il campo version

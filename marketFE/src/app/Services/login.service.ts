@@ -18,8 +18,8 @@ export class LoginService {
   }
 
   logout() {
-    sessionStorage.clear();
     this.isLogged = false;
+    sessionStorage.clear();
   }
 
   getAuthorizationToken() {

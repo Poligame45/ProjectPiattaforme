@@ -11,5 +11,5 @@ import java.util.Optional;
 @EnableJpaRepositories
 public interface BasketItemRepository extends JpaRepository<BasketItem,Integer> {
 
-    Optional<BasketItem> getBasketItemByStoredProductAndCarrello(StoredProduct storedProduct, Basket basket);
+    Optional<BasketItem> getBasketItemByStoredProductAndCarrello(StoredProduct storedProduct, Basket carrello);
 }

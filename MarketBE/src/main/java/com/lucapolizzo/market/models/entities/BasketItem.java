@@ -1,5 +1,6 @@
 package com.lucapolizzo.market.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucapolizzo.market.models.entities.Basket;
 import com.lucapolizzo.market.models.entities.StoredProduct;
 import jakarta.persistence.*;
@@ -14,12 +15,14 @@ public class BasketItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "basket_id")
+    @JsonIgnore
     private Basket carrello;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stored_product_id")
+    @JsonIgnore
     private StoredProduct storedProduct;
 
     @Column(name = "quantita")
