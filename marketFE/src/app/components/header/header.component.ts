@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/Services/login.service';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
-import { SearchCommandStoredProduct } from 'src/app/models/command/SearchCommandStoredProduct';
+import { SearchCommandStoredProduct } from 'src/app/models/command/storedProductCommand/SearchCommandStoredProduct';
 
 @Component({
   selector: 'header',

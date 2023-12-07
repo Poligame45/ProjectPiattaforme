@@ -29,6 +29,7 @@ public class BasketController {
         BasketDTO basketDTO = basketService.getBasket(command);
         return new ResponseEntity<>(basketDTO, HttpStatus.OK);
     }
+
     @PostMapping("/addItemInBasket")
     public ResponseEntity<BasketItemDTO> addItemInBasket(@RequestBody AddUpdateBasketItemCommand command)  {
         BasketItemDTO basketItemDTO = basketService.addProductInBasket(command);

@@ -8,6 +8,7 @@ import { Utility } from 'src/app/utils/Utility';
   styleUrls: ['./paginator.component.scss'],
 })
 export class PaginatorComponent extends Utility {
+
   @Output() changePage: EventEmitter<any> = new EventEmitter();
   @Output() changeSize: EventEmitter<any> = new EventEmitter();
   @Input() itemsPerPages!: number;
@@ -34,7 +35,6 @@ export class PaginatorComponent extends Utility {
       value: '50',
     },
   ]
-
 
 
   emitChangePage(event: any) {

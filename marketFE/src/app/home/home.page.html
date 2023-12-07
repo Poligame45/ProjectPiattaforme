@@ -1,6 +1,10 @@
-<ion-content [fullscreen]="true">
+<ion-header>
     <header (searchBarEvent)="searchProducts($event)" [isLogged]="this.isLogged"></header>
+</ion-header>
+<ion-content [fullscreen]="true">
     <main-content [list]="this.list"></main-content>
-    <paginator (changePage)="changePage($event)" [current]="this.command.current" [itemsPerPages]="this.command.take"
-        (changeSize)="changeSize($event)"></paginator>
 </ion-content>
+<ion-footer>
+    <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
+        [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
+</ion-footer>

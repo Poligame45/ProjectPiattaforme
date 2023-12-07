@@ -26,7 +26,15 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: { authorities: 'CUSTOMER' },
     loadChildren: () => import('./Pages/user-details/user-details.module').then(m => m.UserDetailsPageModule)
+  },  {
+    path: 'basket',
+    loadChildren: () => import('./Pages/basket/basket.module').then( m => m.BasketPageModule)
   },
+  {
+    path: 'product-details',
+    loadChildren: () => import('./Pages/product-details/product-details.module').then( m => m.ProductDetailsPageModule)
+  },
+
 
 
 

@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class GetDeleteBasketItemCommand extends GenericGetDeleteCommand {
     private Integer codiceStoredProduct;
-    private Integer codiceBasket;
+    private Integer codiceCustomer;
 }

@@ -1,6 +1,6 @@
 import { StoredProductService } from "../Services/stored-product.service";
 import { firstValueFrom } from 'rxjs';
-import { SearchCommandStoredProduct } from "../models/command/SearchCommandStoredProduct";
+import { SearchCommandStoredProduct } from "../models/command/storedProductCommand/SearchCommandStoredProduct";
 import { ListStoredProductsDTO } from "../models/dto/ListStoredProductsDTO";
 import { StoredProduct } from "../models/StoredProduct";
 

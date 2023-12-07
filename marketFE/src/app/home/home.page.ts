@@ -2,7 +2,7 @@ import { StoredProductService } from './../Services/stored-product.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Utility } from '../utils/Utility';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SearchCommandStoredProduct } from '../models/command/SearchCommandStoredProduct';
+import { SearchCommandStoredProduct } from '../models/command/storedProductCommand/SearchCommandStoredProduct';
 import { ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 
 

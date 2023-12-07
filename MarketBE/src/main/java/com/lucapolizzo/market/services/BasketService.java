@@ -34,7 +34,7 @@ public class BasketService {
 
     @Transactional
     public BasketDTO getBasket(GetBasketCommand command){
-        Basket basket = basketRepository.findById(command.getCodice()).orElseThrow();
+        Basket basket = basketRepository.findByCustomerId(command.getCodice());
         return convertToDTO(basket);
 
 
@@ -42,7 +42,7 @@ public class BasketService {
     @Transactional
     public BasketItemDTO addProductInBasket(AddUpdateBasketItemCommand command) {
         StoredProduct storedProduct = storedProductRepository.findById(command.getCodiceStoredProduct()).orElseThrow();
-        Basket basket = basketRepository.findById(command.getCodiceBasket()).orElseThrow();
+        Basket basket = basketRepository.findByCustomerId(command.getCodiceCustomer());
         Optional<BasketItem> item = basketItemRepository.getBasketItemByStoredProductAndCarrello(storedProduct, basket);
         if (item.isPresent()) {//se c'è già un prodotto nel carrello aggiorna solo la qtà
             BasketItem item1 = item.get();
@@ -69,7 +69,7 @@ public class BasketService {
     @Transactional
     public BasketItemDTO removeBasketItem(GetDeleteBasketItemCommand command) {
         StoredProduct storedProduct = storedProductRepository.findById(command.getCodiceStoredProduct()).orElseThrow();
-        Basket basket = basketRepository.findById(command.getCodiceBasket()).orElseThrow();
+        Basket basket = basketRepository.findByCustomerId(command.getCodiceCustomer());
         Optional<BasketItem> item = basketItemRepository.getBasketItemByStoredProductAndCarrello(storedProduct, basket);
         if (item.isPresent()) {
             basketItemRepository.delete(item.get());
@@ -82,7 +82,7 @@ public class BasketService {
     @Transactional
     public BasketItemDTO updateBasketQuantity(AddUpdateBasketItemCommand command) {
         StoredProduct storedProduct = storedProductRepository.findById(command.getCodiceStoredProduct()).orElseThrow();
-        Basket basket = basketRepository.findById(command.getCodiceBasket()).orElseThrow();
+        Basket basket = basketRepository.findById(command.getCodiceCustomer()).orElseThrow();
         Optional<BasketItem> item = basketItemRepository.getBasketItemByStoredProductAndCarrello(storedProduct, basket);
         if (item.isPresent()) {//se c'è un prodotto nel carrello aggiorna solo la qtà
             BasketItem item1 = item.get();

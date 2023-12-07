@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class AddUpdateBasketItemCommand {
     private Integer codiceStoredProduct;
-    private Integer codiceBasket;
+    private Integer codiceCustomer;
     private Integer quantita;
 }

@@ -1,4 +1,4 @@
-import { GenericSearchCommand } from "./GenericSearchCommand";
+import { GenericSearchCommand } from "../genericCommand/GenericSearchCommand";
 
 export class SearchCommandStoredProduct extends GenericSearchCommand {
     nome!: String;

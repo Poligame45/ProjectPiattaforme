@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SearchCommandStoredProduct } from '../models/command/SearchCommandStoredProduct';
-import { AddUpdateCommandStoredProduct } from '../models/command/AddUpdateCommandStoredProduct';
+import { SearchCommandStoredProduct } from '../models/command/storedProductCommand/SearchCommandStoredProduct';
+import { AddUpdateCommandStoredProduct } from '../models/command/storedProductCommand/AddUpdateCommandStoredProduct';
 
 @Injectable({
   providedIn: 'root'
