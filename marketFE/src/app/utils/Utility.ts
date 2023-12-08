@@ -17,7 +17,7 @@ export class Utility {
             this.command = filtri;
             await this.startSearch();
         } else if (!!this.command) {
-            this.resp = await firstValueFrom(this.storedProductService.search(this.command));
+            this.resp = await firstValueFrom(this.storedProductService.searchStoredProducts(this.command));
         } else {
             this.command = new SearchCommandStoredProduct();
             await this.startSearch();

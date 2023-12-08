@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/Services/basket.service';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
@@ -13,11 +14,12 @@ import { Utility } from 'src/app/utils/Utility';
   styleUrls: ['./content.component.scss'],
 })
 export class ContentComponent implements OnInit {
+
   currentUser!: any;
 
   @Input() list!: Array<StoredProduct>;
 
-  constructor(private basketService: BasketService) {
+  constructor(private basketService: BasketService, private router:Router) {
   }
   ngOnInit(): void {
     this.currentUser = sessionStorage.getItem('userId');
@@ -31,9 +33,10 @@ export class ContentComponent implements OnInit {
     }
 
     const resp = await firstValueFrom(this.basketService.addItemInBasket(command));
-    console.log(resp)
   }
 
-
+  goToDetails(prodotto: StoredProduct) {
+    this.router.navigate(['product-details'], { queryParams: { product: prodotto.codice} });
+  }
 
 }

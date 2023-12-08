@@ -16,6 +16,9 @@
                         <ion-col size="3">
                             <ion-button [disabled]="!this.currentUser">Acquista</ion-button>
                         </ion-col>
+                        <ion-col>
+                            <a (click)="goToDetails(prodotto)">go To details</a>
+                        </ion-col>
                     </ion-row>
                 </ion-card-content>
             </ion-card>

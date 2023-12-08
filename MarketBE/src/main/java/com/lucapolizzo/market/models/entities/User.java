@@ -58,6 +58,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "basket_id", referencedColumnName = "id")
     private Basket basket;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Order> ordini;
+
     @Override
     public String getPassword() {
         return password;

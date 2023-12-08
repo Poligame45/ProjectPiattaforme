@@ -38,9 +38,8 @@ public class StoredProduct {
     @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.ALL)
     List<BasketItem> basketItems;
 
-    //capire il campo version
-    //@Version
-    //private long version;
+    @Version
+    private long version;
 
     public StoredProduct(String nome, String descrizione, double prezzo, int qta, String img) {
         this.nome = nome;

@@ -52,7 +52,7 @@ public class StoredProductController {
     }
 
     @PostMapping("/searchAllStoredProducts")
-    public ResponseEntity<ListStoredProductsDTO> searchAllStoredProducts(@RequestBody SearchStoredProductCommand searchStoredProductCommand) {
+    public ResponseEntity<ListStoredProductsDTO> searchAllStoredProducts() {
         ListStoredProductsDTO listStoredProductsDTO = productStoredService.searchAll();
         return new ResponseEntity<>(listStoredProductsDTO, HttpStatus.OK);
     }
