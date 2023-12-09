@@ -1,17 +1,20 @@
 package com.lucapolizzo.market.services;
 
 import com.lucapolizzo.market.command.order.AddUpdateOrderCommand;
+import com.lucapolizzo.market.command.order.GetDeleteOrderCommand;
+import com.lucapolizzo.market.command.order.SearchOrderCommand;
+import com.lucapolizzo.market.dto.orderDTO.ListOrderDTO;
+import com.lucapolizzo.market.dto.orderDTO.OrderDTO;
+import com.lucapolizzo.market.dto.orderDTO.PurchasedItemDTO;
 import com.lucapolizzo.market.exception.QuantityNotAvailable;
 import com.lucapolizzo.market.models.entities.*;
+import com.lucapolizzo.market.queries.OrderCustomerQuery;
 import com.lucapolizzo.market.repositories.*;
 import jakarta.transaction.Transactional;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -26,9 +29,10 @@ public class OrderService {
     BasketRepository basketRepository;
     @Autowired
     PurchasedItemRepository purchasedItemRepository;
-
+    @Autowired
+    OrderCustomerQuery queryCustomer;
     @Transactional
-    public Order addOrder(AddUpdateOrderCommand command) {
+    public OrderDTO addOrder(AddUpdateOrderCommand command) {
         Order order = new Order();
         order.setDataAcquisto(new Date());
         List<PurchasedItem> listaProd = new ArrayList<>();
@@ -59,6 +63,52 @@ public class OrderService {
         order.setOrderItems(listaProd);
         orderRepository.save(order);
         if (order.getTotale() != totaleOrdine) throw new RuntimeException();
-        return order;
+        return convertToDTO(order);
+    }
+
+    public OrderDTO getOrder(GetDeleteOrderCommand command) {
+        Optional<Order> order = this.orderRepository.findById(command.getCodice());
+        if (!order.isPresent()) return null;
+        return convertToDTO(order.get());
+    }
+
+
+    public ListOrderDTO searchOrder(SearchOrderCommand command) {
+        Page<Order> searchList = queryCustomer.all(command);
+        List<OrderDTO> returnList = new ArrayList<>();
+
+        if ((searchList != null) && (searchList.hasContent())) {
+
+            List<Order> listProducts = searchList.getContent();
+            for (Order order : listProducts) {
+                returnList.add(convertToDTO(order));
+            }
+        }
+        return new ListOrderDTO(returnList, queryCustomer.count(command));
+    }
+
+
+
+    public static OrderDTO convertToDTO(Order order) {
+        OrderDTO orderDTO = new OrderDTO();
+        List<PurchasedItemDTO> list = new ArrayList<>();
+        orderDTO.setCustomerId(order.getCustomer().getId());
+        orderDTO.setId(order.getId());
+        orderDTO.setDataAcquisto(order.getDataAcquisto());
+        orderDTO.setTotale(order.getTotale());
+        for (PurchasedItem purchasedItem : order.getOrderItems()) {
+            list.add(convertPurchaseItem(purchasedItem));
+        }
+        orderDTO.setPurchasedItemList(list);
+        return orderDTO;
+    }
+
+    public static PurchasedItemDTO convertPurchaseItem(PurchasedItem purchasedItem) {
+        PurchasedItemDTO purchasedItemDTO = new PurchasedItemDTO();
+        purchasedItemDTO.setCodice(purchasedItem.getCodice());
+        purchasedItemDTO.setQtaAcquistata(purchasedItem.getQtaAcquistata());
+        purchasedItemDTO.setStoredProduct(purchasedItem.getProdottoReale());
+        purchasedItemDTO.setOrderId(purchasedItem.getOrder().getId());
+        return purchasedItemDTO;
     }
 }

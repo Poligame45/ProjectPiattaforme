@@ -5,9 +5,12 @@ import com.lucapolizzo.market.models.entities.Basket;
 import com.lucapolizzo.market.models.entities.StoredProduct;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.catalina.Store;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "basket_item")
 public class BasketItem {

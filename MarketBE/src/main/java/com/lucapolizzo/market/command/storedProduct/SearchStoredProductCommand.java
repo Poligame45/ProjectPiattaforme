@@ -11,6 +11,4 @@ public class SearchStoredProductCommand extends GenericSearchCommand {
     private Integer qta;
     private Double prezzo;
     private String img;
-    //Capire
-    //private long version;
 }
