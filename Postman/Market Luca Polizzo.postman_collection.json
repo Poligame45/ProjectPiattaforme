@@ -8,6 +8,422 @@
 	},
 	"item": [
 		{
+			"name": "StoredProduct",
+			"item": [
+				{
+					"name": "searchProducts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"prod5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"prod123456\",\r\n    \"descrizione\": \"333\",\r\n    \"img\": \"../../../assets/images/glutammine.png\",\r\n    \"prezzo\": 15.5,\r\n    \"qta\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/addStoredProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"addStoredProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStoredProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codice\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/deleteStoredProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"deleteStoredProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStoredProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codice\":10\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/getStoredProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"getStoredProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAllStoredProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaWdpQHlhaG9vLml0IiwiaWF0IjoxNzAxNDU0NDczLCJleHAiOjE3MDE1NDA4NzN9.M07BnmelrSNkBgqKJGUgSbILjUznDELCoYdbLTzUtiU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/searchAllStoredProducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"searchAllStoredProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStoredProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codice\":10,\r\n    \"nome\":\"ciccio\",\r\n    \"descrizione\":\"questo prodotto è un prodotto prodotto\",\r\n    \"qta\":22,\r\n    \"img\":\"dwdw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/updateStoredProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"updateStoredProduct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket",
+			"item": [
+				{
+					"name": "addBasketItem",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codiceStoredProduct\": 11,\r\n    \"codiceCustomer\": 102,\r\n    \"quantita\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/basket/addItemInBasket",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basket",
+								"addItemInBasket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeBasketItem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codiceStoredProduct\": 11,\r\n    \"codiceCustomer\": 102\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/basket/removeBasketItem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basket",
+								"removeBasketItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBasketItemQuantity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codiceStoredProduct\": 9,\r\n    \"codiceCustomer\": 102,\r\n    \"quantita\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/basket/updateBasketItemQuantity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basket",
+								"updateBasketItemQuantity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBasket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codice\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/basket/getBasket",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basket",
+								"getBasket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "addAcquisto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codice\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order/getOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"getOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totale\":15.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order/searchOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"searchOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "demo",
 			"request": {
 				"method": "GET",
@@ -22,7 +438,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"gigi@yahoo.it\",\r\n    \"firstname\":\"Luca\",\r\n    \"password\":\"jonny\",\r\n    \"lastname\":\"Polizzo\",\r\n    \"role\":\"CUSTOMER\"\r\n}",
+					"raw": "{\r\n    \"email\":\"aaasasdxab\",\r\n    \"firstname\":\"Luca\",\r\n    \"password\":\"a\",\r\n    \"address\":\"bisignano\",\r\n    \"lastname\":\"Polizzo\",\r\n    \"role\":\"CUSTOMER\",\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -75,14 +491,6 @@
 						"authenticate"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProducts",
-			"request": {
-				"method": "GET",
-				"header": []
 			},
 			"response": []
 		}
