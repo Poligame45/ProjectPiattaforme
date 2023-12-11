@@ -1,5 +1,6 @@
 package com.lucapolizzo.market.services;
 
+import com.lucapolizzo.market.command.basketItem.GetDeleteBasketItemCommand;
 import com.lucapolizzo.market.command.order.AddUpdateOrderCommand;
 import com.lucapolizzo.market.command.order.GetDeleteOrderCommand;
 import com.lucapolizzo.market.command.order.SearchOrderCommand;
@@ -31,6 +32,9 @@ public class OrderService {
     PurchasedItemRepository purchasedItemRepository;
     @Autowired
     OrderCustomerQuery queryCustomer;
+    @Autowired
+    BasketService basketService;
+
     @Transactional
     public OrderDTO addOrder(AddUpdateOrderCommand command) {
         Order order = new Order();
@@ -39,7 +43,6 @@ public class OrderService {
         Basket basket = basketRepository.findByCustomerId(command.getCustomerId());
         double totaleOrdine = 0;
         for (BasketItem item : basket.getBasketItems()) {
-
             StoredProduct storedProduct = storedProductRepository.findByCodice(item.getStoredProduct().getCodice()).orElseThrow();
             int qtaAcquistata = item.getQuantita();
             if ((storedProduct.getQta() - qtaAcquistata) < 0) {
@@ -50,7 +53,7 @@ public class OrderService {
                 storedProductRepository.save(storedProduct);
                 totaleOrdine += storedProduct.getPrezzo() * item.getQuantita();
                 PurchasedItem purchasedItem = new PurchasedItem();
-                purchasedItem.setProdottoReale(storedProduct);
+                purchasedItem.setStoredProduct(storedProduct);
                 purchasedItem.setQtaAcquistata(qtaAcquistata);
                 purchasedItem.setOrder(order);
                 purchasedItemRepository.save(purchasedItem);
@@ -63,6 +66,12 @@ public class OrderService {
         order.setOrderItems(listaProd);
         orderRepository.save(order);
         if (order.getTotale() != totaleOrdine) throw new RuntimeException();
+        for (BasketItem item : basket.getBasketItems()) {
+            GetDeleteBasketItemCommand deleteItemCommand = new GetDeleteBasketItemCommand();
+            deleteItemCommand.setCodiceCustomer(command.getCustomerId());
+            deleteItemCommand.setCodiceStoredProduct(item.getStoredProduct().getCodice());
+            basketService.removeBasketItem(deleteItemCommand);
+        }
         return convertToDTO(order);
     }
 
@@ -88,7 +97,6 @@ public class OrderService {
     }
 
 
-
     public static OrderDTO convertToDTO(Order order) {
         OrderDTO orderDTO = new OrderDTO();
         List<PurchasedItemDTO> list = new ArrayList<>();
@@ -107,7 +115,7 @@ public class OrderService {
         PurchasedItemDTO purchasedItemDTO = new PurchasedItemDTO();
         purchasedItemDTO.setCodice(purchasedItem.getCodice());
         purchasedItemDTO.setQtaAcquistata(purchasedItem.getQtaAcquistata());
-        purchasedItemDTO.setStoredProduct(purchasedItem.getProdottoReale());
+        purchasedItemDTO.setStoredProduct(purchasedItem.getStoredProduct());
         purchasedItemDTO.setOrderId(purchasedItem.getOrder().getId());
         return purchasedItemDTO;
     }

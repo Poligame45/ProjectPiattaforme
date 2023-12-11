@@ -20,9 +20,9 @@ public class PurchasedItem {
     @Column(name = "qta_acquistata")
     private int qtaAcquistata;
 
-    @ManyToOne
-    @JoinColumn(name = "prodotto_reale")
-    private StoredProduct prodottoReale;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stored_product_id")
+    private StoredProduct storedProduct;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ordine_id")

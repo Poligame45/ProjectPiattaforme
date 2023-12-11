@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/basket")
-@Slf4j
 @CrossOrigin("http://localhost:8100")
 public class BasketController {
 

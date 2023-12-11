@@ -2,11 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/Services/basket.service';
-import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { StoredProduct } from 'src/app/models/StoredProduct';
 import { AddUpdateBasketItemCommand } from 'src/app/models/command/basketCommand/AddUpdateBasketItemCommand';
-import { SearchCommandStoredProduct } from 'src/app/models/command/storedProductCommand/SearchCommandStoredProduct';
-import { Utility } from 'src/app/utils/Utility';
+import { GetBasketCommand } from 'src/app/models/command/basketCommand/GetBasketCommand';
 
 @Component({
   selector: 'main-content',
@@ -15,14 +13,12 @@ import { Utility } from 'src/app/utils/Utility';
 })
 export class ContentComponent implements OnInit {
 
-  currentUser!: any;
-
+  currentUser!: number;
   @Input() list!: Array<StoredProduct>;
 
-  constructor(private basketService: BasketService, private router:Router) {
+  constructor(private basketService: BasketService, private router: Router) {
   }
   ngOnInit(): void {
-    this.currentUser = sessionStorage.getItem('userId');
   }
 
   async aggiungiAlCarrello(product: StoredProduct) {
@@ -31,12 +27,20 @@ export class ContentComponent implements OnInit {
       codiceStoredProduct: product.codice,
       quantita: 1
     }
-
-    const resp = await firstValueFrom(this.basketService.addItemInBasket(command));
+    await firstValueFrom(this.basketService.addItemInBasket(command));
+    const getCommand: GetBasketCommand = {
+      customerId: this.currentUser
+    }
+    const basket = await firstValueFrom(this.basketService.getBasket(getCommand));
+    this.basketService.item.next(basket.basketItems.length);
   }
 
   goToDetails(prodotto: StoredProduct) {
-    this.router.navigate(['product-details'], { queryParams: { product: prodotto.codice} });
+    this.router.navigate(['product-details'], { queryParams: { product: prodotto.codice } });
   }
 
+  userLogged() {
+    this.currentUser = +sessionStorage.getItem('userId')!!;
+    return this.currentUser!!
+  }
 }

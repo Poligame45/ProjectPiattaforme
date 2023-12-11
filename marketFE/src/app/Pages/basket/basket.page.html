@@ -1,30 +1,51 @@
-<ion-content [fullscreen]="true">
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Carrello</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of basket.basketItems; index as i">
-          <ion-thumbnail slot="start">
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-          </ion-thumbnail>
-          <ion-label>{{basket.basketItems[i].storedProduct.descrizione}}</ion-label>
-          <ion-label>Quantità prodotti disponibili {{basket.basketItems[i].storedProduct.qta}}</ion-label>
-          <ion-button (click)="rimuoviItem(basket.basketItems[i])">Rimuovi</ion-button>
-          <ion-select *ngIf="!!basket && !!basket.basketItems" interface=popover
-            [value]="basket.basketItems[i].quantita" (ionChange)="changeSizeOfPages($event,basket.basketItems[i])">
-            <ion-select-option
-              *ngFor="let prova of [].constructor(basket.basketItems[i].storedProduct.qta); index as j "
-              [value]="j+1">{{j+1}}
-            </ion-select-option>
-
-          </ion-select>
-
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-</ion-content>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Il tuo carrello</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goToHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-card *ngIf="!!basket && !!basket.basketItems && !!basket.basketItems.length">
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let item of basket.basketItems; index as i">
+        <ion-thumbnail slot="start">
+          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+        </ion-thumbnail>
+        <ion-label>{{basket.basketItems[i].storedProduct.descrizione}}</ion-label>
+        <ion-label>Quantità prodotti disponibili {{basket.basketItems[i].storedProduct.qta}}</ion-label>
+        <ion-label>Prezzo prodotto {{basket.basketItems[i].storedProduct.prezzo}}</ion-label>
+        <ion-button (click)="rimuoviItem(basket.basketItems[i])">Rimuovi</ion-button>
+        <ion-select *ngIf="!!basket && !!basket.basketItems" interface=popover [value]="basket.basketItems[i].quantita"
+          (ionChange)="changeSizeOfPages($event,basket.basketItems[i])">
+          <ion-select-option *ngFor="let prova of [].constructor(basket.basketItems[i].storedProduct.qta); index as j "
+            [value]="j+1">{{j+1}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+<ion-card *ngIf="!basket || !basket.basketItems || !basket.basketItems.length">
+  <ion-card-header>
+    <ion-card-title>Il Tuo Carrello è vuoto.</ion-card-title>
+    <ion-card-subtitle><a (click)="goToHome()">Continua a fare acquisti</a></ion-card-subtitle>
+  </ion-card-header>
+</ion-card>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row *ngIf="!!basket && !!basket.basketItems && !!basket.basketItems.length">
+      <ion-col>
+        <ion-title>Procedi all'acquisto</ion-title>
+      </ion-col>
+      <ion-col>Totale:{{totaleCarrello}}</ion-col>
+      <ion-col><ion-button (click)="acquista()">Procedi all'ordine</ion-button></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

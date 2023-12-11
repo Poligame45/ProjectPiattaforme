@@ -34,7 +34,7 @@ public class BasketService {
 
     @Transactional
     public BasketDTO getBasket(GetBasketCommand command){
-        Basket basket = basketRepository.findByCustomerId(command.getCodice());
+        Basket basket = basketRepository.findByCustomerId(command.getCustomerId());
         return convertToDTO(basket);
 
 
@@ -55,7 +55,7 @@ public class BasketService {
             }
         } else {//Aggiungi nuovo
             BasketItem basketItem = new BasketItem();
-            basketItem.setQuantita(1);
+            basketItem.setQuantita(command.getQuantita());
             basketItem.setStoredProduct(storedProduct);
             basketItem.setCarrello(basket);
             basketItemRepository.save(basketItem);

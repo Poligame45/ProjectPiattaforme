@@ -41,6 +41,11 @@ public class StoredProduct {
     @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.ALL)
     List<BasketItem> basketItems;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.ALL)
+    List<PurchasedItem> purchasedItems;
+
+
     @Version
     private long version;
 

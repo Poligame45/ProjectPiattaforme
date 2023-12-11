@@ -1,0 +1,24 @@
+<ion-grid *ngIf="!!table && !!table.rows && !!table.rows.length">
+  <ion-row>
+    <ion-col class="header" *ngFor="let header of table.headers">
+      <ion-item color="dark">
+        <ion-label>{{header.nome}}</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngFor="let row of table.rows">
+    <ion-col class="header" *ngFor="let column of row.columns">
+      <ion-item class="item" color="light">
+        <ion-label>{{column.nome}}</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col *ngIf="table.hasActionsButton" class="header">
+      <ion-button (click)="editRow(row)">
+        Modifica
+      </ion-button>
+      <ion-button (click)="deleteRow(row)">
+        Elimina
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

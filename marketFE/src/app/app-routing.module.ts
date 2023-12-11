@@ -26,7 +26,8 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: { authorities: 'CUSTOMER' },
     loadChildren: () => import('./Pages/user-details/user-details.module').then(m => m.UserDetailsPageModule)
-  },  {
+  },
+  {
     path: 'basket',
     loadChildren: () => import('./Pages/basket/basket.module').then( m => m.BasketPageModule)
   },
@@ -34,6 +35,27 @@ const routes: Routes = [
     path: 'product-details',
     loadChildren: () => import('./Pages/product-details/product-details.module').then( m => m.ProductDetailsPageModule)
   },
+  {
+    path: 'admin-home-page',
+    canActivate: [authGuard],
+    data: { authorities: 'ADMIN' },
+    loadChildren: () => import('./Pages/admin-home-page/admin-home-page.module').then( m => m.AdminHomePagePageModule)
+  },  {
+    path: 'customer-orders',
+    loadChildren: () => import('./Pages/customer-orders/customer-orders.module').then( m => m.CustomerOrdersPageModule)
+  },
+  {
+    path: 'admin-orders',
+    loadChildren: () => import('./Pages/admin-orders/admin-orders.module').then( m => m.AdminOrdersPageModule)
+  },
+  {
+    path: 'admin-products',
+    loadChildren: () => import('./Pages/admin-products/admin-products.module').then( m => m.AdminProductsPageModule)
+  },
+
+
+
+
 
 
 

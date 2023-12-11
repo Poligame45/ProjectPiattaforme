@@ -1,13 +1,66 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>userDetails</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToHome()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Il tuo account</ion-title>
+
   </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">userDetails</ion-title>
+      <ion-title size="large">Il tuo Account</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-grid class="grid">
+    <ion-row class="row">
+      <ion-col class="col">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Le tue informazioni</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Visualizza le informazioni relative al tuo account!
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card (click)="goToOrders()">
+          <ion-card-header>
+            <ion-card-title>I tuoi ordini!</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Visualizza le informazioni relative ai tuoi ordini! 3
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="row">
+      <ion-col>
+        <ion-card (click)="goToBasket()">
+          <ion-card-header>
+            <ion-card-title>Carrello</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Visualizza i prodotti che hai inserito nel tuo carrello
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Contattaci</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Hai avuto problemi con la nostra piattaforma? Contattaci e saremo felici di aiutarti
+          </ion-card-content>
+        </ion-card>
+      </ion-col></ion-row>
+  </ion-grid>
 </ion-content>

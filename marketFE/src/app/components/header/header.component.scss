@@ -1,0 +1,22 @@
+.toolbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    --min-height:60px;	
+}
+
+.badge{
+    position: absolute;
+    font-size: 8px;
+    right: -8px;
+    top: -3px;
+}
+
+.badge-button{
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    overflow: visible!important;
+}

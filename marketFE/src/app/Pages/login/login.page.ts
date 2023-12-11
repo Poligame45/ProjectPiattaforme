@@ -36,14 +36,20 @@ export class LoginPage implements OnInit {
     } else {
       alert('email o password sbagliate');
     }
-    if (!!this.serviceLogin.isLogged) {
+    if (!!this.serviceLogin.isLogged && this.token.user.role === "CUSTOMER") {
       this.goToHome();
+    }else if (!!this.serviceLogin.isLogged && this.token.user.role === "ADMIN"){
+      this.goToAdminHomePage();
     }
   }
 
 
   goToHome() {
     this.router.navigate(['home'], { queryParams: { isLogged: this.serviceLogin.isLogged } });
+  }
+
+  goToAdminHomePage() {
+    this.router.navigate(['admin-home-page']);
   }
 
   goToRegisterPage() {

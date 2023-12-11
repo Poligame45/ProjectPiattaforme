@@ -1,3 +1,3 @@
 export class GetBasketCommand{
-    codice!:any;
+    customerId!:any;
 }

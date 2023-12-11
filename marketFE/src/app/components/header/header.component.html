@@ -1,11 +1,16 @@
-<ion-row>
-    <ion-col>
-        <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
-    </ion-col>
-    <ion-col>
-        <ion-button *ngIf="isLogged" (click)="logout()">Logout</ion-button>
-    </ion-col>
-    <ion-col>
-        <ion-button *ngIf="!isLogged" (click)="login()">Login</ion-button>
-    </ion-col>
-</ion-row>
+<ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+        <ion-button (click)="goToHome()">
+            <ion-icon slot="icon-only" name="barbell-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+    <ion-buttons slot="end">
+        <ion-button class="badge-button" (click)="goToBasket()" *ngIf="userLogged()">
+            <ion-badge *ngIf=" userLogged() && getBasketItems() " class="badge">{{this.basketItems}}</ion-badge>
+            <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="login()"> Area Personale </ion-button>
+        <ion-button *ngIf="userLogged()" (click)="logout()"> Logout </ion-button>
+    </ion-buttons>
+</ion-toolbar>

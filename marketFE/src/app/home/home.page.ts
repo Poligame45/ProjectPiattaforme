@@ -4,6 +4,10 @@ import { Utility } from '../utils/Utility';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchCommandStoredProduct } from '../models/command/storedProductCommand/SearchCommandStoredProduct';
 import { ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+import { BasketService } from '../Services/basket.service';
+import { GetBasketCommand } from '../models/command/basketCommand/GetBasketCommand';
+import { Basket } from '../models/Basket';
+import { firstValueFrom } from 'rxjs';
 
 
 
@@ -12,21 +16,25 @@ import { ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage extends Utility implements OnInit, ViewWillLeave {
+export class HomePage extends Utility implements OnInit {
   isLogged!: boolean
 
-  constructor(storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) {
+  constructor(storedProductService: StoredProductService, private activatedRoute: ActivatedRoute, private basketService: BasketService) {
     super(storedProductService);
-  }
-  async ionViewWillLeave(): Promise<void> {
-    this.activatedRoute.snapshot.queryParamMap.get('isLogged') ? this.isLogged = true : this.isLogged = false;
-    this.list = await super.startSearch();
-
   }
 
   async ngOnInit(): Promise<void> {
     this.activatedRoute.snapshot.queryParamMap.get('isLogged') ? this.isLogged = true : this.isLogged = false;
     this.list = await super.startSearch();
+    if (!!sessionStorage.getItem('userId')) {
+      const command: GetBasketCommand = {
+        customerId: sessionStorage.getItem('userId')
+      }
+      const basket = await firstValueFrom(this.basketService.getBasket(command));
+      console.log(basket);
+      this.basketService.item.next(basket.basketItems.length);
+    }
+
   }
 
   async changePage(event: any) {
@@ -35,7 +43,6 @@ export class HomePage extends Utility implements OnInit, ViewWillLeave {
 
   async searchProducts(command: SearchCommandStoredProduct) {
     this.list = await this.startSearch(command);
-    console.log(this.list);
   }
 
   async changeSize(event: any) {

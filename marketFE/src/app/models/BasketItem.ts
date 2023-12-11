@@ -5,5 +5,5 @@ export class BasketItem{
         id!:Number;
         carrello!:Basket;
         storedProduct!:StoredProduct;
-        quantita!:Number;
+        quantita!:number;
 } 

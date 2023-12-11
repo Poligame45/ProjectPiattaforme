@@ -18,7 +18,7 @@ import { ContentModule } from '../components/content/content.module';
     PaginatorModule,
     HeaderModule,
     ContentModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
   declarations: [HomePage]
 })

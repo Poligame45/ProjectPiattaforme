@@ -15,10 +15,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterPage
   },
-  {
-    path: 'home',
-    component: HomePage
-  }
+
 ];
 
 @NgModule({

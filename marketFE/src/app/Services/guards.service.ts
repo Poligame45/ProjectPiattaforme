@@ -26,7 +26,7 @@ export class AuthGuard {
       return true;
     }
 
-    alert("Need log in");
+    alert("Effettua l'accesso");
     // not logged in so redirect to login page with the return url{queryParams: {returnUrl: state.url}}
     this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
