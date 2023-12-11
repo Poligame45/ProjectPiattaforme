@@ -1,9 +1,7 @@
 export class Table {
     rows!: Array<Riga>;
     headers!: Array<Header>;
-    hasActionsButton!: boolean;
-
-
+    hasActionsButton: boolean = false;
     constructor() {
         this.rows = new Array<Riga>();
         this.headers = new Array<Header>();
@@ -19,7 +17,7 @@ export class Riga {
 }
 
 export class Column {
-    nome!: string;
+    nome!: any;
     buttons?: Array<ActionButtons>
 }
 export class Header {

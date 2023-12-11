@@ -1,7 +1,7 @@
 import { GenericSearchCommand } from "../genericCommand/GenericSearchCommand";
 
 export class SearchCommandStoredProduct extends GenericSearchCommand {
-    nome!: String;
+    nome?: String;
     descrizione?: String;
     prezzo?: number;
     qta?: number;
