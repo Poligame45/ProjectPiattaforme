@@ -24,14 +24,12 @@ export class HomePage extends Utility implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.activatedRoute.snapshot.queryParamMap.get('isLogged') ? this.isLogged = true : this.isLogged = false;
     this.list = await super.startSearch();
     if (!!sessionStorage.getItem('userId')) {
       const command: GetBasketCommand = {
         customerId: sessionStorage.getItem('userId')
       }
       const basket = await firstValueFrom(this.basketService.getBasket(command));
-      console.log(basket);
       this.basketService.item.next(basket.basketItems.length);
     }
 

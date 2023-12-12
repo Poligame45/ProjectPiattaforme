@@ -47,14 +47,20 @@ const routes: Routes = [
   },
   {
     path: 'admin-orders',
+    canActivate: [authGuard],
+    data: { authorities: 'ADMIN' },
     loadChildren: () => import('./Pages/admin-orders/admin-orders.module').then( m => m.AdminOrdersPageModule)
   },
   {
     path: 'admin-products',
+    canActivate: [authGuard],
+    data: { authorities: 'ADMIN' },
     loadChildren: () => import('./Pages/admin-products/admin-products.module').then( m => m.AdminProductsPageModule)
   },
   {
     path: 'add-update-stored-product',
+    canActivate: [authGuard],
+    data: { authorities: 'ADMIN' },
     loadChildren: () => import('./Pages/add-update-stored-product/add-update-stored-product.module').then( m => m.AddUpdateStoredProductPageModule)
   },
 

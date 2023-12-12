@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminHomePagePage } from './admin-home-page.page';
+import { AdminProductsPage } from '../admin-products/admin-products.page';
 
 const routes: Routes = [
   {
@@ -10,12 +11,12 @@ const routes: Routes = [
   },
   {
     path: 'content',
-    loadChildren: () => import('../../components/content/content.module').then( m => m.ContentModule)
-  },
+    loadChildren: () => import('../../components/content/content.module').then(m => m.ContentModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminHomePagePageRoutingModule {}
+export class AdminHomePagePageRoutingModule { }

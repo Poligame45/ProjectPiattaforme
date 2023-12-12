@@ -8,6 +8,7 @@ import { AdminProductsPageRoutingModule } from './admin-products-routing.module'
 
 import { AdminProductsPage } from './admin-products.page';
 import { TableModule } from 'src/app/components/table/table.module';
+import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TableModule } from 'src/app/components/table/table.module';
     FormsModule,
     IonicModule,
     AdminProductsPageRoutingModule,
-    TableModule
+    TableModule, 
+    PaginatorModule
   ],
   declarations: [AdminProductsPage]
 })

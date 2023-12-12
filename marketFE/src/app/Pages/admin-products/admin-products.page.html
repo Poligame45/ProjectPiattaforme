@@ -1,12 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Prodotti in magazzino</ion-title>
+    <ion-searchbar [debounce]="1000" (ionInput)="searchProducts($event)"></ion-searchbar>
+
     <ion-buttons slot="primary">
-      <ion-button (click)="addStoredItem()"> Aggiungi nuovo prodoto </ion-button>
+      <ion-button (click)="addStoredItem()"> Aggiungi nuovo prodotto </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <table [table]="table"></table>
+<ion-content class="ion-padding" overflow-scroll="false">
+  <table [table]="table" (editRowEvent)="editRow($event)"></table>
 </ion-content>
+<ion-footer>
+  <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
+    [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
+</ion-footer>

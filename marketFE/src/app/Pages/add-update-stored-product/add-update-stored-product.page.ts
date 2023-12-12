@@ -1,9 +1,11 @@
+import { StoredProduct } from './../../models/StoredProduct';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { AddUpdateCommandStoredProduct } from 'src/app/models/command/storedProductCommand/AddUpdateCommandStoredProduct';
+import { GetDeleteStoredProductCommand } from 'src/app/models/command/storedProductCommand/GetDeleteStoredProductCommand';
 
 @Component({
   selector: 'app-add-update-stored-product',
@@ -12,9 +14,10 @@ import { AddUpdateCommandStoredProduct } from 'src/app/models/command/storedProd
 })
 export class AddUpdateStoredProductPage implements OnInit {
   myForm!: FormGroup;
-  constructor(private router: Router, private storedProductService: StoredProductService) { }
+  storedProduct!: StoredProduct;
+  constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     //Inserire query param per la modifica
     this.myForm = new FormGroup({
       nome: new FormControl('', Validators.required),
@@ -23,6 +26,15 @@ export class AddUpdateStoredProductPage implements OnInit {
       prezzo: new FormControl('', Validators.required),
       qta: new FormControl('', Validators.required)
     });
+    let codiceProdotto = await this.activatedRoute.snapshot.queryParamMap.get('product');
+    if (!!codiceProdotto) {
+      const command: GetDeleteStoredProductCommand = {
+        codice: +codiceProdotto
+      }
+      this.storedProduct = await firstValueFrom(this.storedProductService.getStoredProduct(command));
+      console.log(this.storedProduct);
+      this.myForm.setValue({ nome: this.storedProduct.nome, descrizione: this.storedProduct.descrizione, img: this.storedProduct.img, prezzo: this.storedProduct.prezzo, qta: this.storedProduct.qta });
+    }
   }
 
   async onSubmit() {
@@ -38,5 +50,6 @@ export class AddUpdateStoredProductPage implements OnInit {
   }
   goToStoredProducts() {
     this.router.navigate(['admin-products']);
+
   }
 }

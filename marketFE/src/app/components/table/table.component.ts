@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Header, Table } from 'src/app/models/Table';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { StoredProduct } from 'src/app/models/StoredProduct';
+import { Column, Header, Riga, Table } from 'src/app/models/Table';
 
 @Component({
   selector: 'table',
@@ -8,7 +9,8 @@ import { Header, Table } from 'src/app/models/Table';
 })
 export class TableComponent implements OnInit {
   @Input() table!: Table;
-
+  @Output() editRowEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteRowEvent: EventEmitter<any> = new EventEmitter();
 
   actionHeader: Header = {
     nome: "Azioni"
@@ -22,8 +24,9 @@ export class TableComponent implements OnInit {
   }
 
 
-  editRow(event: any) {
-    console.log(event);
+  editRow(event: Riga) {
+    const idProd = event.columns[0].nome;
+    this.editRowEvent.emit(idProd);
   }
 
   deleteRow(event: any) {
