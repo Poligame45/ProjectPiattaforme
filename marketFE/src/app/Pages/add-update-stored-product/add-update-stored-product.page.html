@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>add-update-stored-product</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToStoredProducts()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input label="Nome:" label-placement="floating" formControlName="nome"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input label="Descrizione:" label-placement="floating" formControlName="descrizione"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input label="Url immagine:" label-placement="floating" formControlName="img"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input label="Prezzo:"  type="number" label-placement="floating" formControlName="prezzo"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input label="Quantità:"  type="number" label-placement="floating" formControlName="qta"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-button type="submit">Salva</ion-button>
+    </form>
+  </ion-grid>
+
+</ion-content>

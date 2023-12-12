@@ -1,9 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Prodotti in magazzino</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="addStoredItem()"> Aggiungi nuovo prodoto </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <table [_table]="table"></table>
+  <table [table]="table"></table>
 </ion-content>

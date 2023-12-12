@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { StoredProduct } from 'src/app/models/StoredProduct';
@@ -14,7 +15,7 @@ import { ListStoredProductsDTO } from 'src/app/models/dto/ListStoredProductsDTO'
 export class AdminProductsPage implements OnInit {
   table: Table = new Table();
   list!: ListStoredProductsDTO;
-  constructor(private storedProductService: StoredProductService) { }
+  constructor(private storedProductService: StoredProductService, private router: Router) { }
 
   async ngOnInit() {
     this.table = new Table();
@@ -27,42 +28,45 @@ export class AdminProductsPage implements OnInit {
     this.list = await firstValueFrom(this.storedProductService.searchStoredProducts(searchCommand));
     this.configHeader();
     this.configTable();
-    console.log(this.table)
   }
 
   configTable() {
-    this.list.storedProductList.forEach((prod:StoredProduct) => {
+    this.list.storedProductList.forEach((prod: StoredProduct) => {
       let row = new Riga();
+      let colCodice = new Column();
+      colCodice.nome = prod.codice;
       let colName = new Column();
       colName.nome = prod.nome;
       let colDesc = new Column();
       colDesc.nome = prod.descrizione;
-      let colImg = new Column();
       let colPrezzo = new Column();
       let colQta = new Column();
-      colImg.nome = prod.img
       colPrezzo.nome = prod.prezzo
       colQta.nome = prod.qta
-      row.columns.push(colName, colDesc, colImg, colPrezzo, colQta);
+      row.columns.push(colCodice, colName, colDesc, colPrezzo, colQta);
       this.table.rows.push(row);
     });
-    // this.table.hasActionsButton = true;
+    this.table.hasActionsButton = true;
   }
 
   configHeader() {
     let headerNome = new Header();
     let headerDescrizione = new Header();
-    let headerImg = new Header();
     let headerPrezzo = new Header();
     let headerQta = new Header();
+    let headerCodice = new Header();
     headerNome.nome = "Nome";
     headerDescrizione.nome = "Descrizione";
-    headerImg.nome = "Img";
     headerPrezzo.nome = "Prezzo";
     headerQta.nome = "Quantità";
+    headerCodice.nome = "Codice prodotto";
 
-    this.table.headers.push(headerNome, headerDescrizione, headerImg, headerPrezzo, headerQta);
+    this.table.headers.push(headerCodice, headerNome, headerDescrizione, headerPrezzo, headerQta);
 
+  }
+
+  addStoredItem() {
+    this.router.navigate(['add-update-stored-product']);
   }
 
 }
