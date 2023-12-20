@@ -1,3 +1,5 @@
+import { SearchOrdersCommand } from 'src/app/models/command/orderCommand/searchOrderCommand';
+import { OrdersService } from './../../Services/orders.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminOrdersPage implements OnInit {
 
-  constructor() { }
+  constructor(private orderService:OrdersService) { }
 
   ngOnInit() {
+    const command:SearchOrdersCommand = new SearchOrdersCommand();
+    console.log(this.orderService.searchOrders(command).subscribe((val)=>{
+      console.log(val)
+    }))
   }
 
 

@@ -2,7 +2,6 @@
   <ion-toolbar>
     <ion-title>Prodotti in magazzino</ion-title>
     <ion-searchbar [debounce]="1000" (ionInput)="searchProducts($event)"></ion-searchbar>
-
     <ion-buttons slot="primary">
       <ion-button (click)="addStoredItem()"> Aggiungi nuovo prodotto </ion-button>
     </ion-buttons>
