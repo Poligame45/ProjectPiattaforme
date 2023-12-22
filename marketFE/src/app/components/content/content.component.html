@@ -1,26 +1,23 @@
 <ion-grid>
     <ion-row *ngIf="!!list && list.length>0">
-        <ion-col size="4" *ngFor="let prodotto of list">
-            <ion-card>
-                <img [src]="prodotto.img" height="320px" width="320px"
+        <ion-col size="1" *ngFor="let prodotto of list">
+            <ion-card class="card">
+                <img [src]="prodotto.img" height="200px"
                     style="display: flex; align-items: center; flex-direction: row; justify-content: center;">
                 <ion-card-header>
                     <ion-card-title>{{prodotto.nome}}</ion-card-title>
                     <ion-card-subtitle>{{prodotto.descrizione}}</ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content>
-                    <ion-row class="ion-justify-content-evenly">
-                        <ion-col size="3">
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col class="col">
                             <ion-button id="open-toast" [disabled]="!userLogged()"
                                 (click)="aggiungiAlCarrello(prodotto)">Aggiungi
                                 al carrello</ion-button>
                             <ion-toast trigger="open-toast" message="Hello World!" [duration]="3000"></ion-toast>
                         </ion-col>
-                        <ion-col size="3">
-                            <ion-button [disabled]="!userLogged()">Acquista</ion-button>
-                        </ion-col>
-                        <ion-col>
-                            <a (click)="goToDetails(prodotto)">go To details</a>
+                        <ion-col class="col">
+                            <ion-button (click)="goToDetails(prodotto)">Dettaglio</ion-button>
                         </ion-col>
                     </ion-row>
                 </ion-card-content>

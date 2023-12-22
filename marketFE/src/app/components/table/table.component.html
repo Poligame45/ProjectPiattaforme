@@ -3,7 +3,7 @@
     <ion-card-title>Non ci sono risultati visualizzabili!</ion-card-title>
   </ion-card-header>
 </ion-card>
-<ion-grid *ngIf="!!table && !!table.rows && !!table.rows.length">
+<ion-grid class="grid" *ngIf="!!table  && !!table.rows && !!table.rows.length">
   <ion-row>
     <ion-col size=2 class="header" *ngFor="let header of table.headers">
       <ion-item color="dark">

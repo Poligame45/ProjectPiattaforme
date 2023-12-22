@@ -5,14 +5,14 @@ import { StoredProduct } from 'src/app/models/StoredProduct';
 import { Column, Header, Riga, Table } from 'src/app/models/Table';
 import { SearchCommandStoredProduct } from 'src/app/models/command/storedProductCommand/SearchCommandStoredProduct';
 import { } from 'src/app/models/dto/ListStoredProductsDTO';
-import { Utility } from 'src/app/utils/Utility';
+import { StoredProductUtility } from 'src/app/utils/StoredProductUtility';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.page.html',
   styleUrls: ['./admin-products.page.scss'],
 })
-export class AdminProductsPage extends Utility implements OnInit {
+export class AdminProductsPage extends StoredProductUtility implements OnInit {
   table!: Table;
   constructor(storedProductService: StoredProductService, private router: Router) {
     super(storedProductService);
@@ -21,8 +21,8 @@ export class AdminProductsPage extends Utility implements OnInit {
   async ngOnInit() {
     this.table = new Table();
     this.list = await super.startSearch();
-    this.configHeader();
     this.configTable();
+    this.configHeader();
   }
 
   editRow(idProd: any) {
@@ -30,7 +30,7 @@ export class AdminProductsPage extends Utility implements OnInit {
   }
 
   configTable() {
-    this.table = new Table()
+    this.table = new Table();
     this.list.forEach((prod: StoredProduct) => {
       let row = new Riga();
       let colCodice = new Column();
@@ -69,27 +69,23 @@ export class AdminProductsPage extends Utility implements OnInit {
   }
 
   async changePage(event: any) {
-    this.list = await super.changePaginatorValue(event);
+    await super.goToPage(event, this.totProdotti);
+    this.list = await super.startSearch();
     this.configTable();
+    this.configHeader();
   }
 
   async searchProducts(event: any) {
     const command: SearchCommandStoredProduct = new SearchCommandStoredProduct();
     command.nome = event.target.value;
-    console.log(command)
     this.list = await this.startSearch(command);
-    console.log(this.list)
-    this.configTable();
   }
 
   async changeSize(event: any) {
-    console.log(event.target.value);
-    this.command.take = event.target.value;
-    this.command.current = 0;
-    this.list = await this.startSearch();
+    await super.changePageSize(event);
     this.configTable();
+    this.configHeader();
   }
-
   goBack() {
     this.router.navigate(['admin-home-page']);
   }

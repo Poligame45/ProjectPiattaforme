@@ -8,6 +8,7 @@ import { BasketService } from '../Services/basket.service';
 import { GetBasketCommand } from '../models/command/basketCommand/GetBasketCommand';
 import { Basket } from '../models/Basket';
 import { firstValueFrom } from 'rxjs';
+import { StoredProductUtility } from '../utils/StoredProductUtility';
 
 
 
@@ -16,7 +17,7 @@ import { firstValueFrom } from 'rxjs';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage extends Utility implements OnInit {
+export class HomePage extends StoredProductUtility implements OnInit {
   isLogged!: boolean
 
   constructor(storedProductService: StoredProductService, private activatedRoute: ActivatedRoute, private basketService: BasketService) {
@@ -36,7 +37,8 @@ export class HomePage extends Utility implements OnInit {
   }
 
   async changePage(event: any) {
-    this.list = await super.changePaginatorValue(event);
+    await super.goToPage(event, this.totProdotti);
+    this.list = await super.startSearch();
   }
 
   async searchProducts(command: SearchCommandStoredProduct) {
@@ -44,10 +46,7 @@ export class HomePage extends Utility implements OnInit {
   }
 
   async changeSize(event: any) {
-    console.log(event.target.value);
-    this.command.take = event.target.value;
-    this.command.current = 0;
-    this.list = await this.startSearch();
+    await super.changePageSize(event);
   }
 
 

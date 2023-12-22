@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { StoredProduct } from 'src/app/models/StoredProduct';
-import { Column, Header, Riga, Table } from 'src/app/models/Table';
+import { Header, Riga, Table } from 'src/app/models/Table';
 
 @Component({
   selector: 'table',
@@ -20,7 +19,7 @@ export class TableComponent implements OnInit {
 
 
   ngOnInit() {
-
+    console.log(this.table)
   }
 
 

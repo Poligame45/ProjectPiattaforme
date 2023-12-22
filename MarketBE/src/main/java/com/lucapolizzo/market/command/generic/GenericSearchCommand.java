@@ -11,5 +11,4 @@ public class GenericSearchCommand {
         this.current = current;
         this.take = take;
     }
-    public GenericSearchCommand(){}
 }

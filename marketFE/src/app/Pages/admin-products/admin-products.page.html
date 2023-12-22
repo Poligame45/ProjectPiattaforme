@@ -13,10 +13,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" overflow-scroll="false">
+<ion-content [fullscreen]="true">
   <table [table]="table" (editRowEvent)="editRow($event)"></table>
+  <ion-footer style="bottom: 0; display: contents;">
+    <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
+      [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
+  </ion-footer>
 </ion-content>
-<ion-footer>
-  <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
-    [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
-</ion-footer>

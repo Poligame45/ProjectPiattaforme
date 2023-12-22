@@ -1,6 +1,6 @@
 export class Table {
-    rows!: Array<Riga>;
-    headers!: Array<Header>;
+    rows: Array<Riga>;
+    headers: Array<Header>;
     hasActionsButton: boolean = false;
     constructor() {
         this.rows = new Array<Riga>();

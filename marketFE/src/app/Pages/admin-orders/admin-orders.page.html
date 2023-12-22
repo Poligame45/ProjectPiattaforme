@@ -1,16 +1,19 @@
- <ion-header [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Ordini ricevuti</ion-title>
-
-
-
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-content  class="ion-padding" overflow-scroll="false">
+<ion-content class="ion-padding" overflow-scroll="false">
   <table [table]="table" (editRowEvent)="editRow($event)"></table>
 </ion-content>
+
 <ion-footer>
   <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
     [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
-</ion-footer> --> 
+</ion-footer>

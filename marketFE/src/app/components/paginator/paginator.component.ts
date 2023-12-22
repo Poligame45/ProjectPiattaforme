@@ -7,15 +7,14 @@ import { Utility } from 'src/app/utils/Utility';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent extends Utility {
+export class PaginatorComponent {
 
   @Output() changePage: EventEmitter<any> = new EventEmitter();
   @Output() changeSize: EventEmitter<any> = new EventEmitter();
   @Input() itemsPerPages!: number;
   @Input() current!: number;
 
-  constructor(storedProductService: StoredProductService) {
-    super(storedProductService);
+  constructor() {
   }
 
   alertInputs: any = [

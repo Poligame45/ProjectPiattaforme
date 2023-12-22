@@ -1,89 +1,53 @@
-import { StoredProductService } from "../Services/stored-product.service";
-import { firstValueFrom } from 'rxjs';
-import { SearchCommandStoredProduct } from "../models/command/storedProductCommand/SearchCommandStoredProduct";
-import { ListStoredProductsDTO } from "../models/dto/ListStoredProductsDTO";
-import { StoredProduct } from "../models/StoredProduct";
+import { GenericSearchCommand } from "../models/command/genericCommand/GenericSearchCommand";
 
-export class Utility {
-    totProdotti!: number;
-    resp!: ListStoredProductsDTO;
-    list!: Array<StoredProduct>;
-    command!: SearchCommandStoredProduct;
+export abstract class Utility {
 
-    constructor(public storedProductService: StoredProductService) { }
-
-    async startSearch(filtri?: SearchCommandStoredProduct) {
-        if (!!filtri) {
-            this.command = filtri;
-            await this.startSearch();
-        } else if (!!this.command) {
-            this.resp = await firstValueFrom(this.storedProductService.searchStoredProducts(this.command));
-        } else {
-            this.command = new SearchCommandStoredProduct();
-            await this.startSearch();
-        }
-        this.totProdotti = this.resp.totProdotti;
-        return this.resp.storedProductList;
-    }
-
-
-    async changePaginatorValue(event: any) {
+    async changePaginatorValue(command: GenericSearchCommand, event: any, totale?: number) {
         switch (event) {
             case 1: {
-                await this.goToFirstPage();
-                return this.resp.storedProductList;
+                return await this.goToFirstPage(command);
             }
             case 2: {
-                await this.goToPreviousPage();
-                return this.resp.storedProductList;
-
+                return await this.goToPreviousPage(command);
             }
             case 3: {
-                await this.goToNextPage();
-                return this.resp.storedProductList;
+                return await this.goToNextPage(command, totale);
             }
             case 4: {
-                await this.goToLastPage();
-                return this.resp.storedProductList;
+                return await this.goToLastPage(command, totale);
             }
             default: {
-                return this.resp.storedProductList;
+                return command.current;
             }
         }
     }
 
-    async goToLastPage() {
-        if (this.command.current === Math.floor(this.totProdotti / this.command.take)) return;
-        this.command.current = Math.floor(this.totProdotti / this.command.take);
-        await this.startSearch();
-        console.log(this.command.current);
+    async goToLastPage(command: GenericSearchCommand, totale?: number) {
+        if (!totale) return command.current;
+        if (command.current === Math.floor(totale / command.take)) return command.current;
+        command.current = Math.floor(totale / command.take);
+        return command.current;
     }
 
-    async goToNextPage() {
-        if (this.command.take < this.totProdotti / (this.command.current + 1)) {
-            this.command.current = this.command.current + 1;
-            await this.startSearch();
-            console.log(this.command.current);
-
+    async goToNextPage(command: GenericSearchCommand, totale?: number) {
+        if (!totale) return command.current;
+        if (command.take < totale / (command.current + 1)) {
+            command.current = command.current + 1;
         } else {
-            return;
+            return command.current;
         }
-
+        return command.current;
     }
-    async goToPreviousPage() {
-        if (this.command.current === 0) return;
-        this.command.current = this.command.current - 1;
-        await this.startSearch();
-        console.log(this.command.current);
-
+    async goToPreviousPage(command: GenericSearchCommand) {
+        if (command.current === 0) return 0;
+        command.current = command.current - 1;
+        return command.current;
     }
 
-    async goToFirstPage() {
-        if (this.command.current == 0) return;
-        this.command.current = 0;
-        await this.startSearch();
-        console.log(this.command.current);
+    async goToFirstPage(command: GenericSearchCommand) {
+        if (command.current == 0) return 0;
+        command.current = 0;
+        return command.current;
     }
-
-
+    abstract changePageSize(event: any):any;
 }
