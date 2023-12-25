@@ -17,7 +17,7 @@
         <ion-label>{{column.nome}}</ion-label>
       </ion-item>
     </ion-col>
-    <ion-col size="2" *ngIf="table.hasActionsButton" class="header">
+    <ion-col size="2" *ngIf="table.hasActionsButton" class="edit-delete">
       <ion-button (click)="editRow(row)">
         Modifica
       </ion-button>

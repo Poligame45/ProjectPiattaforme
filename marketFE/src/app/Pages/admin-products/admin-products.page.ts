@@ -41,8 +41,8 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
       colDesc.nome = prod.descrizione;
       let colPrezzo = new Column();
       let colQta = new Column();
-      colPrezzo.nome = prod.prezzo
-      colQta.nome = prod.qta
+      colPrezzo.nome = prod.prezzo + "€";
+      colQta.nome = prod.qta;
       row.columns.push(colCodice, colName, colDesc, colPrezzo, colQta);
       this.table.rows.push(row);
     });
@@ -79,6 +79,8 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
     const command: SearchCommandStoredProduct = new SearchCommandStoredProduct();
     command.nome = event.target.value;
     this.list = await this.startSearch(command);
+    this.configTable();
+    this.configHeader();
   }
 
   async changeSize(event: any) {

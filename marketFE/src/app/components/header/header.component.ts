@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   myForm!: FormGroup;
   @Output() searchBarEvent: EventEmitter<any> = new EventEmitter();
   
-  constructor(private serviceLogin: LoginService, private router: Router, private loginService: LoginService, private basketService: BasketService) { }
+  constructor(private router: Router, private loginService: LoginService, private basketService: BasketService) { }
 
   basketItems: number = 0;
 
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.serviceLogin.logout();
+    this.loginService.logout();
     location.reload();
   }
 

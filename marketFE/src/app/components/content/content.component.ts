@@ -15,6 +15,7 @@ export class ContentComponent implements OnInit {
 
   currentUser!: number;
   @Input() list!: Array<StoredProduct>;
+  isToastOpen = false;
 
   constructor(private basketService: BasketService, private router: Router) {
   }
@@ -42,5 +43,10 @@ export class ContentComponent implements OnInit {
   userLogged() {
     this.currentUser = +sessionStorage.getItem('userId')!!;
     return this.currentUser!!
+  }
+
+  async setOpen(isOpen: boolean,prodotto?:StoredProduct) {
+    this.isToastOpen = isOpen;
+    !!prodotto ? await this.aggiungiAlCarrello(prodotto) : '';
   }
 }

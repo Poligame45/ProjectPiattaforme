@@ -1,9 +1,41 @@
-<ion-grid>
-  <ion-row *ngIf="!!storedProd">
-    <ion-col>{{storedProd.img}}</ion-col>
-    <ion-col>{{storedProd.nome}}</ion-col>
-    <ion-col>{{storedProd.descrizione}}</ion-col>
-    <ion-col>{{storedProd.prezzo}}</ion-col>
-    <ion-col>{{storedProd.qta}}</ion-col>
-  </ion-row>
-  <ion-button (click)="aggiungiAlCarrello(storedProd)">Aggiungi al Carrello</ion-button>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dettagli prodotto</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!userLogged()" (click)="login()"> Accedi per aggiungere il prodotto al carrello </ion-button>
+      <ion-button *ngIf="userLogged()" (click)="logout()"> Logout </ion-button>
+      <ion-button *ngIf="userLogged()" (click)="goToBasket()"> Vai al tuo carrello! </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-row *ngIf="!!storedProd">
+  <ion-col><img [src]="storedProd.img"></ion-col>
+  <ion-col>
+    <ion-row>
+      <h1>{{storedProd.nome}}</h1>
+    </ion-row>
+    <ion-row>
+      <h2>Descrizione articolo: {{storedProd.descrizione}}</h2>
+    </ion-row>
+    <ion-row>
+      <h2>Prezzo: {{storedProd.prezzo}}</h2>
+    </ion-row>
+    <ion-row>
+      <h2>Quantità disponibili: {{storedProd.qta}}</h2>
+    </ion-row>
+    <ion-row>
+      <ion-button expand="block" [disabled]="!userLogged()" (click)="setOpen(true)">Aggiungi al carrello</ion-button>
+      <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
+        [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
+    </ion-row>
+  </ion-col>
+</ion-row>

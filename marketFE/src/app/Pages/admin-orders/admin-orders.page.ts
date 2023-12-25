@@ -34,7 +34,7 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
   }
 
   editRow(idProd: any) {
-    this.router.navigate(['add-update-stored-product'], { queryParams: { product: idProd } });
+    this.router.navigate(['detail-order'], { queryParams: { product: idProd } });
   }
 
   configTable() {
@@ -48,7 +48,7 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
       let colCustomerId = new Column();
       colCustomerId.nome = order.customerId;
       let colTotale = new Column();
-      colTotale.nome = order.totale;
+      colTotale.nome = order.totale + "€";
       row.columns.push(colId, colData, colCustomerId, colTotale);
       this.table.rows.push(row);
     });

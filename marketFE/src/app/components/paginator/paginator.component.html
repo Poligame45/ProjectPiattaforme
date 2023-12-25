@@ -1,5 +1,5 @@
 <ion-grid class="paginator" [fixed]="true">
-  <ion-row class="ion-justify-content-between"> 
+  <ion-row class="ion-justify-content-between ion-align-items-center"> 
     <ion-col >
       <ion-item button lines="none" (click)="emitChangePage(1)">
         <ion-icon name="caret-back-outline"></ion-icon>
@@ -10,7 +10,7 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-item>
     </ion-col>
-    <ion-col >
+    <ion-col>
       <ion-item button lines="none" (click)="emitChangePage(3)">
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-item>
