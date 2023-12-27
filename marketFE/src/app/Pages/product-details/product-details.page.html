@@ -17,7 +17,7 @@
 </ion-header>
 
 
-<ion-row *ngIf="!!storedProd">
+<ion-row *ngIf="!!storedProd" class="row">
   <ion-col><img [src]="storedProd.img"></ion-col>
   <ion-col>
     <ion-row>
@@ -33,7 +33,7 @@
       <h2>Quantità disponibili: {{storedProd.qta}}</h2>
     </ion-row>
     <ion-row>
-      <ion-button expand="block" [disabled]="!userLogged()" (click)="setOpen(true)">Aggiungi al carrello</ion-button>
+      <ion-button expand="block" [disabled]="adminLogged() || !userLogged() " (click)="setOpen(true)">Aggiungi al carrello</ion-button>
       <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
         [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
     </ion-row>

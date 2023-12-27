@@ -11,19 +11,21 @@
       </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row *ngFor="let row of table.rows">
-    <ion-col size=2 class="header" *ngFor="let column of row.columns">
-      <ion-item class="item" color="light">
-        <ion-label>{{column.nome}}</ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="2" *ngIf="table.hasActionsButton" class="edit-delete">
-      <ion-button (click)="editRow(row)">
-        Modifica
-      </ion-button>
-      <ion-button (click)="deleteRow(row)">
-        Elimina
-      </ion-button>
-    </ion-col>
-  </ion-row>
+  <ng-container>
+    <ion-row *ngFor="let row of table.rows">
+      <ion-col size=2 class="header" *ngFor="let column of row.columns">
+        <ion-item class="item" color="light">
+          <ion-label>{{column.nome}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="table.hasActionsButton" size="2" class="edit-delete">
+        <ion-button *ngIf="table.hasEditButton"(click)="editRow(row)">
+          Visualizza
+        </ion-button>
+        <ion-button *ngIf="table.hasDeleteButton" (click)="deleteRow(row)">
+          Elimina
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ng-container>
 </ion-grid>

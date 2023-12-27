@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from './Services/login.service';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

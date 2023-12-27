@@ -28,14 +28,13 @@ public class OrdineController {
         OrderDTO orderDTO = orderService.addOrder(command);
         return new ResponseEntity<>(orderDTO, HttpStatus.OK);
     }
-
+    @CrossOrigin("http://localhost:8100")
     @PostMapping("/getOrder")
     public ResponseEntity<OrderDTO> getOrder(@RequestBody GetDeleteOrderCommand command) {
         OrderDTO orderDTO = orderService.getOrder(command);
         return new ResponseEntity<>(orderDTO, HttpStatus.OK);
 
     }
-
 
     @PostMapping("/searchOrderByCustomer")
     public ResponseEntity<ListOrderDTO> searchOrderByCustomer(@RequestBody SearchOrderCommand command) {

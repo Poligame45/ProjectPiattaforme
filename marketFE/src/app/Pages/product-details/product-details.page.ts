@@ -45,7 +45,6 @@ export class ProductDetailsPage implements OnInit {
       quantita: 1
     }
     const resp = await firstValueFrom(this.basketService.addItemInBasket(command));
-    console.log(resp)
   }
 
 
@@ -77,5 +76,9 @@ export class ProductDetailsPage implements OnInit {
 
   goToBasket(){
     this.router.navigate(['basket']);
+  }
+  
+  adminLogged(){
+    return sessionStorage.getItem('userRole')!! === "ADMIN";
   }
 }

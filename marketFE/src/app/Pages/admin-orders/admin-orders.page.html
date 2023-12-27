@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding" overflow-scroll="false">
-  <table [table]="table" (editRowEvent)="editRow($event)"></table>
+  <table *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table" (editRowEvent)="editRow($event)"></table>
 </ion-content>
 
 <ion-footer>

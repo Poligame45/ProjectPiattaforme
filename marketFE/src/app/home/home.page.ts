@@ -37,12 +37,15 @@ export class HomePage extends StoredProductUtility implements OnInit {
   }
 
   async updateBasket() {
+    const userRole = sessionStorage.getItem('userRole');
     if (!!sessionStorage.getItem('userId')) {
       const command: GetBasketCommand = {
         customerId: sessionStorage.getItem('userId')
       }
-      const basket = await firstValueFrom(this.basketService.getBasket(command));
-      this.basketService.item.next(basket.basketItems.length);
+      if (userRole!! && userRole != "ADMIN") {
+        const basket = await firstValueFrom(this.basketService.getBasket(command));
+        this.basketService.item.next(basket.basketItems.length);
+      }
     }
   }
   async changePage(event: any) {

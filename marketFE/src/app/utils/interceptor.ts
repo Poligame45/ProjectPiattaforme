@@ -28,7 +28,6 @@ export class JwtInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(catchError(x => this.handleError(x)));
     }
     private handleError(err: HttpErrorResponse): Observable<any> {
-        console.log(err);
         if (err.status === 401) {
             sessionStorage.clear();
             alert("Email o password sbagliati");

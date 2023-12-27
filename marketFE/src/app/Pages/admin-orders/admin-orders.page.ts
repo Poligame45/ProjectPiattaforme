@@ -1,8 +1,5 @@
-import { SearchOrdersCommand } from 'src/app/models/command/orderCommand/searchOrderCommand';
 import { OrdersService } from './../../Services/orders.service';
 import { Component, OnInit } from '@angular/core';
-import { ListOrderDTO } from 'src/app/models/dto/orders/ListOrderDTO';
-import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { Column, Header, Riga, Table } from 'src/app/models/Table';
 import { OrderDTO } from 'src/app/models/dto/orders/OrderDTO';
@@ -33,12 +30,15 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
     this.router.navigate(['admin-home-page']);
   }
 
-  editRow(idProd: any) {
-    this.router.navigate(['detail-order'], { queryParams: { product: idProd } });
+  editRow(idOrder: any) {
+    this.router.navigate(['order-details'], { queryParams: { order: idOrder } });
   }
 
   configTable() {
     this.table = new Table();
+    this.table.hasDeleteButton = true;
+    this.table.hasEditButton = true;
+    this.table.hasActionsButton = true;
     this.list.forEach((order: OrderDTO) => {
       let row = new Riga();
       let colId = new Column();
@@ -52,7 +52,6 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
       row.columns.push(colId, colData, colCustomerId, colTotale);
       this.table.rows.push(row);
     });
-    this.table.hasActionsButton = true;
   }
 
   configHeader() {

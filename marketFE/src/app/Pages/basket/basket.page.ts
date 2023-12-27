@@ -1,7 +1,6 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IonSelect, SelectChangeEventDetail } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { SelectChangeEventDetail } from '@ionic/angular';
 import { IonSelectCustomEvent } from '@ionic/core';
 import { firstValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/Services/basket.service';
@@ -20,6 +19,7 @@ import { AddUpdateOrderCommand } from 'src/app/models/command/orderCommand/addUp
 export class BasketPage implements OnInit {
   basket: Basket = new Basket();
   totaleCarrello!: number;
+  isAlertOpen: boolean = false;
 
   async changeSizeOfPages(event: IonSelectCustomEvent<SelectChangeEventDetail<any>>, item: BasketItem) {
     const command: AddUpdateBasketItemCommand = {
@@ -31,7 +31,13 @@ export class BasketPage implements OnInit {
     await this.startSearch();
   }
 
-  constructor(private basketService: BasketService, private router: Router) { }
+  constructor(private basketService: BasketService, private router: Router) {
+    this.router.events.subscribe(async (ev) => {
+      if (ev instanceof NavigationEnd) {
+        await this.startSearch();
+      }
+    });
+  }
 
 
   async ngOnInit() {
@@ -69,11 +75,15 @@ export class BasketPage implements OnInit {
 
     let elem = sessionStorage.getItem('userId');
     command.customerId = +elem!
-    const acquisto = await firstValueFrom(this.basketService.acquista(command));
-    console.log(acquisto);
+    await firstValueFrom(this.basketService.acquista(command));
+    this.isAlertOpen = true;
   }
 
   goBack() {
     this.router.navigate(['user-details']);
+  }
+
+  goToOrders() {
+    this.router.navigate(['customer-orders']);
   }
 }

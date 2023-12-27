@@ -11,13 +11,7 @@
                 <ion-card-content>
                     <ion-row class="ion-justify-content-center">
                         <ion-col class="col">
-                            <!-- <ion-button id="open-toast" [disabled]="!userLogged()"
-                                (click)="aggiungiAlCarrello(prodotto)">Aggiungi
-                                al carrello</ion-button>
-                            <ion-toast trigger="open-toast" message="Hello World!" [duration]="3000"></ion-toast> -->
-
-
-                            <ion-button expand="block" [disabled]="!userLogged()" (click)="setOpen(true,prodotto)">Aggiungi al carrello</ion-button>
+                            <ion-button expand="block" [disabled]="!userLogged() || adminLogged()" (click)="setOpen(true,prodotto)">Aggiungi al carrello</ion-button>
                             <ion-toast
                               [isOpen]="isToastOpen"
                               message="Il prodotto è stato aggiunto correttamente al carrello"

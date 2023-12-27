@@ -5,12 +5,16 @@
         </ion-button>
     </ion-buttons>
     <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="!adminLogged()">
         <ion-button class="badge-button" (click)="goToBasket()" *ngIf="userLogged()">
-            <ion-badge *ngIf=" userLogged() && getBasketItems() " class="badge">{{this.basketItems}}</ion-badge>
+            <ion-badge *ngIf="userLogged() && getBasketItems()" class="badge">{{this.basketItems}}</ion-badge>
             <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
         </ion-button>
         <ion-button (click)="login()"> Area Personale </ion-button>
         <ion-button *ngIf="userLogged()" (click)="logout()"> Logout </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="adminLogged()">
+        <ion-button *ngIf="userLogged()" (click)="logout()"> Logout </ion-button>
+        <ion-button *ngIf="userLogged()" (click)="goAdminHomePage()"> Home page admin </ion-button>
     </ion-buttons>
 </ion-toolbar>

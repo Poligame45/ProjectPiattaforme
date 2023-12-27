@@ -1,9 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>I tuoi ordini</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <table></table>
+  <table class="table" *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table"
+    (editRowEvent)="goToDetails($event)"></table>
 </ion-content>

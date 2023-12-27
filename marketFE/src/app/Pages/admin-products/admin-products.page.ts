@@ -31,6 +31,9 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
 
   configTable() {
     this.table = new Table();
+    this.table.hasActionsButton = true;
+    this.table.hasEditButton = true;
+    this.table.hasDeleteButton = true;
     this.list.forEach((prod: StoredProduct) => {
       let row = new Riga();
       let colCodice = new Column();
@@ -46,7 +49,6 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
       row.columns.push(colCodice, colName, colDesc, colPrezzo, colQta);
       this.table.rows.push(row);
     });
-    this.table.hasActionsButton = true;
   }
 
   configHeader() {

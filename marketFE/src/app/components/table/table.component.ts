@@ -16,16 +16,16 @@ export class TableComponent implements OnInit {
   }
 
   constructor() { }
-
+  
 
   ngOnInit() {
-    console.log(this.table)
   }
 
 
+
   editRow(event: Riga) {
-    const idProd = event.columns[0].nome;
-    this.editRowEvent.emit(idProd);
+    const id = event.columns[0].nome;
+    this.editRowEvent.emit(id);
   }
 
   deleteRow(event: any) {

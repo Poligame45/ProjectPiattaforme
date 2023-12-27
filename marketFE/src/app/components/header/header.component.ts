@@ -14,7 +14,7 @@ import { SearchCommandStoredProduct } from 'src/app/models/command/storedProduct
 export class HeaderComponent implements OnInit {
   myForm!: FormGroup;
   @Output() searchBarEvent: EventEmitter<any> = new EventEmitter();
-  
+
   constructor(private router: Router, private loginService: LoginService, private basketService: BasketService) { }
 
   basketItems: number = 0;
@@ -55,5 +55,10 @@ export class HeaderComponent implements OnInit {
     this.searchBarEvent.emit(command);
   }
 
-
+  adminLogged() {
+    return sessionStorage.getItem('userRole')!! === "ADMIN";
+  }
+  goAdminHomePage(){
+    this.router.navigate(['admin-home-page']);
+  }
 }

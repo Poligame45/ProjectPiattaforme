@@ -1,8 +1,8 @@
 Front end:
-- Sistemare i pulsanti login e logout
-- Creazione pagina dettaglio di un prodotto tramite query param e/o path param
+- Bug visivo quando si effettua ordine e quando si registra un nuovo cliente
 - Creazione pagina area personale utente
 - Creazione pagine dell'admin per la gestione prodotti e ordini
+- Regex email
 
 Back end:
 - Test API prodotto
@@ -11,3 +11,7 @@ Back end:
 - Gestione ordini
 - Gestione acquisti
 - Gestione admin
+
+
+- Generale 
+- Gestire autorizzazioni api

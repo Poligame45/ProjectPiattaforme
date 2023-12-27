@@ -49,9 +49,6 @@ export class RegisterPage implements OnInit {
       role: "CUSTOMER"
     }
 
-    if (this.myForm.invalid) {
-      console.log('form invalido');
-    }
 
     this.token = await firstValueFrom(this.serviceRegister.register(obj));
     sessionStorage.setItem("token", this.token.accessToken);

@@ -19,6 +19,7 @@ export class ContentComponent implements OnInit {
 
   constructor(private basketService: BasketService, private router: Router) {
   }
+  
   ngOnInit(): void {
   }
 
@@ -48,5 +49,8 @@ export class ContentComponent implements OnInit {
   async setOpen(isOpen: boolean,prodotto?:StoredProduct) {
     this.isToastOpen = isOpen;
     !!prodotto ? await this.aggiungiAlCarrello(prodotto) : '';
+  }
+  adminLogged(){
+    return sessionStorage.getItem('userRole')!! === "ADMIN";
   }
 }

@@ -32,7 +32,6 @@ export class AddUpdateStoredProductPage implements OnInit {
         codice: +codiceProdotto
       }
       this.storedProduct = await firstValueFrom(this.storedProductService.getStoredProduct(command));
-      console.log(this.storedProduct);
       this.myForm.setValue({ nome: this.storedProduct.nome, descrizione: this.storedProduct.descrizione, img: this.storedProduct.img, prezzo: this.storedProduct.prezzo, qta: this.storedProduct.qta });
     }
   }

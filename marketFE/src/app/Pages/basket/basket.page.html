@@ -45,7 +45,15 @@
         <ion-title>Procedi all'acquisto</ion-title>
       </ion-col>
       <ion-col>Totale:{{totaleCarrello}}</ion-col>
-      <ion-col><ion-button (click)="acquista()">Procedi all'ordine</ion-button></ion-col>
+      <ion-col><ion-button id="present-alert" (click)="acquista()">Procedi all'ordine</ion-button>
+        <ion-alert
+        trigger="present-alert"
+        [isOpen]="isAlertOpen"
+        header="Ordine effettuato"
+        message="Il tuo ordine è stato inviato."
+        (didDismiss)="goToOrders()"
+      ></ion-alert></ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-footer>
+

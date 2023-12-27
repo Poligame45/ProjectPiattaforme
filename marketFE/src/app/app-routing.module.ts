@@ -1,7 +1,6 @@
-import { NgModule, inject } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './Services/guards.service';
-import { LoginService } from './Services/login.service';
 
 const routes: Routes = [
   {
@@ -29,6 +28,8 @@ const routes: Routes = [
   },
   {
     path: 'basket',
+    canActivate: [authGuard],
+    data: { authorities: 'CUSTOMER' },
     loadChildren: () => import('./Pages/basket/basket.module').then( m => m.BasketPageModule)
   },
   {
@@ -63,13 +64,10 @@ const routes: Routes = [
     data: { authorities: 'ADMIN' },
     loadChildren: () => import('./Pages/add-update-stored-product/add-update-stored-product.module').then( m => m.AddUpdateStoredProductPageModule)
   },
-
-
-
-
-
-
-
+  {
+    path: 'order-details',
+    loadChildren: () => import('./Pages/order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
+  },
 
 ];
 
