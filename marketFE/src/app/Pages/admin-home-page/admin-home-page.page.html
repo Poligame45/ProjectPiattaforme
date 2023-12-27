@@ -1,8 +1,58 @@
-<ion-row>
-    <ion-col>
-        <ion-button (click)="goToOrders()">ordini</ion-button>
-    </ion-col>
-    <ion-col>
-        <ion-button (click)="goToProducts()">prodotti</ion-button>
-    </ion-col>
-</ion-row>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Admin home page</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="goToHome()">Vedi la home page del cliente!
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    
+    <ion-grid class="grid">
+        <ion-row class="row">
+            <ion-col class="col">
+                <ion-card (click)="goToProducts()">
+                    <ion-card-header>
+                        <ion-card-title>Prodotti</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Visualizza e modifica i prodotti in magazzino
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col>
+                <ion-card (click)="goToOrders()">
+                    <ion-card-header>
+                        <ion-card-title>Ordini!</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Visualizza gli ordini ricevuti.
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row class="row">
+            <ion-col>
+                <ion-card (click)="goToOrders()">
+                    <ion-card-header>
+                        <ion-card-title>Admin</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Registra un nuovo amministratore
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Richieste clienti</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                       Visualizza le richieste cliente
+                    </ion-card-content>
+                </ion-card>
+            </ion-col></ion-row>
+    </ion-grid>
+</ion-content>

@@ -19,4 +19,8 @@ export class AdminHomePagePage implements OnInit {
   goToProducts(){
     this.router.navigate(['admin-products']);
   }
+
+  goToHome(){
+    this.router.navigate(['home']);
+  }
 }

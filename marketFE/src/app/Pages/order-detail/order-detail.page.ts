@@ -70,4 +70,12 @@ export class OrderDetailPage implements OnInit {
     headerQtaAcquistata.nome = "Quantità acquistata";
     this.table.headers.push(headerCodiceProdotto, headerNomeProdotto, headerPrezzoU,headerQtaAcquistata);
   }
+
+  goToHome(){
+    if(sessionStorage.getItem('userRole')==="ADMIN"){
+      this.router.navigate(['admin-home-page']);
+    }else{
+      this.router.navigate(['home']);
+    }
+  }
 }

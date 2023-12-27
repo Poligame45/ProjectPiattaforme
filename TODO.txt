@@ -1,7 +1,7 @@
 Front end:
-- Bug visivo quando si effettua ordine e quando si registra un nuovo cliente
-- Creazione pagina area personale utente
-- Creazione pagine dell'admin per la gestione prodotti e ordini
+
+- Creazione pagina area personale utente per consultare le proprie informazioni
+- Form registrazione nuovo admin
 - Regex email
 
 Back end:

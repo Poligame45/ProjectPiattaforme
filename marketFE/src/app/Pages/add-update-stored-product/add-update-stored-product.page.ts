@@ -1,7 +1,7 @@
 import { StoredProduct } from './../../models/StoredProduct';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { AddUpdateCommandStoredProduct } from 'src/app/models/command/storedProductCommand/AddUpdateCommandStoredProduct';
@@ -15,10 +15,19 @@ import { GetDeleteStoredProductCommand } from 'src/app/models/command/storedProd
 export class AddUpdateStoredProductPage implements OnInit {
   myForm!: FormGroup;
   storedProduct!: StoredProduct;
-  constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) { 
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.configForm();
+      }
+    });
+  }
 
   async ngOnInit() {
-    //Inserire query param per la modifica
+    await this.configForm();
+  }
+
+  async configForm(){
     this.myForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       descrizione: new FormControl('', Validators.required),
