@@ -15,7 +15,8 @@
     <ion-row *ngFor="let row of table.rows">
       <ion-col size=2 class="header" *ngFor="let column of row.columns">
         <ion-item class="item" color="light">
-          <ion-label>{{column.nome}}</ion-label>
+          <ion-label *ngIf="column.type != 'date' ">{{column.nome}}</ion-label>
+          <ion-label *ngIf="!!column.type && column.type === 'date' ">{{column.nome | date : 'dd/MM/yyyy'}}</ion-label>
         </ion-item>
       </ion-col>
       <ion-col *ngIf="table.hasActionsButton" size="2" class="edit-delete">

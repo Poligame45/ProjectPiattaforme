@@ -20,7 +20,7 @@ export class Riga {
 
 export class Column {
     nome!: any;
-    buttons?: Array<ActionButtons>
+    type?: string;
 }
 export class Header {
     nome!: string;

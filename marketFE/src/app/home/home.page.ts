@@ -9,6 +9,7 @@ import { GetBasketCommand } from '../models/command/basketCommand/GetBasketComma
 import { Basket } from '../models/Basket';
 import { every, firstValueFrom } from 'rxjs';
 import { StoredProductUtility } from '../utils/StoredProductUtility';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 
@@ -19,7 +20,9 @@ import { StoredProductUtility } from '../utils/StoredProductUtility';
 })
 export class HomePage extends StoredProductUtility implements OnInit {
   isLogged!: boolean
-  previousUrl!: String;
+  myForm!: FormGroup;
+  removeFilter: boolean = false;
+  filtri: SearchCommandStoredProduct = new SearchCommandStoredProduct();
   constructor(storedProductService: StoredProductService, private router: Router, private basketService: BasketService) {
     super(storedProductService);
     this.router.events.subscribe((ev) => {
@@ -30,10 +33,25 @@ export class HomePage extends StoredProductUtility implements OnInit {
 
   }
 
+  configForm() {
+    this.myForm = new FormGroup({
+      prezzo: new FormControl(),
+    });
+  }
+  async onSubmit() {
+    this.filtri.prezzo = this.myForm.value.prezzo;
+    this.list = await super.startSearch(this.filtri);
+  }
+
+  async rimuoviFiltri(){
+    this.filtri.prezzo = undefined;
+    this.myForm.setValue({prezzo: ''});
+    this.list = await super.startSearch(this.filtri);
+  }
+
   async ngOnInit(): Promise<void> {
+    this.configForm();
     this.list = await super.startSearch();
-
-
   }
 
   async updateBasket() {
@@ -54,7 +72,8 @@ export class HomePage extends StoredProductUtility implements OnInit {
   }
 
   async searchProducts(command: SearchCommandStoredProduct) {
-    this.list = await this.startSearch(command);
+    this.filtri.nome = command.nome;
+    this.list = await this.startSearch(this.filtri);
   }
 
   async changeSize(event: any) {

@@ -30,6 +30,5 @@ export class TableComponent implements OnInit {
 
   deleteRow(event: any) {
     console.log(event);
-
   }
 }

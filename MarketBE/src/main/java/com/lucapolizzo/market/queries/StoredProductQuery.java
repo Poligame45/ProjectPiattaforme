@@ -40,7 +40,7 @@ public class StoredProductQuery {
 
         if (command.getPrezzo() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.equal(root.get("prezzo"), command.getPrezzo());
+                return criteriaBuilder.lt(root.get("prezzo"), command.getPrezzo());
             });
         }
         if (command.getDescrizione() != null) {

@@ -7,10 +7,48 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onSubmit()">Applica filtri</ion-button>
+      <ion-button (click)="rimuoviFiltri()">Rimuovi filtri</ion-button>
+    </ion-buttons>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <ion-row>
+        <ion-col>
+          <ion-input formControlName="totale" label="Totale ordine minimo:" type="number"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-datetime-button datetime="dataAcquistoDa"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime #dataAcquistoDa formControlName="dataAcquistoDa" id="dataAcquistoDa" presentation="date"></ion-datetime>
+              <ion-buttons slot="buttons">
+                <ion-button color="danger" (click)="dataAcquistoDa.reset(); resetData();">Reset</ion-button>
+                <ion-button color="primary" (click)=" dataAcquistoDa.confirm(true); selezionaDataDa();">Conferma</ion-button>
+              </ion-buttons>
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+        <ion-col>
+          <ion-datetime-button *ngIf="dataAcquistoDaSelected && myForm.value.dataAcquistoDa"  datetime="dataAcquistoA"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime [min]="myForm.value.dataAcquistoDa" [value]="today" #dataAcquistoA formControlName="dataAcquistoA" id="dataAcquistoA" presentation="date"></ion-datetime>
+              <ion-buttons slot="buttons">
+                <ion-button color="danger" (click)="dataAcquistoA.reset(); resetData();">Reset</ion-button>
+                <ion-button color="primary" (click)=" dataAcquistoA.confirm(true); selezionaDataDa();">Conferma</ion-button>
+              </ion-buttons>
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" overflow-scroll="false">
-  <table *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table" (editRowEvent)="editRow($event)"></table>
+  <table *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table"
+    (editRowEvent)="editRow($event)"></table>
 </ion-content>
 
 <ion-footer>

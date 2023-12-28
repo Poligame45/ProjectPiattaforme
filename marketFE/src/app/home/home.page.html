@@ -3,7 +3,15 @@
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-toolbar>
-        
+        <ion-buttons slot="start">
+            <ion-button [disabled]="!myForm.value.prezzo" (click)="onSubmit()">Applica filtri</ion-button>
+            <ion-button (click)="rimuoviFiltri()">Rimuovi filtri</ion-button>
+        </ion-buttons>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <ion-item>
+                <ion-input formControlName="prezzo" label="Prezzo max:" type="number" ></ion-input>
+            </ion-item>
+        </form>
     </ion-toolbar>
     <main-content [list]="this.list"></main-content>
 </ion-content>

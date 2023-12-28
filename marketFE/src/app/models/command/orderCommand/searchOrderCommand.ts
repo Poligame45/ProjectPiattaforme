@@ -2,8 +2,8 @@ import { GenericSearchCommand } from "../genericCommand/GenericSearchCommand";
 
 export class SearchOrdersCommand extends GenericSearchCommand {
     id?: number;
-    dataAcquistoDa?: Date;
-    dataAcquistoA?: Date;
+    dataAcquistoDa?: string;
+    dataAcquistoA?: string;
     totale?: number;
     customerId?: number;
 }
