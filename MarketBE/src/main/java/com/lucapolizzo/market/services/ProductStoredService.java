@@ -87,7 +87,8 @@ public class ProductStoredService {
     @Transactional
     public StoredProductDTO deleteStoredProduct(GetDeleteStoredProductCommand command) {
         StoredProduct stored = storedProductRepository.findByCodice(command.getCodice()).orElseThrow();
-        storedProductRepository.delete(stored);
+        stored.setDeleted(true);
+        storedProductRepository.save(stored);
         return convertToDTO(stored);
     }
 
@@ -99,6 +100,7 @@ public class ProductStoredService {
         storedProductDTO.setPrezzo(stored.getPrezzo());
         storedProductDTO.setImg(stored.getImg());
         storedProductDTO.setQta(stored.getQta());
+        storedProductDTO.setDeleted(stored.getDeleted());
         return storedProductDTO;
     }
 }

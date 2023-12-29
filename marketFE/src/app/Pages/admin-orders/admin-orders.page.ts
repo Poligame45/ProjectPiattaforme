@@ -58,7 +58,6 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
     this.list = await super.startSearch(this.filtri);
     this.configTable();
     this.configHeader();
-
   }
 
   async rimuoviFiltri() {

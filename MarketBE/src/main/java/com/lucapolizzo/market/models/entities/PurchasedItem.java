@@ -20,11 +20,12 @@ public class PurchasedItem {
     @Column(name = "qta_acquistata")
     private int qtaAcquistata;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "stored_product_id")
+    @JsonIgnore
     private StoredProduct storedProduct;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ordine_id")
     @JsonIgnore
     private Order order;

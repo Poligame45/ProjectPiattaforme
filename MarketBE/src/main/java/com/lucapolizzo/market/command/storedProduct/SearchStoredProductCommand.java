@@ -11,4 +11,5 @@ public class SearchStoredProductCommand extends GenericSearchCommand {
     private Integer qta;
     private Double prezzo;
     private String img;
+    private Boolean deleted;
 }

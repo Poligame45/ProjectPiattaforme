@@ -17,7 +17,8 @@
         <ion-col>
           <ion-input formControlName="totale" label="Totale ordine minimo:" type="number"></ion-input>
         </ion-col>
-        <ion-col>
+        <ion-col class="col-data">
+          <ion-label>Range date</ion-label>
           <ion-datetime-button datetime="dataAcquistoDa"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
@@ -30,7 +31,7 @@
           </ion-modal>
         </ion-col>
         <ion-col>
-          <ion-datetime-button *ngIf="dataAcquistoDaSelected && myForm.value.dataAcquistoDa"  datetime="dataAcquistoA"></ion-datetime-button>
+          <ion-datetime-button  *ngIf="dataAcquistoDaSelected && myForm.value.dataAcquistoDa"   datetime="dataAcquistoA"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
               <ion-datetime [min]="myForm.value.dataAcquistoDa" [value]="today" #dataAcquistoA formControlName="dataAcquistoA" id="dataAcquistoA" presentation="date"></ion-datetime>

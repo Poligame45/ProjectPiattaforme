@@ -35,7 +35,7 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-content *ngIf="!basket || !basket.basketItems || !basket.basketItems.length">
+<ion-content *ngIf="showEmptyBasket">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Il Tuo Carrello è vuoto.</ion-card-title>

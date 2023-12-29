@@ -6,4 +6,5 @@ export class SearchCommandStoredProduct extends GenericSearchCommand {
     prezzo?: number;
     qta?: number;
     img?: String;
+    deleted?: boolean;
 }

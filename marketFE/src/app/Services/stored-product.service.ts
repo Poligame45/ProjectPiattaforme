@@ -22,4 +22,12 @@ export class StoredProductService {
   getStoredProduct(body:GetDeleteStoredProductCommand):Observable<any>{
     return this.httpClient.post<any>("http://localhost:8080/products/getStoredProduct", body);
   }
+
+  updateStoredProduct(body:AddUpdateCommandStoredProduct):Observable<any>{
+    return this.httpClient.post<any>("http://localhost:8080/products/updateStoredProduct", body);
+  }
+  
+  deleteStoredProduct(body:GetDeleteStoredProductCommand):Observable<any>{
+    return this.httpClient.post<any>("http://localhost:8080/products/deleteStoredProduct", body);
+  }
 }

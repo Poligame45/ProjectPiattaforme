@@ -71,11 +71,13 @@ export class OrderDetailPage implements OnInit {
     this.table.headers.push(headerCodiceProdotto, headerNomeProdotto, headerPrezzoU,headerQtaAcquistata);
   }
 
-  goToHome(){
+
+
+  goBack(){
     if(sessionStorage.getItem('userRole')==="ADMIN"){
-      this.router.navigate(['admin-home-page']);
+      this.router.navigate(['admin-orders']);
     }else{
-      this.router.navigate(['home']);
+      this.router.navigate(['customer-orders']);
     }
   }
 }

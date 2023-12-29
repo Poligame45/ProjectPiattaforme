@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { StoredProduct } from 'src/app/models/StoredProduct';
 import { Column, Header, Riga, Table } from 'src/app/models/Table';
+import { GetDeleteStoredProductCommand } from 'src/app/models/command/storedProductCommand/GetDeleteStoredProductCommand';
 import { SearchCommandStoredProduct } from 'src/app/models/command/storedProductCommand/SearchCommandStoredProduct';
 import { } from 'src/app/models/dto/ListStoredProductsDTO';
 import { StoredProductUtility } from 'src/app/utils/StoredProductUtility';
@@ -16,6 +18,11 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
   table!: Table;
   constructor(storedProductService: StoredProductService, private router: Router) {
     super(storedProductService);
+    this.router.events.subscribe(async (ev) => {
+      if (ev instanceof NavigationEnd) {
+        await this.startSearch();
+      }
+    });
   }
 
   async ngOnInit() {
@@ -25,8 +32,16 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
     this.configHeader();
   }
 
-  editRow(idProd: any) {
+  editProduct(idProd: any) {
     this.router.navigate(['add-update-stored-product'], { queryParams: { product: idProd } });
+  }
+
+  async deleteStoredProduct(idProd: any) {
+    const command: GetDeleteStoredProductCommand = {
+      codice: +idProd
+    }
+    const resp = await firstValueFrom(this.storedProductService.deleteStoredProduct(command));
+    console.log(resp)
   }
 
   configTable() {

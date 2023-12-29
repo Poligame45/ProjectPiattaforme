@@ -43,8 +43,10 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-button type="submit">Salva</ion-button>
+      <ion-button id="present-alert" type="submit">Salva</ion-button>
     </form>
+    <ion-alert class="alert" trigger="present-alert" [isOpen]="isAlertOpen" 
+          message="Prodotto salvato correttamente." (didDismiss)="goToStoredProducts()"></ion-alert>
   </ion-grid>
 
 </ion-content>

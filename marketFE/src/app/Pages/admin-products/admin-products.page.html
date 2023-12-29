@@ -16,7 +16,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <table [table]="table" (editRowEvent)="editRow($event)"></table>
+  <table [table]="table" (editRowEvent)="editProduct($event)"  (deleteRowEvent)="deleteStoredProduct($event)"></table>
 </ion-content>
 <ion-footer style="bottom: 0; display: contents;">
   <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"

@@ -50,6 +50,9 @@ public class OrderService {
             } else {
                 int nuovaQta = storedProduct.getQta() - item.getQuantita();
                 storedProduct.setQta(nuovaQta);
+                if(storedProduct.getQta() <= 0){
+                    storedProduct.setDeleted(true);
+                }
                 storedProductRepository.save(storedProduct);
                 totaleOrdine += storedProduct.getPrezzo() * item.getQuantita();
                 PurchasedItem purchasedItem = new PurchasedItem();

@@ -19,6 +19,8 @@ export class BasketPage implements OnInit {
   basket: Basket = new Basket();
   totaleCarrello!: number;
   isAlertOpen: boolean = false;
+  showEmptyBasket: boolean = false;
+
   async changeSizeOfPages(event: IonSelectCustomEvent<SelectChangeEventDetail<any>>, item: BasketItem) {
     const command: AddUpdateBasketItemCommand = {
       codiceCustomer: item.carrello.id,
@@ -52,6 +54,7 @@ export class BasketPage implements OnInit {
       this.totaleCarrello = this.totaleCarrello + (basketItem.quantita * basketItem.storedProduct.prezzo);
     });
     this.basketService.item.next(this.basket.basketItems.length);
+    this.basket.basketItems.length <=0 ? this.showEmptyBasket = true : this.showEmptyBasket=false;
   }
 
 

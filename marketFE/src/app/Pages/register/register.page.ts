@@ -12,8 +12,8 @@ import { LoginService } from 'src/app/Services/login.service';
 export class RegisterPage implements OnInit {
   myForm!: FormGroup;
   token!: any;
-  
-
+  regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  regex:boolean = false;
   constructor(private serviceRegister: LoginService, private router:Router, private activatedRoute:ActivatedRoute) { }
   // Far vedere altri campi da visualizzare? Es. indirizzo ecc ecc con autocomplete solo FE?
   // Bisogna aggiungere i controlli riguardanti 
@@ -28,7 +28,7 @@ export class RegisterPage implements OnInit {
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       address: new FormControl('',Validators.required),
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.pattern(this.regexp)),
       password: new FormControl('', Validators.required),
       cpassword: new FormControl('', Validators.required)
     });

@@ -11,7 +11,8 @@ Back end:
 - Gestione ordini
 - Gestione acquisti
 - Gestione admin
-
+- FIX CANCELLAZIONE: AGGIUNGERE CAMPO DELETED COME ATTRIBUTO DELLA CLASSE PRODUCT ANZICHE' ELIMINARLO
+REALMENTE IN MODO DA TENERE TRACCIA DEI PRODOTTI VENDUTI.
 
 - Generale 
 - Gestire autorizzazioni api

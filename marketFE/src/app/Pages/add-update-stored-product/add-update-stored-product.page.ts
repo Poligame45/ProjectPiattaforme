@@ -15,7 +15,8 @@ import { GetDeleteStoredProductCommand } from 'src/app/models/command/storedProd
 export class AddUpdateStoredProductPage implements OnInit {
   myForm!: FormGroup;
   storedProduct!: StoredProduct;
-  constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) { 
+  isAlertOpen: boolean = false;
+  constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.configForm();
@@ -27,7 +28,7 @@ export class AddUpdateStoredProductPage implements OnInit {
     await this.configForm();
   }
 
-  async configForm(){
+  async configForm() {
     this.myForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       descrizione: new FormControl('', Validators.required),
@@ -53,8 +54,13 @@ export class AddUpdateStoredProductPage implements OnInit {
       qta: +this.myForm.value.qta,
       img: this.myForm.value.img
     }
-    const resp = await firstValueFrom(this.storedProductService.addStoredProduct(command));
-    location.reload();
+    if (!!this.storedProduct) {
+      command.codice = this.storedProduct.codice;
+      await firstValueFrom(this.storedProductService.updateStoredProduct(command));
+    } else {
+      await firstValueFrom(this.storedProductService.addStoredProduct(command));
+    }
+    this.isAlertOpen = true;
   }
   goToStoredProducts() {
     this.router.navigate(['admin-products']);

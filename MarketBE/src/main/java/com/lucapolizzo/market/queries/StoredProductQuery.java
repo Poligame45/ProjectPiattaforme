@@ -34,6 +34,12 @@ public class StoredProductQuery {
 
             });
         }
+        if (command.getDeleted() != null) {
+            specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
+                return criteriaBuilder.equal(root.get("deleted"), command.getDeleted());
+
+            });
+        }
         specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
             return criteriaBuilder.gt(root.get("qta"), 0);
         });

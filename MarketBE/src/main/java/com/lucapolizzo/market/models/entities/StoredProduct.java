@@ -37,26 +37,30 @@ public class StoredProduct {
     @Column(name = "img")
     private String img;
 
+    @Column(name = "deleted")
+    private Boolean deleted;
+
     @JsonIgnore
     @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.ALL)
     List<BasketItem> basketItems;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "storedProduct", cascade = CascadeType.PERSIST)
     List<PurchasedItem> purchasedItems;
-
 
     @Version
     private long version;
 
-    public StoredProduct(String nome, String descrizione, double prezzo, int qta, String img) {
+    public StoredProduct(String nome, String descrizione, double prezzo, int qta, String img, Boolean deleted) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.prezzo = prezzo;
         this.qta = qta;
         this.img = img;
+        this.deleted = deleted;
     }
 
     public StoredProduct() {
+        this.deleted = false;
     }
 }

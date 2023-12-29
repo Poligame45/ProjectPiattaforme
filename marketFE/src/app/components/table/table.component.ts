@@ -29,6 +29,7 @@ export class TableComponent implements OnInit {
   }
 
   deleteRow(event: any) {
-    console.log(event);
+    const id = event.columns[0].nome;
+    this.deleteRowEvent.emit(id);
   }
 }

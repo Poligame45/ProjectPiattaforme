@@ -6,7 +6,6 @@ import { ListStoredProductsDTO } from "../models/dto/ListStoredProductsDTO";
 import { Utility } from "./Utility";
 
 export class StoredProductUtility extends Utility {
-
     totProdotti!: number;
     resp!: ListStoredProductsDTO;
     list!: Array<StoredProduct>;
@@ -21,9 +20,11 @@ export class StoredProductUtility extends Utility {
             this.command = filtri;
             await this.startSearch();
         } else if (!!this.command) {
+            this.command.deleted = false;
             this.resp = await firstValueFrom(this.storedProductService.searchStoredProducts(this.command));
         } else {
             this.command = new SearchCommandStoredProduct();
+            this.command.deleted = false;
             await this.startSearch();
         }
         this.totProdotti = this.resp.totProdotti;

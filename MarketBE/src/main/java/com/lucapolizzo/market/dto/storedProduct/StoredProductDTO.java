@@ -10,6 +10,7 @@ public class StoredProductDTO {
     private double prezzo;
     private int qta;
     private String img;
+    private Boolean deleted;
 
     //private long version?
 }

@@ -4,4 +4,5 @@ export class AddUpdateCommandStoredProduct{
     prezzo!: number;
     qta!: number;
     img!: String;
+    codice?:Number;
 }

@@ -29,13 +29,13 @@ public class Order {
     @Column(name = "totale", nullable = false)
     private double totale;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     @JsonIgnore
     private User customer;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private List<PurchasedItem> orderItems = new ArrayList<>();
 
 }
