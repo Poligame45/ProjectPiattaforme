@@ -1,13 +1,10 @@
 import { StoredProductService } from './../Services/stored-product.service';
-import { Component, Input, OnInit } from '@angular/core';
-import { Utility } from '../utils/Utility';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component,  OnInit } from '@angular/core';
+import {  NavigationEnd, Router } from '@angular/router';
 import { SearchCommandStoredProduct } from '../models/command/storedProductCommand/SearchCommandStoredProduct';
-import { ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import { BasketService } from '../Services/basket.service';
 import { GetBasketCommand } from '../models/command/basketCommand/GetBasketCommand';
-import { Basket } from '../models/Basket';
-import { every, firstValueFrom } from 'rxjs';
+import {  firstValueFrom } from 'rxjs';
 import { StoredProductUtility } from '../utils/StoredProductUtility';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -40,6 +37,7 @@ export class HomePage extends StoredProductUtility implements OnInit {
   }
   async onSubmit() {
     this.filtri.prezzo = this.myForm.value.prezzo;
+    this.filtri.deleted = false;
     this.list = await super.startSearch(this.filtri);
   }
 

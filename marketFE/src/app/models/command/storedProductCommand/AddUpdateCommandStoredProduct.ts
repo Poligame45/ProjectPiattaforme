@@ -5,4 +5,5 @@ export class AddUpdateCommandStoredProduct{
     qta!: number;
     img!: String;
     codice?:Number;
+    deleted!:boolean;
 }

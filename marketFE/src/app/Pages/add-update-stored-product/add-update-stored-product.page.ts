@@ -34,7 +34,8 @@ export class AddUpdateStoredProductPage implements OnInit {
       descrizione: new FormControl('', Validators.required),
       img: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
-      qta: new FormControl('', Validators.required)
+      qta: new FormControl('', Validators.required),
+      deleted: new FormControl('', Validators.required),
     });
     let codiceProdotto = await this.activatedRoute.snapshot.queryParamMap.get('product');
     if (!!codiceProdotto) {
@@ -42,7 +43,7 @@ export class AddUpdateStoredProductPage implements OnInit {
         codice: +codiceProdotto
       }
       this.storedProduct = await firstValueFrom(this.storedProductService.getStoredProduct(command));
-      this.myForm.setValue({ nome: this.storedProduct.nome, descrizione: this.storedProduct.descrizione, img: this.storedProduct.img, prezzo: this.storedProduct.prezzo, qta: this.storedProduct.qta });
+      this.myForm.setValue({ nome: this.storedProduct.nome, descrizione: this.storedProduct.descrizione, img: this.storedProduct.img, prezzo: this.storedProduct.prezzo, qta: this.storedProduct.qta, deleted:this.storedProduct.deleted });
     }
   }
 
@@ -52,7 +53,8 @@ export class AddUpdateStoredProductPage implements OnInit {
       descrizione: this.myForm.value.descrizione,
       prezzo: +this.myForm.value.prezzo,
       qta: +this.myForm.value.qta,
-      img: this.myForm.value.img
+      img: this.myForm.value.img,
+      deleted: false
     }
     if (!!this.storedProduct) {
       command.codice = this.storedProduct.codice;
@@ -62,8 +64,8 @@ export class AddUpdateStoredProductPage implements OnInit {
     }
     this.isAlertOpen = true;
   }
+
   goToStoredProducts() {
     this.router.navigate(['admin-products']);
-
   }
 }

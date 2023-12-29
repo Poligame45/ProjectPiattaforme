@@ -40,8 +40,8 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
     const command: GetDeleteStoredProductCommand = {
       codice: +idProd
     }
-    const resp = await firstValueFrom(this.storedProductService.deleteStoredProduct(command));
-    console.log(resp)
+    await firstValueFrom(this.storedProductService.deleteStoredProduct(command));
+    location.reload();
   }
 
   configTable() {
@@ -55,29 +55,29 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
       colCodice.nome = prod.codice;
       let colName = new Column();
       colName.nome = prod.nome;
-      let colDesc = new Column();
-      colDesc.nome = prod.descrizione;
       let colPrezzo = new Column();
+      let colDeleted = new Column();
+      colDeleted.nome = prod.deleted;
       let colQta = new Column();
       colPrezzo.nome = prod.prezzo + "€";
       colQta.nome = prod.qta;
-      row.columns.push(colCodice, colName, colDesc, colPrezzo, colQta);
+      row.columns.push(colCodice, colName, colPrezzo, colQta, colDeleted);
       this.table.rows.push(row);
     });
   }
 
   configHeader() {
     let headerNome = new Header();
-    let headerDescrizione = new Header();
     let headerPrezzo = new Header();
     let headerQta = new Header();
     let headerCodice = new Header();
+    let headerDeleted = new Header();
     headerNome.nome = "Nome";
-    headerDescrizione.nome = "Descrizione";
     headerPrezzo.nome = "Prezzo";
     headerQta.nome = "Quantità";
     headerCodice.nome = "Codice prodotto";
-    this.table.headers.push(headerCodice, headerNome, headerDescrizione, headerPrezzo, headerQta);
+    headerDeleted.nome = "Deleted"
+    this.table.headers.push(headerCodice, headerNome, headerPrezzo, headerQta, headerDeleted);
 
   }
 

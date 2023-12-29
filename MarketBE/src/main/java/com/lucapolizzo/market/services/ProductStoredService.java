@@ -79,7 +79,7 @@ public class ProductStoredService {
         stored.setDescrizione(command.getDescrizione());
         stored.setQta(command.getQta());
         stored.setImg(command.getImg());
-        //stored.setVersion(storedProduct.getVersion());
+        stored.setDeleted(command.getDeleted());
         storedProductRepository.save(stored);
         return convertToDTO(stored);
     }

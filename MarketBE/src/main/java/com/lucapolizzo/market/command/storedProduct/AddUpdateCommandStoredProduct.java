@@ -12,6 +12,7 @@ public class AddUpdateCommandStoredProduct {
     private int qta;
     private double prezzo;
     private String img;
+    private Boolean deleted;
     //Capire
     //private long version;
 }
