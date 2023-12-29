@@ -45,7 +45,7 @@ export class HomePage extends StoredProductUtility implements OnInit {
 
   async rimuoviFiltri(){
     this.filtri.prezzo = undefined;
-    this.myForm.setValue({prezzo: ''});
+    this.myForm.reset();
     this.list = await super.startSearch(this.filtri);
   }
 

@@ -63,9 +63,11 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
 
   async rimuoviFiltri() {
     this.filtri.totale = undefined;
+    this.filtri.dataAcquistoA = undefined;
+    this.filtri.dataAcquistoDa = undefined;
     this.dataAcquistoDaSelected = false;
-    this.myForm.setValue({ totale: undefined, dataAcquistoDa: undefined, dataAcquistoA: undefined });
-    this.list = await super.startSearch(this.filtri);
+    this.myForm.reset();
+    this.list = await super.startSearch(new SearchOrdersCommand());
     this.configTable();
     this.configHeader();
   }
