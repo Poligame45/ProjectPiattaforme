@@ -44,9 +44,9 @@
         </ion-col>
         <ion-col *ngIf="!!storedProduct">
           <ion-item>
-            <ion-select aria-label="Deleted" *ngIf="!!storedProduct.deleted" [value]="storedProduct.deleted" formControlName="deleted">
+            <ion-select aria-label="Deleted" *ngIf="!!storedProduct" [value]="storedProduct.deleted" formControlName="deleted">
               <ion-select-option [value]="true">Elimina da magazzino</ion-select-option>
-              <ion-select-option [value]="false">Rimetti in magazzino</ion-select-option>
+              <ion-select-option [value]="false">Prodotto in magazzino</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>

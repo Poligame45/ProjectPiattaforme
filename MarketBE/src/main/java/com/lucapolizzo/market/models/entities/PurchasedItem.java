@@ -25,7 +25,7 @@ public class PurchasedItem {
     @JsonIgnore
     private StoredProduct storedProduct;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ordine_id")
     @JsonIgnore
     private Order order;

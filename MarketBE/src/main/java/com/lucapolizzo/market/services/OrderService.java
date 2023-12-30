@@ -38,6 +38,7 @@ public class OrderService {
     @Transactional
     public OrderDTO addOrder(AddUpdateOrderCommand command) {
         Order order = new Order();
+        order.setDeleted(false);
         order.setDataAcquisto(new Date());
         List<PurchasedItem> listaProd = new ArrayList<>();
         Basket basket = basketRepository.findByCustomerId(command.getCustomerId());
@@ -78,10 +79,30 @@ public class OrderService {
         return convertToDTO(order);
     }
 
+    @Transactional
     public OrderDTO getOrder(GetDeleteOrderCommand command) {
         Optional<Order> order = this.orderRepository.findById(command.getCodice());
         if (!order.isPresent()) return null;
         return convertToDTO(order.get());
+    }
+
+    @Transactional
+    public OrderDTO deleteOrder(GetDeleteOrderCommand command){
+        Optional<Order> optionalOrder = this.orderRepository.findById(command.getCodice());
+        if(!optionalOrder.isPresent()) return null;
+        Order order = optionalOrder.get();
+        for(PurchasedItem item : order.getOrderItems()){
+            StoredProduct storedProduct = storedProductRepository.findByCodice(item.getStoredProduct().getCodice()).orElseThrow();
+            int prodQta = storedProduct.getQta() + item.getQtaAcquistata();
+            if(storedProduct.getDeleted() == true){
+                storedProduct.setDeleted(false);
+            }
+            storedProduct.setQta(prodQta);
+            storedProductRepository.save(storedProduct);
+        }
+        order.setDeleted(true);
+        orderRepository.save(order);
+        return convertToDTO(order);
     }
 
 
@@ -107,6 +128,7 @@ public class OrderService {
         orderDTO.setId(order.getId());
         orderDTO.setDataAcquisto(order.getDataAcquisto());
         orderDTO.setTotale(order.getTotale());
+        orderDTO.setDeleted(order.getDeleted());
         for (PurchasedItem purchasedItem : order.getOrderItems()) {
             list.add(convertPurchaseItem(purchasedItem));
         }

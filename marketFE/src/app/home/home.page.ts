@@ -1,10 +1,10 @@
 import { StoredProductService } from './../Services/stored-product.service';
-import { Component,  OnInit } from '@angular/core';
-import {  NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { SearchCommandStoredProduct } from '../models/command/storedProductCommand/SearchCommandStoredProduct';
 import { BasketService } from '../Services/basket.service';
 import { GetBasketCommand } from '../models/command/basketCommand/GetBasketCommand';
-import {  firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { StoredProductUtility } from '../utils/StoredProductUtility';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -18,31 +18,36 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class HomePage extends StoredProductUtility implements OnInit {
   isLogged!: boolean
   myForm!: FormGroup;
-  removeFilter: boolean = false;
   filtri: SearchCommandStoredProduct = new SearchCommandStoredProduct();
+
   constructor(storedProductService: StoredProductService, private router: Router, private basketService: BasketService) {
     super(storedProductService);
-    this.router.events.subscribe((ev) => {
+    this.router.events.subscribe(async (ev) => {
       if (ev instanceof NavigationEnd) {
+        this.list = await super.startSearch();
         this.updateBasket();
       }
     });
 
   }
-
   configForm() {
     this.myForm = new FormGroup({
       prezzo: new FormControl(),
+      descrizione: new FormControl(),
+      qta: new FormControl(),
     });
   }
+
   async onSubmit() {
     this.filtri.prezzo = this.myForm.value.prezzo;
+    this.filtri.qta = this.myForm.value.qta;
+    this.filtri.descrizione = this.myForm.value.descrizione;
     this.filtri.deleted = false;
     this.list = await super.startSearch(this.filtri);
   }
 
-  async rimuoviFiltri(){
-    this.filtri.prezzo = undefined;
+  async rimuoviFiltri() {
+    this.filtri = new SearchCommandStoredProduct();
     this.myForm.reset();
     this.list = await super.startSearch(this.filtri);
   }
@@ -77,6 +82,4 @@ export class HomePage extends StoredProductUtility implements OnInit {
   async changeSize(event: any) {
     await super.changePageSize(event);
   }
-
-
 }

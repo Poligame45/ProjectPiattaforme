@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goToHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Inviaci una richiesta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm">
+    <ion-row *ngIf="!!user">
+      <ion-col>
+        <ion-input *ngIf="user.firstname" label="Nome" [readonly]="true" formControlName="firstname"></ion-input>
+        <ion-input label="Cognome" formControlName="lastname">
+        </ion-input>
+        <ion-input label="Email" formControlName="email">
+        </ion-input>
+        <ion-input label="Richiesta" formControlName="request"> 
+         </ion-input>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

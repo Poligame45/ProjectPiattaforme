@@ -9,6 +9,7 @@ import { BasketItem } from 'src/app/models/BasketItem';
 import { AddUpdateBasketItemCommand } from 'src/app/models/command/basketCommand/AddUpdateBasketItemCommand';
 import { GetBasketCommand } from 'src/app/models/command/basketCommand/GetBasketCommand';
 import { GetDeleteBasketItemCommand } from 'src/app/models/command/basketCommand/GetDeleteBasketItemCommand';
+import { AddUpdateOrderCommand } from 'src/app/models/command/orderCommand/addUpdateOrderCommand';
 
 @Component({
   selector: 'app-basket',
@@ -73,10 +74,10 @@ export class BasketPage implements OnInit {
   }
 
   async acquista() {
-    // const command: AddUpdateOrderCommand = new AddUpdateOrderCommand();
-    // let elem = sessionStorage.getItem('userId');
-    // command.customerId = +elem!
-    // await firstValueFrom(this.basketService.acquista(command));
+    const command: AddUpdateOrderCommand = new AddUpdateOrderCommand();
+    let elem = sessionStorage.getItem('userId');
+    command.customerId = +elem!
+    await firstValueFrom(this.basketService.acquista(command));
     this.isAlertOpen = true;
   }
 

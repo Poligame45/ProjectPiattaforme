@@ -22,4 +22,6 @@ public class SearchOrderCommand extends GenericSearchCommand {
     private Double totale;
 
     private Integer customerId;
+
+    private Boolean deleted;
 }

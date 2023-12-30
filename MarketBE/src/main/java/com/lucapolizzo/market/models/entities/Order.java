@@ -29,6 +29,9 @@ public class Order {
     @Column(name = "totale", nullable = false)
     private double totale;
 
+    @Column(name = "deleted", nullable = false)
+    private Boolean deleted;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @JsonIgnore

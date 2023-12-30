@@ -40,18 +40,25 @@ public class StoredProductQuery {
 
             });
         }
-        specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-            return criteriaBuilder.gt(root.get("qta"), 0);
-        });
+        if (command.getQta() != null) {
+            specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
+                return criteriaBuilder.greaterThanOrEqualTo(root.get("qta"), command.getQta());
+            });
+        }
+        if (command.getQta() == null) {
+            specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
+                return criteriaBuilder.gt(root.get("qta"), 0);
+            });
+        }
 
         if (command.getPrezzo() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.lt(root.get("prezzo"), command.getPrezzo());
+                return criteriaBuilder.lessThanOrEqualTo(root.get("prezzo"), command.getPrezzo());
             });
         }
         if (command.getDescrizione() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.equal(root.get("descrizione"), command.getDescrizione());
+                return criteriaBuilder.like(root.get("descrizione"), "%" + command.getDescrizione() + "%");
             });
         }
         return specification;

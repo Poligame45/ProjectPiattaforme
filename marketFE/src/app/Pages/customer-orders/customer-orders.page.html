@@ -9,7 +9,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!!this.list && this.list.length>0">
   <table class="table" *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table"
     (editRowEvent)="goToDetails($event)"></table>
+</ion-content>
+<ion-content *ngIf="!list || list.length<=0 ">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Non hai ancora effettuato nessun ordine!</ion-card-title>
+      <ion-card-subtitle><a class="link-back" (click)="goHome()">Continua a fare acquisti</a></ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

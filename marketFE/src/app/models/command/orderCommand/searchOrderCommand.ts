@@ -6,4 +6,5 @@ export class SearchOrdersCommand extends GenericSearchCommand {
     dataAcquistoA?: string;
     totale?: number;
     customerId?: number;
+    deleted!:boolean;
 }

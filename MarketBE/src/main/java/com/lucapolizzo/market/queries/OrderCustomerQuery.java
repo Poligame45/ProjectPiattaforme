@@ -47,7 +47,11 @@ public class OrderCustomerQuery {
                 return criteriaBuilder.greaterThanOrEqualTo(root.get("totale"), command.getTotale());
             });
         }
-
+        if(command.getDeleted() != null){
+            specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
+                return criteriaBuilder.equal(root.get("deleted"), command.getDeleted());
+            });
+        }
         return specification;
     }
 

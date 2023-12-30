@@ -54,7 +54,7 @@ export class AddUpdateStoredProductPage implements OnInit {
       prezzo: +this.myForm.value.prezzo,
       qta: +this.myForm.value.qta,
       img: this.myForm.value.img,
-      deleted: false
+      deleted: this.myForm.value.deleted
     }
     if (!!this.storedProduct) {
       command.codice = this.storedProduct.codice;

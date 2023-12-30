@@ -17,4 +17,7 @@ export class OrdersService {
   getOrder(body: GetDeleteOrderCommand): Observable<any> {
     return this.httpClient.post<any>("http://localhost:8080/order/getOrder", body);
   }
+  deleteOrder(body: GetDeleteOrderCommand): Observable<any> {
+    return this.httpClient.post<any>("http://localhost:8080/admin/deleteOrder", body);
+  }
 }

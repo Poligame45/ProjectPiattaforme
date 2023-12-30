@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
@@ -16,22 +17,46 @@ import { StoredProductUtility } from 'src/app/utils/StoredProductUtility';
 })
 export class AdminProductsPage extends StoredProductUtility implements OnInit {
   table!: Table;
+  myForm!:FormGroup;
+  filtri:SearchCommandStoredProduct = new SearchCommandStoredProduct();
+
   constructor(storedProductService: StoredProductService, private router: Router) {
     super(storedProductService);
     this.router.events.subscribe(async (ev) => {
       if (ev instanceof NavigationEnd) {
-        await this.startSearch();
+        this.list = await super.startSearch();
+        this.configTable();
+        this.configHeader();
       }
     });
   }
 
   async ngOnInit() {
+    this.configForm();
     this.table = new Table();
-    this.list = await super.startSearch();
+    this.list = await super.startSearch(this.filtri);
     this.configTable();
     this.configHeader();
   }
 
+  configForm(){
+    this.myForm = new FormGroup({
+      deleted: new FormControl(),
+    });
+  }
+  async rimuoviFiltri() {
+    this.filtri.deleted = false;
+    this.myForm.reset();
+    this.list = await super.startSearch(new SearchCommandStoredProduct());
+    this.configTable();
+    this.configHeader();
+  }
+  async onSubmit(){
+    this.filtri.deleted = this.myForm.value.deleted;
+    this.list = await super.startSearch(this.filtri);
+    this.configTable();
+    this.configHeader();
+  }
   editProduct(idProd: any) {
     this.router.navigate(['add-update-stored-product'], { queryParams: { product: idProd } });
   }

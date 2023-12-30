@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { OrdersService } from 'src/app/Services/orders.service';
 import { Column, Header, Riga, Table } from 'src/app/models/Table';
 import { SearchOrdersCommand } from 'src/app/models/command/orderCommand/searchOrderCommand';
@@ -16,14 +16,23 @@ export class CustomerOrdersPage extends OrderUtility implements OnInit {
 
   constructor(orderService:OrdersService, private router:Router) {
     super(orderService);
+    this.router.events.subscribe(async (ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.list = await this.startSearch();
+        this.configTable();
+        this.configHeader();
+      }
+    });
   }
 
   async ngOnInit() {
     let command:SearchOrdersCommand = {
       current: 0,
       take: 10,
-      customerId: +sessionStorage.getItem('userId')!!
+      customerId: +sessionStorage.getItem('userId')!!,
+      deleted: false,
     }
+    
     this.list = await this.startSearch(command);
     this.configTable();
     this.configHeader();
@@ -61,5 +70,8 @@ export class CustomerOrdersPage extends OrderUtility implements OnInit {
   }
   goBack(){
     this.router.navigate(['user-details']);
+  }
+  goHome(){
+    this.router.navigate(['home']);
   }
 }

@@ -5,6 +5,7 @@ export class OrderDTO{
     dataAcquisto!:Date;
     totale!:number;
     customerId!:number;
+    deleted!:boolean;
     purchasedItemList!:Array<PurchasedItemDTO>;
 }
 

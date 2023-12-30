@@ -17,6 +17,12 @@
         <ion-col>
           <ion-input formControlName="totale" label="Totale ordine minimo:" type="number"></ion-input>
         </ion-col>
+        <ion-col>
+          <ion-select [value]="false" label="Deleted:" formControlName="deleted">
+            <ion-select-option [value]="true">True</ion-select-option>
+            <ion-select-option [value]="false">False</ion-select-option>
+          </ion-select>
+        </ion-col>
         <ion-col class="col-data">
           <ion-label>Range date</ion-label>
           <ion-datetime-button datetime="dataAcquistoDa"></ion-datetime-button>
@@ -49,7 +55,7 @@
 
 <ion-content class="ion-padding" overflow-scroll="false">
   <table *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table"
-    (editRowEvent)="editRow($event)"></table>
+    (editRowEvent)="editRow($event)" (deleteRowEvent)="deleteRow($event)"></table>
 </ion-content>
 
 <ion-footer>

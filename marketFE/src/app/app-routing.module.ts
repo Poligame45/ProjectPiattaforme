@@ -68,6 +68,29 @@ const routes: Routes = [
     path: 'order-details',
     loadChildren: () => import('./Pages/order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
   },
+  {
+    path: 'info-user',
+    canActivate: [authGuard],
+    data: { authorities: 'CUSTOMER' },
+    loadChildren: () => import('./Pages/info-user/info-user.module').then( m => m.InfoUserPageModule)
+  },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./Pages/about-us/about-us.module').then( m => m.AboutUsPageModule)
+  },
+  {
+    canActivate: [authGuard],
+    data: { authorities: 'CUSTOMER' },
+    path: 'user-request',
+    loadChildren: () => import('./Pages/user-request/user-request.module').then( m => m.UserRequestPageModule)
+  },
+  {
+    canActivate: [authGuard],
+    data: { authorities: 'ADMIN' },
+    path: 'admin-request',
+    loadChildren: () => import('./Pages/admin-request/admin-request.module').then( m => m.AdminRequestPageModule)
+  },
+
 
 ];
 

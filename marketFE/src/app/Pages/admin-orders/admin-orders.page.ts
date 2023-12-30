@@ -6,6 +6,8 @@ import { Column, Header, Riga, Table } from 'src/app/models/Table';
 import { OrderDTO } from 'src/app/models/dto/orders/OrderDTO';
 import { OrderUtility } from 'src/app/utils/OrderUtility';
 import { SearchOrdersCommand } from 'src/app/models/command/orderCommand/searchOrderCommand';
+import { GetDeleteOrderCommand } from 'src/app/models/command/orderCommand/GetDeleteOrderCommand';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-admin-orders',
@@ -48,13 +50,15 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
     this.myForm = new FormGroup({
       totale: new FormControl(),
       dataAcquistoDa: new FormControl(),
-      dataAcquistoA: new FormControl()
+      dataAcquistoA: new FormControl(),
+      deleted: new FormControl()
     });
   }
 
   async onSubmit() {
+    this.filtri.deleted = this.myForm.value.deleted;
     this.filtri.totale = this.myForm.value.totale;
-    this.filtri.dataAcquistoA =  !!this.myForm.value.dataAcquistoA ? this.changeFormatDate(this.myForm.value.dataAcquistoA) : this.changeFormatDate(this.today);
+    this.filtri.dataAcquistoA = !!this.myForm.value.dataAcquistoA ? this.changeFormatDate(this.myForm.value.dataAcquistoA) : this.changeFormatDate(this.today);
     this.list = await super.startSearch(this.filtri);
     this.configTable();
     this.configHeader();
@@ -78,6 +82,19 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
   editRow(idOrder: any) {
     this.router.navigate(['order-details'], { queryParams: { order: idOrder } });
   }
+  async deleteRow(idOrder: any) {
+    const command: GetDeleteOrderCommand = {
+      codice: +idOrder,
+    }
+    let order = await firstValueFrom(this.orderService.getOrder(command));
+    if (!!order.deleted) {
+      alert("Ordine già annullato");
+      return;
+    } else {
+      firstValueFrom(await this.orderService.deleteOrder(command));
+      alert("Ordine annullato");
+    }
+  }
 
   configTable() {
     this.table = new Table();
@@ -88,6 +105,8 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
       let row = new Riga();
       let colId = new Column();
       colId.nome = order.id;
+      let colDeleted = new Column();
+      colDeleted.nome = order.deleted;
       let colData = new Column();
       colData.nome = order.dataAcquisto;
       colData.type = "date";
@@ -95,7 +114,7 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
       colCustomerId.nome = order.customerId;
       let colTotale = new Column();
       colTotale.nome = order.totale + "€";
-      row.columns.push(colId, colData, colCustomerId, colTotale);
+      row.columns.push(colId, colData, colCustomerId, colTotale, colDeleted);
       this.table.rows.push(row);
     });
   }
@@ -105,11 +124,13 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
     let headerData = new Header();
     let headerCustomerId = new Header();
     let headerTotale = new Header();
+    let headerDeleted = new Header();
+    headerDeleted.nome = "Deleted";
     headerId.nome = "Codice ordine";
     headerCustomerId.nome = "Codice cliente";
     headerData.nome = "Data ordine";
     headerTotale.nome = "Totale ordine";
-    this.table.headers.push(headerId, headerData, headerCustomerId, headerTotale);
+    this.table.headers.push(headerId, headerData, headerCustomerId, headerTotale, headerDeleted);
 
   }
 

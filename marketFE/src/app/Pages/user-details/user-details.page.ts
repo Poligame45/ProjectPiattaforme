@@ -23,4 +23,7 @@ export class UserDetailsPage implements OnInit {
   goToOrders(){
     this.router.navigate(['customer-orders']);
   }
+  goToUserRequest(){
+    this.router.navigate(['user-request']);
+  }
 }

@@ -1,21 +1,19 @@
 <ion-header>
-    <header (searchBarEvent)="searchProducts($event)"></header>
+    <header (searchBarEvent)="searchProducts($event)" (resetEvent)="rimuoviFiltri()"></header>
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-button [disabled]="!myForm.value.prezzo" (click)="onSubmit()">Applica filtri</ion-button>
-            <ion-button (click)="rimuoviFiltri()">Rimuovi filtri</ion-button>
-        </ion-buttons>
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-            <ion-item>
-                <ion-input formControlName="prezzo" label="Prezzo max:" type="number" ></ion-input>
-            </ion-item>
+            <ion-buttons slot="end">
+                <ion-input class="input" color="primary" [debounce]="1000" placeholder="Filtra per prezzo massimo" [clearInput]="true" (ionInput)="onSubmit()" formControlName="prezzo" label="Prezzo max:" type="number"></ion-input>
+                <ion-input class="input" color="primary" [debounce]="1000" [clearInput]="true" placeholder="Filtra per la quantità minima necessaria" (ionInput)="onSubmit()" formControlName="qta" label="Quantità minima prodotto:" type="number"></ion-input>
+            </ion-buttons>
         </form>
     </ion-toolbar>
     <main-content [list]="this.list"></main-content>
+
 </ion-content>
-<ion-footer>
+<ion-footer class="footer">
     <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
         [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
 </ion-footer>

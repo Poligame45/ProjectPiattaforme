@@ -1,6 +1,7 @@
 package com.lucapolizzo.market.services;
 
 import com.lucapolizzo.market.command.order.SearchOrderCommand;
+import com.lucapolizzo.market.command.user.GetDeleteUserCommand;
 import com.lucapolizzo.market.command.user.SearchUserCommand;
 import com.lucapolizzo.market.dto.orderDTO.ListOrderDTO;
 import com.lucapolizzo.market.dto.orderDTO.OrderDTO;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -43,6 +45,11 @@ public class UserService {
     }
 
 
+    public UserDTO getUser(GetDeleteUserCommand command){
+        System.out.println(command.getCodice());
+        User user = userRepository.findById(command.getCodice()).orElseThrow();
+        return convertToDTO(user);
+    }
     public static UserDTO convertToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());

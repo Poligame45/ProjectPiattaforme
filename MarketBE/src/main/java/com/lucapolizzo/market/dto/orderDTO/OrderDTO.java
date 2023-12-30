@@ -19,4 +19,6 @@ public class OrderDTO {
     private int customerId;
 
     private List<PurchasedItemDTO> purchasedItemList;
+
+    private Boolean deleted;
 }
