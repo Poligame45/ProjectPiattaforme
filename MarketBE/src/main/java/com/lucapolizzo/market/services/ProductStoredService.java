@@ -43,7 +43,7 @@ public class ProductStoredService {
         storedProductRepository.save(stored);
         return convertToDTO(stored);
     }
-
+    @Transactional
     public ListStoredProductsDTO search(SearchStoredProductCommand command) {
         Page<StoredProduct> searchList = query.all(command);
         List<StoredProductDTO> returnList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ProductStoredService {
         }
         return new ListStoredProductsDTO(returnList, query.count(command));
     }
-
+    @Transactional
     public ListStoredProductsDTO searchAll() {
         ListStoredProductsDTO returnListDTO = new ListStoredProductsDTO();
         List<StoredProduct> list = storedProductRepository.findAll();

@@ -15,8 +15,6 @@ import java.util.List;
 @Table(name = "Product")
 
 public class StoredProduct {
-
-
     @Id
     @Column(name = "codice", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

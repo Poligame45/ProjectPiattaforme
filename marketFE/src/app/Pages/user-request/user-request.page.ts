@@ -5,6 +5,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GetDeleteUserInfoCommand } from 'src/app/models/command/userCommand/GetDeleteUserInfoCommand';
 import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
+import { SearchRequestCommand } from 'src/app/models/command/requestCommand/searchRequestCommand';
+import { AddUpdateRequestCommand } from 'src/app/models/command/requestCommand/addUpdateRequestCommand';
+import { RequestService } from 'src/app/Services/request.service';
 
 @Component({
   selector: 'app-user-request',
@@ -14,7 +17,7 @@ import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
 export class UserRequestPage implements OnInit {
   myForm!: FormGroup;
   user!: UserDTO;
-  constructor(private router: Router, private userInfoService: UserInfoService) { }
+  constructor(private router: Router, private userInfoService: UserInfoService, private requestService: RequestService) { }
 
   async ngOnInit() {
     this.configForm();
@@ -31,17 +34,18 @@ export class UserRequestPage implements OnInit {
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      request: new FormControl('', Validators.required)
+      content: new FormControl('', Validators.required)
     });
   }
 
-  setForm(){
+  setForm() {
     this.myForm.setValue({
       firstname: this.user.firstname,
       lastname: this.user.lastname,
       email: this.user.email,
-      request: ""
+      content: ""
     });
+
   }
 
   goBack() {
@@ -50,5 +54,30 @@ export class UserRequestPage implements OnInit {
 
   goToHome() {
     this.router.navigate(['home']);
+  }
+
+  async onSubmit() {
+    const command: AddUpdateRequestCommand = {
+      customerId: this.user.id,
+      content: this.myForm.value.content
+    }
+    const resp = await firstValueFrom(this.requestService.addRequest(command));
+    console.log(resp)
+  }
+
+
+  function1(bool:boolean) {
+    let str:string;
+    if (bool!!){
+      return str = 'Hello';
+    }
+    return str = 'Goodbye';
+  }
+
+
+
+  function2(bool:boolean){
+    let str:string;
+    return str = bool ? 'Hello' : 'Goodbye';
   }
 }

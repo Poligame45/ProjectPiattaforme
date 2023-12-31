@@ -17,25 +17,26 @@
 </ion-header>
 
 
-<ion-row *ngIf="!!storedProd" class="row">
-  <ion-col><img [src]="storedProd.img"></ion-col>
-  <ion-col>
-    <ion-row>
-      <h1>{{storedProd.nome}}</h1>
-    </ion-row>
-    <ion-row>
-      <h2>Descrizione articolo: {{storedProd.descrizione}}</h2>
-    </ion-row>
-    <ion-row>
-      <h2>Prezzo: {{storedProd.prezzo}}</h2>
-    </ion-row>
-    <ion-row>
-      <h2>Quantità disponibili: {{storedProd.qta}}</h2>
-    </ion-row>
-    <ion-row>
-      <ion-button expand="block" [disabled]="adminLogged() || !userLogged() " (click)="setOpen(true)">Aggiungi al carrello</ion-button>
-      <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
-        [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
-    </ion-row>
-  </ion-col>
-</ion-row>
+  <ion-row *ngIf="!!storedProd" class="row">
+    <ion-col><img [src]="storedProd.img"></ion-col>
+    <ion-col>
+      <ion-row>
+        <h1>{{storedProd.nome}}</h1>
+      </ion-row>
+      <ion-row>
+        <h2>Descrizione articolo: {{storedProd.descrizione}}</h2>
+      </ion-row>
+      <ion-row>
+        <h2>Prezzo: {{storedProd.prezzo}}€</h2>
+      </ion-row>
+      <ion-row>
+        <h2>Quantità disponibili: {{storedProd.qta}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-button expand="block" [disabled]="adminLogged() || !userLogged() " (click)="setOpen(true)">Aggiungi al
+          carrello</ion-button>
+        <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
+          [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
+      </ion-row>
+    </ion-col>
+  </ion-row>

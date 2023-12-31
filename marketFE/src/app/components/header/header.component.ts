@@ -69,4 +69,8 @@ export class HeaderComponent implements OnInit {
   goAdminHomePage(){
     this.router.navigate(['admin-home-page']);
   }
+
+  goAboutUs(){
+    this.router.navigate(['about-us']);
+  }
 }

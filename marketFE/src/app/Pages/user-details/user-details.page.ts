@@ -26,4 +26,9 @@ export class UserDetailsPage implements OnInit {
   goToUserRequest(){
     this.router.navigate(['user-request']);
   }
+
+  goToInfo(){
+    this.router.navigate(['info-user']);
+
+  }
 }

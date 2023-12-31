@@ -52,13 +52,15 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "basket_id", referencedColumnName = "id")
     private Basket basket;
 
     @OneToMany(mappedBy = "customer")
     private List<Order> ordini;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Request> requests;
 
     @Override
     public String getPassword() {
@@ -89,8 +91,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    
 }
-
 
 
 

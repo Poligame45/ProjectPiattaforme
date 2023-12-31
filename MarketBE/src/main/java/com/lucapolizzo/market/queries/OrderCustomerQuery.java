@@ -2,6 +2,7 @@ package com.lucapolizzo.market.queries;
 
 import com.lucapolizzo.market.command.order.SearchOrderCommand;
 import com.lucapolizzo.market.models.entities.Order;
+import com.lucapolizzo.market.queries.GenericQuery.GenericQuery;
 import com.lucapolizzo.market.repositories.OrderRepository;
 import com.lucapolizzo.market.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class OrderCustomerQuery {
+public class OrderCustomerQuery extends GenericQuery {
 
     @Autowired
     public OrderRepository orderRepository;
@@ -66,12 +67,6 @@ public class OrderCustomerQuery {
     }
 
     public Pageable getPageable(SearchOrderCommand command) {
-        Pageable pageable;
-        if (command != null && command.getCurrent() != null && command.getTake() != null) {
-            pageable = PageRequest.of(command.getCurrent(), command.getTake());
-        } else {
-            pageable = PageRequest.of(0, 10);
-        }
-        return pageable;
+        return super.getPageable(command);
     }
 }

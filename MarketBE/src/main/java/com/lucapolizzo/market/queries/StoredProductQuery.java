@@ -1,7 +1,9 @@
 package com.lucapolizzo.market.queries;
 
+import com.lucapolizzo.market.command.order.SearchOrderCommand;
 import com.lucapolizzo.market.models.entities.StoredProduct;
 import com.lucapolizzo.market.command.storedProduct.SearchStoredProductCommand;
+import com.lucapolizzo.market.queries.GenericQuery.GenericQuery;
 import com.lucapolizzo.market.repositories.StoredProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class StoredProductQuery {
+public class StoredProductQuery extends GenericQuery {
 
     @Autowired
     public StoredProductRepository storedProductRepository;
@@ -74,13 +76,7 @@ public class StoredProductQuery {
         return storedProductRepository.count(where());
     }
 
-    public Pageable getPageable(SearchStoredProductCommand searchStoredProductCommand) {
-        Pageable pageable;
-        if (searchStoredProductCommand != null && searchStoredProductCommand.getCurrent() != null && searchStoredProductCommand.getTake() != null) {
-            pageable = PageRequest.of(command.getCurrent(), command.getTake());
-        } else {
-            pageable = PageRequest.of(0, 10);
-        }
-        return pageable;
+    public Pageable getPageable(SearchOrderCommand command) {
+        return super.getPageable(command);
     }
 }

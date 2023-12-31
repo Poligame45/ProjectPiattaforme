@@ -105,7 +105,7 @@ public class OrderService {
         return convertToDTO(order);
     }
 
-
+    @Transactional
     public ListOrderDTO searchOrder(SearchOrderCommand command) {
         Page<Order> searchList = queryCustomer.all(command);
         List<OrderDTO> returnList = new ArrayList<>();

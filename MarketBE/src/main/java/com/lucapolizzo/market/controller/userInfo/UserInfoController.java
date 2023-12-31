@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/userInfo")
-@Slf4j
 @CrossOrigin("http://localhost:8100")
 public class UserInfoController {
 
     @Autowired
     private UserService userService;
-
-
     @Transactional
     @PostMapping("/getUserInfo")
     public ResponseEntity<UserDTO> searchUserByCustomer(@RequestBody GetDeleteUserCommand command){
