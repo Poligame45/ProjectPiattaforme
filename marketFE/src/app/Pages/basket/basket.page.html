@@ -43,9 +43,9 @@
     </ion-card-header>
   </ion-card>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="!!basket && !!basket.basketItems && !!basket.basketItems.length">
   <ion-toolbar>
-    <ion-row *ngIf="!!basket && !!basket.basketItems && !!basket.basketItems.length">
+    <ion-row >
       <ion-col>
         <ion-title>Procedi all'acquisto</ion-title>
       </ion-col>
@@ -56,3 +56,4 @@
     </ion-row>
   </ion-toolbar>
 </ion-footer>
+<footer *ngIf="!basket || !basket.basketItems || !basket.basketItems.length"></footer>

@@ -8,6 +8,7 @@ import { BasketPageRoutingModule } from './basket-routing.module';
 
 import { BasketPage } from './basket.page';
 import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
     BasketPageRoutingModule,
     PaginatorModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FooterModule
   ],
   declarations: [BasketPage]
 })

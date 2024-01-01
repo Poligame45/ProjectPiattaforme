@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserRequestPageRoutingModule } from './user-request-routing.module';
 
 import { UserRequestPage } from './user-request.page';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { UserRequestPage } from './user-request.page';
     FormsModule,
     IonicModule,
     UserRequestPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterModule
   ],
   declarations: [UserRequestPage]
 })

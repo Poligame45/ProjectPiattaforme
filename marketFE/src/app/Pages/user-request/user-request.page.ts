@@ -67,19 +67,4 @@ export class UserRequestPage implements OnInit {
     this.isAlertOpen = true;
   }
 
-
-  function1(bool:boolean) {
-    let str:string;
-    if (bool!!){
-      return str = 'Hello';
-    }
-    return str = 'Goodbye';
-  }
-
-
-
-  function2(bool:boolean){
-    let str:string;
-    return str = bool ? 'Hello' : 'Goodbye';
-  }
 }

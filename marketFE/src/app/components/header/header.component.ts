@@ -1,8 +1,6 @@
-import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, EventEmitter,  OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSearchbar } from '@ionic/angular';
-import { firstValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/Services/basket.service';
 import { LoginService } from 'src/app/Services/login.service';
 import { SearchCommandStoredProduct } from 'src/app/models/command/storedProductCommand/SearchCommandStoredProduct';

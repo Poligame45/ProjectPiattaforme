@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { PaginatorModule } from '../components/paginator/paginator.module';
 import { HeaderModule } from '../components/header/header.module';
 import { ContentModule } from '../components/content/content.module';
+import { FooterModule } from '../components/footer/footer.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ContentModule } from '../components/content/content.module';
     HeaderModule,
     ContentModule,
     HomePageRoutingModule,
+    FooterModule
   ],
   declarations: [HomePage]
 })

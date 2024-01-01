@@ -8,6 +8,7 @@ import { UserDetailsPageRoutingModule } from './user-details-routing.module';
 
 import { UserDetailsPage } from './user-details.page';
 import { TableModule } from 'src/app/components/table/table.module';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TableModule } from 'src/app/components/table/table.module';
     FormsModule,
     IonicModule,
     UserDetailsPageRoutingModule,
-    TableModule
+    TableModule,
+    FooterModule
   ],
   declarations: [UserDetailsPage]
 })
