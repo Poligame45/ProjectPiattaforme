@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { InfoUserPageRoutingModule } from './info-user-routing.module';
 
 import { InfoUserPage } from './info-user.page';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { InfoUserPage } from './info-user.page';
     FormsModule,
     IonicModule,
     InfoUserPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterModule
   ],
   declarations: [InfoUserPage]
 })

@@ -14,37 +14,29 @@
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-input label="Nome:" label-placement="floating" formControlName="nome"></ion-input>
-          </ion-item>
+          <ion-input color="primary" label="Nome:" label-placement="floating" formControlName="nome"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-input label="Descrizione:" label-placement="floating" formControlName="descrizione" [counter]="true" maxlength="30"></ion-input>
-          </ion-item>
+          <ion-input color="primary" label="Descrizione:" label-placement="floating" formControlName="descrizione"
+            [counter]="true" maxlength="30"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-input label="Url immagine:" label-placement="floating" formControlName="img"></ion-input>
-          </ion-item>
+            <ion-input color="primary" label="Url immagine:" label-placement="floating" formControlName="img"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-input label="Prezzo:" type="number" label-placement="floating" formControlName="prezzo"></ion-input>
-          </ion-item>
+            <ion-input color="primary" label="Prezzo:" type="number" label-placement="floating" formControlName="prezzo"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-input label="Quantità:" type="number" label-placement="floating" formControlName="qta"></ion-input>
-          </ion-item>
+            <ion-input color="primary" label="Quantità:" type="number" label-placement="floating" formControlName="qta"></ion-input>
         </ion-col>
         <ion-col *ngIf="!!storedProduct">
           <ion-item>
-            <ion-select aria-label="Deleted" *ngIf="!!storedProduct" [value]="storedProduct.deleted" formControlName="deleted">
+            <ion-select aria-label="Deleted" *ngIf="!!storedProduct" [value]="storedProduct.deleted"
+              formControlName="deleted">
               <ion-select-option [value]="true">Elimina da magazzino</ion-select-option>
               <ion-select-option [value]="false">Prodotto in magazzino</ion-select-option>
             </ion-select>
@@ -53,8 +45,8 @@
       </ion-row>
       <ion-button id="present-alert" type="submit">Salva</ion-button>
     </form>
-    <ion-alert class="alert" trigger="present-alert" [isOpen]="isAlertOpen" 
-          message="Prodotto salvato correttamente." (didDismiss)="goToStoredProducts()"></ion-alert>
+    <ion-alert class="alert" trigger="present-alert" [isOpen]="isAlertOpen" message="Prodotto salvato correttamente."
+      (didDismiss)="goToStoredProducts()"></ion-alert>
   </ion-grid>
 
 </ion-content>
