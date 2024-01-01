@@ -21,10 +21,12 @@
         </ion-input>
         <ion-input label="Email" formControlName="email">
         </ion-input>
-        <ion-input label="Richiesta" formControlName="content"> 
+        <ion-input label="Richiesta"  [maxlength]="50" formControlName="content"> 
          </ion-input>
       </ion-col>
     </ion-row>
   </form>
-  <ion-button [disabled]="myForm.invalid" (click)="onSubmit()">Invia Richiesta</ion-button>
+  <ion-button [disabled]="myForm.invalid" id="present-alert" (click)="onSubmit()">Invia Richiesta</ion-button>
+  <ion-alert class="alert" trigger="present-alert" [isOpen]="isAlertOpen" 
+  message="Richiesta inviata correttamente." (didDismiss)="goBack()"></ion-alert>
 </ion-content>

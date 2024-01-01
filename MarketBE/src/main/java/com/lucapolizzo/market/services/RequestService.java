@@ -1,6 +1,7 @@
 package com.lucapolizzo.market.services;
 
 import com.lucapolizzo.market.command.request.AddUpdateRequestCommand;
+import com.lucapolizzo.market.command.request.GetDeleteRequestCommand;
 import com.lucapolizzo.market.command.request.SearchRequestCommand;
 import com.lucapolizzo.market.dto.request.ListRequestDTO;
 import com.lucapolizzo.market.dto.request.RequestDTO;
@@ -29,6 +30,12 @@ public class RequestService {
     private RequestRepository requestRepository;
 
 
+    @Transactional
+    public RequestDTO getRequest(GetDeleteRequestCommand command){
+        Optional<Request> optionalRequest = requestRepository.findById(command.getCodice());
+        if(!optionalRequest.isPresent()) return null;
+        return convertToDTO(optionalRequest.get());
+    }
     @Transactional
     public ListRequestDTO search(SearchRequestCommand command){
         Page<Request> searchList = query.all(command);

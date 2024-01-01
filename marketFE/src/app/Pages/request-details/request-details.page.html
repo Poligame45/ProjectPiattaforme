@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goToHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Dettaglio richiesta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="myForm">
+    <ion-input [readonly]="true" formControlName="idReq"></ion-input>
+    <ion-input [readonly]="true" formControlName="email"></ion-input>
+    <ion-input [readonly]="true" formControlName="firstname"></ion-input>
+    <ion-input [readonly]="true" formControlName="lastname"></ion-input>
+    <ion-input [readonly]="true" formControlName="content"></ion-input>
+  </form>
+</ion-content>

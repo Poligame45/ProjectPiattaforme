@@ -17,6 +17,8 @@ import { RequestService } from 'src/app/Services/request.service';
 export class UserRequestPage implements OnInit {
   myForm!: FormGroup;
   user!: UserDTO;
+  isAlertOpen: boolean = false;
+
   constructor(private router: Router, private userInfoService: UserInfoService, private requestService: RequestService) { }
 
   async ngOnInit() {
@@ -62,7 +64,7 @@ export class UserRequestPage implements OnInit {
       content: this.myForm.value.content
     }
     const resp = await firstValueFrom(this.requestService.addRequest(command));
-    console.log(resp)
+    this.isAlertOpen = true;
   }
 
 

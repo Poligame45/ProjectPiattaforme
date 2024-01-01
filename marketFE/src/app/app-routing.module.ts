@@ -90,6 +90,14 @@ const routes: Routes = [
     path: 'admin-request',
     loadChildren: () => import('./Pages/admin-request/admin-request.module').then( m => m.AdminRequestPageModule)
   },
+  {
+    canActivate: [authGuard],
+    data: { authorities: 'ADMIN' },
+    path: 'request-details',
+    loadChildren: () => import('./Pages/request-details/request-details.module').then( m => m.RequestDetailsPageModule)
+  },
+
+
 
 
 ];

@@ -1,6 +1,7 @@
 package com.lucapolizzo.market.controller.request;
 
 import com.lucapolizzo.market.command.request.AddUpdateRequestCommand;
+import com.lucapolizzo.market.command.request.GetDeleteRequestCommand;
 import com.lucapolizzo.market.command.request.SearchRequestCommand;
 import com.lucapolizzo.market.command.storedProduct.SearchStoredProductCommand;
 import com.lucapolizzo.market.dto.request.ListRequestDTO;
@@ -27,6 +28,12 @@ public class RequestController {
     public ResponseEntity<ListRequestDTO> searchRequest(@RequestBody SearchRequestCommand command) {
         ListRequestDTO listRequestDTO = requestService.search(command);
         return new ResponseEntity<>(listRequestDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/getRequest")
+    public ResponseEntity<RequestDTO> getRequest(@RequestBody GetDeleteRequestCommand command) {
+        RequestDTO requestDTO = requestService.getRequest(command);
+        return new ResponseEntity<>(requestDTO, HttpStatus.OK);
     }
 
     @PostMapping("/addRequest")

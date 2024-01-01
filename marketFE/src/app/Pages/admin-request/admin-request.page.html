@@ -1,13 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>admin-request</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goToHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Richieste clienti</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">admin-request</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <table class="table" (editRowEvent)="goToRequestDetail($event)" [table]="table"></table>
 </ion-content>
+
+<ion-footer>
+  <paginator
+  *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
+    [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
+</ion-footer>

@@ -25,10 +25,6 @@ export class AddUpdateStoredProductPage implements OnInit {
   }
 
   async ngOnInit() {
-    await this.configForm();
-  }
-
-  async configForm() {
     this.myForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       descrizione: new FormControl('', Validators.required),
@@ -37,6 +33,11 @@ export class AddUpdateStoredProductPage implements OnInit {
       qta: new FormControl('', Validators.required),
       deleted: new FormControl('', Validators.required),
     });
+    await this.configForm();
+  }
+
+  async configForm() {
+    
     let codiceProdotto = await this.activatedRoute.snapshot.queryParamMap.get('product');
     if (!!codiceProdotto) {
       const command: GetDeleteStoredProductCommand = {

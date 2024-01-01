@@ -23,4 +23,9 @@ export class AdminHomePagePage implements OnInit {
   goToHome(){
     this.router.navigate(['home']);
   }
+
+  goToRequest(){
+    this.router.navigate(['admin-request']);
+
+  }
 }
