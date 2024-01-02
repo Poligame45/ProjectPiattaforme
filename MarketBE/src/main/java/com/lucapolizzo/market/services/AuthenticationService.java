@@ -1,5 +1,6 @@
 package com.lucapolizzo.market.services;
 
+import com.lucapolizzo.market.command.user.GetDeleteUserCommand;
 import com.lucapolizzo.market.dto.auth.AuthenticationDTO;
 import com.lucapolizzo.market.command.auth.AuthenticationCommand;
 import com.lucapolizzo.market.command.auth.RegisterCommand;
@@ -28,9 +29,12 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
 
     @Transactional
     public AuthenticationDTO register(RegisterCommand request) {
+        Optional<User> u = userRepository.findByEmail(request.getEmail());
+        if(u.isPresent()) return null;
         User user = User.builder()
                 .firstname(request.getFirstname())
                 .address(request.getAddress())

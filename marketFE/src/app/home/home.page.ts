@@ -48,6 +48,7 @@ export class HomePage extends StoredProductUtility implements OnInit {
 
   async rimuoviFiltri() {
     this.filtri = new SearchCommandStoredProduct();
+    this.filtri.deleted = false;
     this.myForm.reset();
     this.list = await super.startSearch(this.filtri);
   }

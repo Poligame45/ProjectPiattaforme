@@ -23,6 +23,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.lucapolizzo.market.services.UserService.convertToDTO;
+
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin("http://localhost:8100")
@@ -36,6 +38,10 @@ public class AdminController {
 
     @Autowired
     AuthenticationService authenticationService;
+
+    @Autowired
+    AuthenticationService serviceAuth;
+
 
     @PostMapping("/searchUsers")
         public ResponseEntity<ListUserDTO> searchUsers(@RequestBody SearchUserCommand command) {
@@ -56,10 +62,16 @@ public class AdminController {
         return new ResponseEntity<>(orderDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/adminRegister")
-    public ResponseEntity<AuthenticationDTO> adminRegister(@RequestBody RegisterCommand command) {
-        AuthenticationDTO admin = authenticationService.register(command);
-        return new ResponseEntity<>(admin, HttpStatus.OK);
+    @PostMapping("/registerAdmin")
+    public ResponseEntity<UserDTO> registerAdmin(@RequestBody RegisterCommand request) {
+        AuthenticationDTO authenticationDTO = serviceAuth.register(request);
+        if (authenticationDTO == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (authenticationDTO.getAccessToken() == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } else {
+            UserDTO userDTO = convertToDTO(authenticationDTO.getUser());
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+        }
     }
-
 }

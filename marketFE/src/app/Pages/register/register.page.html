@@ -27,7 +27,13 @@
           </ion-input>
       </ion-col>
     </ion-row>
-    <ion-button [disabled]="myForm.invalid" type="submit">Registrati</ion-button>
-    <ion-button (click)="goToLoginPage()">Hai già un account? Effettua il Login</ion-button>
+    <ion-button *ngIf="!adminLogged" [disabled]="myForm.invalid" [id]="checkForm()" type="submit">Registrati</ion-button>
+    <ion-button *ngIf="!adminLogged" (click)="goToLoginPage()">Hai già un account? Effettua il Login</ion-button>
+    <ion-button *ngIf="adminLogged" [disabled]="myForm.invalid" [id]="checkAdminForm()" (click)="registerAdmin()">Registra amministratore</ion-button>
+
   </form>
+  <ion-alert class="alert" trigger="present-alert"  [isOpen]="isAlertOpen"
+          message="Utente registrato correttamente!" (didDismiss)="goToHome()"></ion-alert>
+  <ion-alert class="alert" trigger="present-alert-admin" [isOpen]="isAlertAdminOpen"
+          message="Utente registrato correttamente!" (didDismiss)="goToHome()"></ion-alert>
 </ion-grid>

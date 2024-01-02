@@ -18,7 +18,7 @@
                     <ion-row class="ion-justify-content-center">
                         <ion-col class="col">
                             <ion-button expand="block" [disabled]="!userLogged() || adminLogged()"
-                                (click)="setOpen(true,prodotto)">Aggiungi al carrello</ion-button>
+                                (click)="setOpen(true, prodotto)">Aggiungi al carrello</ion-button>
                             <ion-toast [isOpen]="isToastOpen"
                                 message="Il prodotto è stato aggiunto correttamente al carrello" [duration]="2000"
                                 (didDismiss)="setOpen(false)"></ion-toast>

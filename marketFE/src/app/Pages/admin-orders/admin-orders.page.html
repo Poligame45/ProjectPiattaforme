@@ -56,9 +56,16 @@
 <ion-content class="ion-padding" overflow-scroll="false">
   <table *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table"
     (editRowEvent)="editRow($event)" (deleteRowEvent)="deleteRow($event)"></table>
+    <ion-card *ngIf="!table || !table.rows.length">
+      <ion-card-header>
+          <ion-card-title>Nessun risultato trovato</ion-card-title>
+          <ion-card-subtitle>Rimuovi i filtri per avviare un'altra ricerca</ion-card-subtitle>
+      </ion-card-header>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
   <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
     [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
 </ion-footer>
+<footer *ngIf="!table || !table.rows.length"></footer>

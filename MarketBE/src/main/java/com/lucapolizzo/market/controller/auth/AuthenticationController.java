@@ -24,12 +24,17 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthenticationDTO> register(@RequestBody RegisterCommand request) {
         AuthenticationDTO authenticationDTO = service.register(request);
-        if (authenticationDTO.getAccessToken() == null) {
+        if (authenticationDTO == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (authenticationDTO.getAccessToken() == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } else {
+
             return new ResponseEntity<>(authenticationDTO, HttpStatus.OK);
         }
     }
+
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationDTO> authenticate(@RequestBody AuthenticationCommand request) {

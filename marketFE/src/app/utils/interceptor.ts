@@ -36,6 +36,10 @@ export class JwtInterceptor implements HttpInterceptor {
         }else if(err.status === 403){
             alert("Non hai l'autorizzazione per visualizzare questa pagina");
             this.router.navigateByUrl(`/home`);
+        }else if (err.status === 400){
+            alert("Email già presente nel sistema");
+            this.router.navigateByUrl(`/register`);
+
         }
         return throwError(() => err);
     }

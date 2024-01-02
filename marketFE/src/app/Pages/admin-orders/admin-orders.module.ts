@@ -10,6 +10,7 @@ import { AdminOrdersPage } from './admin-orders.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { TableModule } from 'src/app/components/table/table.module';
 import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
     HeaderModule,
     TableModule,
     PaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterModule
   ],
   declarations: [AdminOrdersPage]
 })

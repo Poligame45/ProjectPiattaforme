@@ -45,11 +45,12 @@ public class UserService {
     }
 
 
-    public UserDTO getUser(GetDeleteUserCommand command){
+    public UserDTO getUser(GetDeleteUserCommand command) {
         System.out.println(command.getCodice());
         User user = userRepository.findById(command.getCodice()).orElseThrow();
         return convertToDTO(user);
     }
+
     public static UserDTO convertToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
@@ -58,12 +59,14 @@ public class UserService {
         userDTO.setRole(user.getRole());
         userDTO.setLastname(user.getLastname());
         userDTO.setFirstname(user.getFirstname());
-        userDTO.setBasket(user.getBasket());
         List<OrderDTO> list = new ArrayList<>();
-        for(Order order: user.getOrdini()){
-            list.add(OrderService.convertToDTO(order));
-        }
+        if (user.getRole().equals("CUSTOMER")) {
+            userDTO.setBasket(user.getBasket());
+            for (Order order : user.getOrdini()) {
+                list.add(OrderService.convertToDTO(order));
+            }
         userDTO.setOrdini(list);
+        }
         return userDTO;
     }
 

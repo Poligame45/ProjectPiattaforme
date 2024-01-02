@@ -4,6 +4,8 @@
         <ion-buttons slot="end">
             <ion-button (click)="goToHome()">Vedi la home page del cliente!
             </ion-button>
+            <ion-button (click)="logout()">Logout
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -35,7 +37,7 @@
         </ion-row>
         <ion-row class="row">
             <ion-col>
-                <ion-card (click)="goToOrders()">
+                <ion-card (click)="goToRegisterPage()">
                     <ion-card-header>
                         <ion-card-title>Admin</ion-card-title>
                     </ion-card-header>
