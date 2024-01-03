@@ -26,7 +26,8 @@ export abstract class Utility {
         if (!totale) return command.current;
         if(totale <= command.take) return command.current;
         if (command.current === Math.floor(totale / command.take)) return command.current;
-        command.current = Math.floor(totale / command.take);
+    
+        command.current = Math.floor(totale / command.take) -1;
         return command.current;
     }
 

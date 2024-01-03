@@ -22,13 +22,13 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
 
   constructor(storedProductService: StoredProductService, private router: Router) {
     super(storedProductService);
-    this.router.events.subscribe(async (ev) => {
-      if (ev instanceof NavigationEnd) {
-        this.list = await super.startSearch();
-        this.configTable();
-        this.configHeader();
-      }
-    });
+    // this.router.events.subscribe(async (ev) => {
+    //   if (ev instanceof NavigationEnd) {
+    //     this.list = await super.startSearch();
+    //     this.configTable();
+    //     this.configHeader();
+    //   }
+    // });
   }
 
   async ngOnInit() {
@@ -46,6 +46,7 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
   }
   async rimuoviFiltri() {
     this.filtri.deleted = false;
+    this.filtri.current = 0;
     this.myForm.reset();
     this.list = await super.startSearch(new SearchCommandStoredProduct());
     this.configTable();

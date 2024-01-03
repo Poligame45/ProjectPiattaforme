@@ -1,18 +1,7 @@
 Front end:
 
-- Creazione pagina area personale utente per consultare le proprie informazioni
-- Form registrazione nuovo admin
-- Regex email
+FIXARE PAGINATORE
 
 Back end:
-- Test API prodotto
-- Introdurre API lato admin per poter effettuare operazioni CRUD sui prodotti.
-- Gestione carrello
-- Gestione ordini
-- Gestione acquisti
-- Gestione admin
-- FIX CANCELLAZIONE: AGGIUNGERE CAMPO DELETED COME ATTRIBUTO DELLA CLASSE PRODUCT ANZICHE' ELIMINARLO
-REALMENTE IN MODO DA TENERE TRACCIA DEI PRODOTTI VENDUTI.
 
-- Generale 
-- Gestire autorizzazioni api
+

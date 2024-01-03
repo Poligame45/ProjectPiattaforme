@@ -17,11 +17,11 @@ export class AddUpdateStoredProductPage implements OnInit {
   storedProduct!: StoredProduct;
   isAlertOpen: boolean = false;
   constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) {
-    this.router.events.subscribe((ev) => {
-      if (ev instanceof NavigationEnd) {
-        this.configForm();
-      }
-    });
+    // this.router.events.subscribe((ev) => {
+    //   if (ev instanceof NavigationEnd) {
+    //     await this.configForm();
+    //   }
+    // });
   }
 
   async ngOnInit() {
