@@ -32,16 +32,16 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
   }
 
   async ngOnInit() {
-    this.configForm();
     this.table = new Table();
-    this.list = await super.startSearch(this.filtri);
+    this.configForm();
+    this.list = await super.startSearch();
     this.configTable();
     this.configHeader();
   }
 
   configForm(){
     this.myForm = new FormGroup({
-      deleted: new FormControl(),
+      deleted: new FormControl(''),
     });
   }
   async rimuoviFiltri() {

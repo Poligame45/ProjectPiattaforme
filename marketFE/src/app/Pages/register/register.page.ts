@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormRecord, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { LoginService } from 'src/app/Services/login.service';
+import { RegisterCommand } from 'src/app/models/command/authCommand/registerCommand';
 import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
 
 @Component({
@@ -13,8 +14,7 @@ import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
 export class RegisterPage implements OnInit {
   myForm!: FormGroup;
   token!: any;
-  regexp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
+  regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   regex: boolean = false;
   adminLogged: boolean = false;
   isAlertOpen: boolean = false;
@@ -37,7 +37,6 @@ export class RegisterPage implements OnInit {
     }
   }
   ngOnInit() {
-
     this.myForm = new FormGroup({
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
@@ -53,7 +52,7 @@ export class RegisterPage implements OnInit {
       alert('password diverse');
       return;
     }
-    const obj: any = {
+    const command: RegisterCommand = {
       firstname: this.myForm.value.firstname,
       lastname: this.myForm.value.lastname,
       address: this.myForm.value.address,
@@ -61,7 +60,7 @@ export class RegisterPage implements OnInit {
       password: this.myForm.value.password,
       role: "CUSTOMER"
     }
-    this.token = await firstValueFrom(this.serviceRegister.register(obj));
+    this.token = await firstValueFrom(this.serviceRegister.register(command));
     if (!!this.token) {
       sessionStorage.setItem("token", this.token.accessToken);
       sessionStorage.setItem("userId", this.token.user.id);
@@ -73,11 +72,12 @@ export class RegisterPage implements OnInit {
   }
 
   async registerAdmin() {
+    if(!this.myForm.value.email)
     if (this.myForm.value.password != this.myForm.value.cpassword) {
       alert('password diverse');
       return;
     }
-    const obj: any = {
+    const command: RegisterCommand = {
       firstname: this.myForm.value.firstname,
       lastname: this.myForm.value.lastname,
       address: this.myForm.value.address,
@@ -85,7 +85,7 @@ export class RegisterPage implements OnInit {
       password: this.myForm.value.password,
       role: "ADMIN"
     }
-    const user: UserDTO = await firstValueFrom(this.serviceRegister.registerAdmin(obj));
+    const user: UserDTO = await firstValueFrom(this.serviceRegister.registerAdmin(command));
     if (user!) {
       this.isAlertAdminOpen = true;
     }else{

@@ -8,8 +8,10 @@
     <ion-row *ngIf="!!list && list.length>0">
         <ion-col size="1" *ngFor="let prodotto of list">
             <ion-card class="card">
-                <img [src]="prodotto.img" height="200px"
-                    style="display: flex; align-items: center; flex-direction: row; justify-content: center;">
+                <ion-row class="img-row">
+                    <img *ngIf="prodotto.img!" [src]="prodotto.img" height="200px"
+                        style="display: flex; align-items: center; flex-direction: row; justify-content: center;">
+                </ion-row>
                 <ion-card-header>
                     <ion-card-title>{{prodotto.nome}}</ion-card-title>
                     <ion-card-subtitle>{{prodotto.prezzo}}€</ion-card-subtitle>

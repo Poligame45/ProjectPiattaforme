@@ -25,7 +25,9 @@ export class HomePage extends StoredProductUtility implements OnInit {
     this.router.events.subscribe(async (ev) => {
       if (ev instanceof NavigationEnd) {
         this.list = await super.startSearch();
-        this.updateBasket();
+        if (sessionStorage.getItem('userRole') === "CUSTOMER") {
+          this.updateBasket();
+        }
       }
     });
 
@@ -55,7 +57,7 @@ export class HomePage extends StoredProductUtility implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.configForm();
-    this.list = await super.startSearch();
+
   }
 
   async updateBasket() {
@@ -64,7 +66,7 @@ export class HomePage extends StoredProductUtility implements OnInit {
       const command: GetBasketCommand = {
         customerId: sessionStorage.getItem('userId')
       }
-      if (userRole!! && userRole != "ADMIN") {
+      if (userRole != "ADMIN") {
         const basket = await firstValueFrom(this.basketService.getBasket(command));
         this.basketService.item.next(basket.basketItems.length);
       }

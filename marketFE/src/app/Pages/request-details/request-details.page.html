@@ -14,10 +14,10 @@
 
 <ion-content [fullscreen]="true">
   <form [formGroup]="myForm">
-    <ion-input [readonly]="true" formControlName="idReq"></ion-input>
-    <ion-input [readonly]="true" formControlName="email"></ion-input>
-    <ion-input [readonly]="true" formControlName="firstname"></ion-input>
-    <ion-input [readonly]="true" formControlName="lastname"></ion-input>
-    <ion-input [readonly]="true" formControlName="content"></ion-input>
+    <ion-input [readonly]="true" formControlName="idReq" label="Codice richiesta :"></ion-input>
+    <ion-input [readonly]="true" formControlName="email" label="Email cliente :"></ion-input>
+    <ion-input [readonly]="true" formControlName="firstname" label="Nome cliente :"></ion-input>
+    <ion-input [readonly]="true" formControlName="lastname" label="Cognome cliente :"></ion-input>
+    <ion-input [readonly]="true" formControlName="content" label="Contenuto richiesta :"></ion-input>
   </form>
 </ion-content>

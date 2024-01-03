@@ -1,24 +1,64 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
-    <ion-title>Hello friend</ion-title>
+    <ion-title>
+      <ion-row>
+        <ion-col class="col">
+          <ion-icon name="barbell-outline"></ion-icon>
+          <ion-label class="label">GYM STORE
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        Home Page
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Card title</ion-card-title>
-      <ion-card-subtitle>Hello Friend</ion-card-subtitle>
+      <ion-card-title>GYM STORE </ion-card-title>
+      <ion-card-subtitle>Ricerca i migliori integratori sul mercato</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
   <ion-card-content>
-    Here's an example of one of the ionic components
+    <p>
+      GYM STORE nasce con l'idea di unire l'allenamento in palestra con l'alimentazione tramite
+      uno spazio fondamentale dedicato alla integrazione dell'atleta
+      <br>
+      <a class="link" (click)="goToHome()">Scopri i nostri migliori prodotti</a>
+      <br>
+      <br>
+      Nato nel 2024 con lo scopo di assecondare tutte le esigenze dei migliori atleti italiani ed europei
+      <br>
+      <br>
+      Nato dall'idea di Luca Polizzo - Web developer appassionato di sport!
+    </p>
+    <br>
+    <br>
+    Hai una particolare richiesta? <a class="link" (click)="goContactUs()">Contattaci!</a>
+    <br>
+    <br>
+    Oppure contattaci:
+    <br>
+    <br>
+    <ion-label>Email: plzlcu99a12d086h&#64;studenti.unical.it</ion-label>
+    <br>
+    <br>
+    <ion-label>Cell. 333333333</ion-label>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    Vieni a trovarci in via: Ponte Pietro Bucci!
   </ion-card-content>
 
 </ion-content>
 
 
 <footer></footer>
-
-

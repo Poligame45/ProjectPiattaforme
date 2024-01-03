@@ -18,16 +18,10 @@ export class AdminRequestPage extends RequestUtility implements OnInit {
 
   constructor(serviceRequest: RequestService, private router: Router) {
     super(serviceRequest);
-    this.router.events.subscribe(async (ev) => {
-      if (ev instanceof NavigationEnd) {
-        this.list = await super.startSearch();
-      }
-    });
   }
 
   async ngOnInit() {
     this.list = await super.startSearch(this.filtri);
-    console.log(this.list);
     this.configTable();
     this.configHeader();
   }

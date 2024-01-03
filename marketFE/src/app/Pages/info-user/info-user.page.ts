@@ -31,6 +31,7 @@ export class InfoUserPage implements OnInit {
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
     });
   }
 
@@ -39,6 +40,7 @@ export class InfoUserPage implements OnInit {
       firstname: this.user.firstname,
       lastname: this.user.lastname,
       email: this.user.email,
+      address: this.user.address
     });
   }
 

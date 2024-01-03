@@ -2,27 +2,26 @@
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <ion-row size="3" class="ion-justify-content-center ion-align-items-center">
       <ion-col>
-          <ion-input formControlName="firstname" label="Name input"
+          <ion-input formControlName="firstname" label="Nome :"
             placeholder="Inserisci il tuo nome"></ion-input>
       </ion-col>
       <ion-col>
-          <ion-input formControlName="lastname" label="Surname input" 
+          <ion-input formControlName="lastname" label="Cognome :" 
             placeholder="Inserisci il tuo cognome"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row size="3" class="ion-justify-content-center ion-align-items-center">
       <ion-col>
         
-          <ion-input formControlName="email" label="Inserisci la tua email"
-            placeholder="Inserisci la tua mail" ></ion-input>
-          <ion-input formControlName="address" label="Inserisci il tuo indirizzo"
+          <ion-input formControlName="email" label="Email :" placeholder="Inserisci la tua mail" [required]="true"></ion-input>
+          <ion-input formControlName="address" label="Indirizzo :"
             placeholder="Inserisci il tuo indirizzo"></ion-input>
       </ion-col>
       <ion-col>
-          <ion-input formControlName="password" label="Inserisci la tua password" 
+          <ion-input formControlName="password" label="Password :" 
             placeholder="Inserisci la tua password">
           </ion-input>
-          <ion-input formControlName="cpassword" label="Inserisci la tua password" 
+          <ion-input formControlName="cpassword" label="Conferma password :" 
             placeholder="Conferma la tua password">
           </ion-input>
       </ion-col>

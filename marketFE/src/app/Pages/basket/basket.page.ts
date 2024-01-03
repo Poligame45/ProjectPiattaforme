@@ -18,7 +18,7 @@ import { AddUpdateOrderCommand } from 'src/app/models/command/orderCommand/addUp
 })
 export class BasketPage implements OnInit {
   basket: Basket = new Basket();
-  totaleCarrello!: number;
+  totaleCarrello: number = 0;
   isAlertOpen: boolean = false;
   showEmptyBasket: boolean = false;
 
@@ -41,8 +41,7 @@ export class BasketPage implements OnInit {
   }
 
 
-  async ngOnInit() {
-    await this.startSearch();
+   ngOnInit() {
   }
 
   async startSearch() {
@@ -50,12 +49,18 @@ export class BasketPage implements OnInit {
     let command = new GetBasketCommand();
     command.customerId = sessionStorage.getItem('userId');
     this.basket = await firstValueFrom(this.basketService.getBasket(command));
-    this.basket.basketItems.forEach((basketItem: BasketItem) => {
-      if(basketItem.quantita <= 0){this.rimuoviItem(basketItem); return;}
+
+    let basketLen = this.basket.basketItems.length;
+    for (let i = 0; i < this.basket.basketItems.length; i++) {
+      let basketItem = this.basket.basketItems[i];
+      if (basketItem.storedProduct.qta <= 0) {
+        basketLen = basketLen - 1;
+        break;
+      }
       this.totaleCarrello = this.totaleCarrello + (basketItem.quantita * basketItem.storedProduct.prezzo);
-    });
-    this.basketService.item.next(this.basket.basketItems.length);
-    this.basket.basketItems.length <=0 ? this.showEmptyBasket = true : this.showEmptyBasket=false;
+    }
+    this.basketService.item.next(basketLen);
+    this.basket.basketItems.length <= 0 ? this.showEmptyBasket = true : this.showEmptyBasket = false;
   }
 
 
@@ -87,5 +92,13 @@ export class BasketPage implements OnInit {
 
   goToOrders() {
     this.router.navigate(['customer-orders']);
+  }
+
+  productsNotAvailable() {
+    for (let i = 0; i < this.basket.basketItems.length; i++) {
+      let basketItem = this.basket.basketItems[i];
+      if (basketItem.storedProduct.qta <= 0) { return true; }
+    }
+    return false;
   }
 }

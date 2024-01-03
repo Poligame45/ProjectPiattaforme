@@ -8,6 +8,7 @@ import { ProductDetailsPageRoutingModule } from './product-details-routing.modul
 
 import { ProductDetailsPage } from './product-details.page';
 import { HeaderModule } from 'src/app/components/header/header.module';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderModule } from 'src/app/components/header/header.module';
     FormsModule,
     IonicModule,
     ProductDetailsPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule
   ],
   declarations: [ProductDetailsPage]
 })

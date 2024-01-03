@@ -3,9 +3,15 @@
         <ion-button (click)="goAboutUs()">
             <ion-icon slot="icon-only" name="barbell-outline"></ion-icon>
         </ion-button>
+        <ion-title>
+            <ion-label class="title">
+                GYM STORE
+            </ion-label>
+        </ion-title>
         <ion-button (click)="resetFiltri()">
             Rimuovi filtri
         </ion-button>
+
     </ion-buttons>
     <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
     <ion-buttons slot="end" *ngIf="!adminLogged()">

@@ -1,7 +1,7 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from './../../Services/orders.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Column, Header, Riga, Table } from 'src/app/models/Table';
 import { OrderDTO } from 'src/app/models/dto/orders/OrderDTO';
 import { OrderUtility } from 'src/app/utils/OrderUtility';
@@ -24,13 +24,18 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
 
   constructor(orderService: OrdersService, private router: Router) {
     super(orderService);
+    this.router.events.subscribe(async (ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.list = await super.startSearch();
+        this.configTable();
+        this.configHeader();
+      }
+    });
   }
 
   async ngOnInit() {
     this.configForm();
-    this.list = await this.startSearch();
-    this.configTable();
-    this.configHeader();
+
   }
   selezionaDataDa() {
     this.dataAcquistoDaSelected = true;

@@ -2,7 +2,7 @@ import { firstValueFrom } from 'rxjs';
 import { UserInfoService } from './../../Services/user-info.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { GetDeleteUserInfoCommand } from 'src/app/models/command/userCommand/GetDeleteUserInfoCommand';
 import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
 import { SearchRequestCommand } from 'src/app/models/command/requestCommand/searchRequestCommand';
@@ -19,7 +19,13 @@ export class UserRequestPage implements OnInit {
   user!: UserDTO;
   isAlertOpen: boolean = false;
 
-  constructor(private router: Router, private userInfoService: UserInfoService, private requestService: RequestService) { }
+  constructor(private router: Router, private userInfoService: UserInfoService, private requestService: RequestService) {
+    this.router.events.subscribe(async (ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.setForm();
+      }
+    });
+   }
 
   async ngOnInit() {
     this.configForm();

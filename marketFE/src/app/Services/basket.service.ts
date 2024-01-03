@@ -28,7 +28,7 @@ export class BasketService {
   }
 
   acquista(body: any): Observable<any> {
-    return this.httpClient.post<any>("http://localhost:8080/order", body)
+    return this.httpClient.post<any>("http://localhost:8080/order/addOrder", body)
   }
 
 

@@ -31,13 +31,12 @@ export class AddUpdateStoredProductPage implements OnInit {
       img: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
       qta: new FormControl('', Validators.required),
-      deleted: new FormControl('', Validators.required),
+      deleted: new FormControl(''),
     });
     await this.configForm();
   }
 
   async configForm() {
-    
     let codiceProdotto = await this.activatedRoute.snapshot.queryParamMap.get('product');
     if (!!codiceProdotto) {
       const command: GetDeleteStoredProductCommand = {
@@ -49,15 +48,17 @@ export class AddUpdateStoredProductPage implements OnInit {
   }
 
   async onSubmit() {
+    if(sessionStorage.getItem("userRole") != "ADMIN") return;
     const command: AddUpdateCommandStoredProduct = {
       nome: this.myForm.value.nome,
       descrizione: this.myForm.value.descrizione,
       prezzo: +this.myForm.value.prezzo,
       qta: +this.myForm.value.qta,
       img: this.myForm.value.img,
-      deleted: this.myForm.value.deleted
+      deleted: false
     }
     if (!!this.storedProduct) {
+      command.deleted = this.myForm.value.deleted;
       command.codice = this.storedProduct.codice;
       await firstValueFrom(this.storedProductService.updateStoredProduct(command));
     } else {
