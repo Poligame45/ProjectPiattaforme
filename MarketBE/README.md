@@ -1,34 +1,61 @@
-# Spring Boot 3.0 Security with JWT Implementation
-This project demonstrates the implementation of security using Spring Boot 3.0 and JSON Web Tokens (JWT). It includes the following features:
+# Gym Store
+Progetto realizzato da Luca Polizzo mat.189952
+Framework utilizzati: SpringBoot e Ionic(Angular)
 
 ## Features
-* User registration and login with JWT authentication
-* Password encryption using BCrypt
-* Role-based authorization with Spring Security
-* Customized access denied handling
-* Logout mechanism
-* Refresh token
+* Registrazione utenti
+* Password encryption tramite BCrypt
+* Autorizzazione ruoli basata su Spring Security
+* Personalizzazione accessi API
+
+## Features Admin
+* Aggiungere/modificare prodotti
+* Gestione ordini cliente
+* Gestione prodotti in magazzino
+* Visualizzazione Home page Cliente
+* Creazione di una nuova utenza di un nuovo ADMIN tramite registrazione
+
+## Features Customer
+* Ricerca prodotti
+* Aggiunta prodotti al carrello
+* Gestione carrello (rimozione prodotti, modifica qta prodotti)
+* Visualizzazione dei propri ordini
+* Inviare una richiesta di assistenza agli admin
+* Visualizzare le informazioni personali
+* Registrarsi
 
 ## Technologies
-* Spring Boot 3.0
 * Spring Security
 * JSON Web Tokens (JWT)
 * BCrypt
 * Maven
- 
-## Getting Started
-To get started with this project, you will need to have the following installed on your local machine:
+* Ionic
+* Angular
+* GIT
+* PostgreSQL
 
+## Dettagli implementativi BE
+* Utilizzo della paginazione
+* Utilizzo della classe Specification per effettuare le query sul DB
+* Utilizzo di Command e DTO per pulizia del codice
+* Eliminazione di ordini e prodotti valorizzando il campo Deleted anziché eliminare realmente il prodotto
+per tenere traccia dei prodotti che sono stati eliminati 
+
+
+## Dettagli implementativi FE
+* Creazione di componenti custom (es. paginatore FE)
+* Utilizzo dei componenti messi a disposizione da Ionic
+* Utilizzo di Subject per la notifica carrello
+* Utilizzo delle direttive @ViewChild per effettuare query sul DOM
+* Creazione di servizi Custom per richiamare le APi
+* Utilizzo di Command e DTO per una migliore organizzazione del progetto
+* 
+
+## Getting Started
+All'avvio dell'applicazione verrà eseguito il metodo run della classe InitDB per popolare il DB
 * JDK 17+
 * Maven 3+
 
 
-To build and run the project, follow these steps:
-
-* Clone the repository: `git clone https://github.com/ali-bouali/spring-boot-3-jwt-security.git`
-* Navigate to the project directory: cd spring-boot-security-jwt
-* Add database "jwt_security" to postgres 
-* Build the project: mvn clean install
-* Run the project: mvn spring-boot:run 
-
--> The application will be available at http://localhost:8080.
+## Tema
+* Il progetto è basato sulla volontà di rappresentare uno store online di prodotti per persone che si allenano in palestra
