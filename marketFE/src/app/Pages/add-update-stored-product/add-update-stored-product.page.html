@@ -23,30 +23,36 @@
       </ion-row>
       <ion-row>
         <ion-col>
-            <ion-input color="primary" label="Url immagine:" label-placement="floating" formControlName="img"></ion-input>
+          <ion-input color="primary" label="Url immagine:" label-placement="floating" formControlName="img"></ion-input>
         </ion-col>
         <ion-col>
-            <ion-input color="primary" label="Prezzo:" type="number" label-placement="floating" formControlName="prezzo"></ion-input>
+          <ion-input color="primary" label="Prezzo:" type="number" label-placement="floating"
+            formControlName="prezzo"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-            <ion-input color="primary" label="Quantità:" type="number" label-placement="floating" formControlName="qta"></ion-input>
+          <ion-input color="primary" label="Quantità:" type="number" label-placement="floating"
+            formControlName="qta"></ion-input>
         </ion-col>
         <ion-col *ngIf="!!storedProduct">
-          <ion-item>
             <ion-select aria-label="Deleted" *ngIf="!!storedProduct" [value]="storedProduct.deleted"
               formControlName="deleted">
               <ion-select-option [value]="true">Elimina da magazzino</ion-select-option>
               <ion-select-option [value]="false">Prodotto in magazzino</ion-select-option>
             </ion-select>
-          </ion-item>
         </ion-col>
       </ion-row>
-      <ion-button id="present-alert" type="submit" [disabled]="myForm.invalid">Salva</ion-button>
+      <ion-button type="submit" [disabled]="myForm.invalid">Salva</ion-button>
     </form>
-    <ion-alert class="alert" trigger="present-alert" [isOpen]="isAlertOpen" message="Prodotto salvato correttamente."
+    <ion-alert #alertCustomer class="alert" message="Ordine effettuato correttamente!"
       (didDismiss)="goToStoredProducts()"></ion-alert>
   </ion-grid>
+
+
+
+  <ion-row class="row">
+    <img *ngIf="storedProduct!" [src]="storedProduct.img" height="300" width="300">
+  </ion-row>
 
 </ion-content>

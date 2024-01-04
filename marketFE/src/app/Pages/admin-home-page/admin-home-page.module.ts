@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AdminHomePagePageRoutingModule } from './admin-home-page-routing.module';
 
 import { AdminHomePagePage } from './admin-home-page.page';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AdminHomePagePage } from './admin-home-page.page';
     FormsModule,
     IonicModule,
     AdminHomePagePageRoutingModule,
+    FooterModule
   ],
   declarations: [AdminHomePagePage]
 })

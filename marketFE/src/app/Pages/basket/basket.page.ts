@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { SelectChangeEventDetail } from '@ionic/angular';
+import { IonAlert, SelectChangeEventDetail } from '@ionic/angular';
 import { IonSelectCustomEvent } from '@ionic/core';
 import { firstValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/Services/basket.service';
@@ -19,8 +19,9 @@ import { AddUpdateOrderCommand } from 'src/app/models/command/orderCommand/addUp
 export class BasketPage implements OnInit {
   basket: Basket = new Basket();
   totaleCarrello: number = 0;
-  isAlertOpen: boolean = false;
   showEmptyBasket: boolean = false;
+  @ViewChild('alertCustomer') alert!: IonAlert;
+
 
   async changeSizeOfPages(event: IonSelectCustomEvent<SelectChangeEventDetail<any>>, item: BasketItem) {
     const command: AddUpdateBasketItemCommand = {
@@ -83,7 +84,8 @@ export class BasketPage implements OnInit {
     let elem = sessionStorage.getItem('userId');
     command.customerId = +elem!
     await firstValueFrom(this.basketService.acquista(command));
-    this.isAlertOpen = true;
+    this.alert.present();
+    setTimeout( () => { this.alert.dismiss(); }, 1500 );
   }
 
   goBack() {

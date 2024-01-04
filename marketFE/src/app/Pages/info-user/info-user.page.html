@@ -13,19 +13,20 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="myForm">
-    <ion-row *ngIf="!!user">
-      <ion-col>
-        <ion-input *ngIf="user.firstname" [readonly]="true" label="Nome" [readonly]="true" formControlName="firstname"></ion-input>
-        <ion-input label="Cognome" [readonly]="true" formControlName="lastname">
-        </ion-input>
-        <ion-input label="Email" [readonly]="true" formControlName="email">
-        </ion-input>
-        <ion-input label="Indirizzo" [readonly]="true" formControlName="address">
-        </ion-input>
+    <form [formGroup]="myForm">
+      <ion-row *ngIf="!!user">
+        <ion-col>
+          <ion-input *ngIf="user.firstname" [readonly]="true" label="Nome" [readonly]="true"
+            formControlName="firstname"></ion-input>
+          <ion-input label="Cognome" [readonly]="true" formControlName="lastname">
+          </ion-input>
+          <ion-input label="Email" [readonly]="true" formControlName="email">
+          </ion-input>
+          <ion-input label="Indirizzo" [readonly]="true" formControlName="address">
+          </ion-input>
 
-      </ion-col>
-    </ion-row>
-  </form>
+        </ion-col>
+      </ion-row>
+    </form>
 </ion-content>
 <footer></footer>

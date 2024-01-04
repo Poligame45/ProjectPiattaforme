@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
 
 
   goToHome() {
-    this.router.navigate(['home'], { queryParams: { isLogged: this.serviceLogin.isLogged } });
+    this.router.navigate(['home']);
   }
 
   goToAdminHomePage() {
@@ -56,5 +56,8 @@ export class LoginPage implements OnInit {
     this.router.navigate(['register']);
   }
 
+  goAboutUs(){
+    this.router.navigate(['about-us']);
+  }
 
 }

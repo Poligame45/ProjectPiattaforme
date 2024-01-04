@@ -3,19 +3,23 @@
     <ion-title>Dettagli ordine</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
-          <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
-  </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large">order-detail</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <h1 class="head" *ngIf="!!order">Codice ordine : {{order.id}}</h1>
-  <table class="table" *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table"></table>
+
+<ion-content [fullscreen]="true" *ngIf="!!order">
+  <ion-row>
+    <ion-col>
+      <h1 class="head" *ngIf="!!order">Codice ordine : {{order.id}}</h1>
+    </ion-col>
+    <ion-col> <h1 class="head">Totale ordine : {{order.totale}}€</h1></ion-col>
+    <ion-col><h1 class="head"> Data ordine : {{order.dataAcquisto | date : 'dd/MM/yyyy'}}</h1></ion-col>
+  </ion-row>
+  <table class="table" *ngIf="!!table && !!this.table.rows.length && this.table.rows.length > 0" [table]="table">
+  </table>
 </ion-content>
+<footer></footer>

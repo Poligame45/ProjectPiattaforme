@@ -16,7 +16,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage extends StoredProductUtility implements OnInit {
-  isLogged!: boolean
   myForm!: FormGroup;
   filtri: SearchCommandStoredProduct = new SearchCommandStoredProduct();
 

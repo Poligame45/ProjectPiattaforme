@@ -62,6 +62,8 @@
           <ion-card-subtitle>Rimuovi i filtri per avviare un'altra ricerca</ion-card-subtitle>
       </ion-card-header>
   </ion-card>
+  <ion-alert #alertCustomer class="alert"
+  (didDismiss)="startSearch(this.filtri); configTable(); configHeader();"></ion-alert>
 </ion-content>
 
 <ion-footer>

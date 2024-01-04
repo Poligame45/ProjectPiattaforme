@@ -17,27 +17,43 @@
 </ion-header>
 
 
-  <ion-row *ngIf="!!storedProd" class="row">
-    <ion-col><img [src]="storedProd.img" width="500" height="500"></ion-col>
-    <ion-col>
+<ion-row *ngIf="!!storedProd" class="row">
+  <ion-col><img [src]="storedProd.img" width="500" height="500"></ion-col>
+  <ion-col>
+    <ion-row>
+      <h1>{{storedProd.nome}}</h1>
+    </ion-row>
+    <ion-row>
+      <h2>Descrizione articolo: {{storedProd.descrizione}}</h2>
+    </ion-row>
+    <ion-row>
+      <h2>Prezzo: {{storedProd.prezzo}}€</h2>
+    </ion-row>
+    <ion-row>
+      <h2>Quantità disponibili: {{storedProd.qta}}</h2>
+    </ion-row>
+    <form [formGroup]="myForm">
       <ion-row>
-        <h1>{{storedProd.nome}}</h1>
+        <ion-item class="item" *ngIf="!!storedProd && !!storedProd.qta">
+          <ion-label>Seleziona la quantità da acquistare</ion-label>
+          <ion-select *ngIf="!!storedProd && !!storedProd.qta"
+            interface=popover  formControlName="qtaProd">
+            <ion-select-option *ngFor="let quantita of [].constructor(storedProd.qta); index as j "
+              [value]="j+1">{{j+1}}
+            </ion-select-option>
+          </ion-select>
+
+        </ion-item>
       </ion-row>
-      <ion-row>
-        <h2>Descrizione articolo: {{storedProd.descrizione}}</h2>
-      </ion-row>
-      <ion-row>
-        <h2>Prezzo: {{storedProd.prezzo}}€</h2>
-      </ion-row>
-      <ion-row>
-        <h2>Quantità disponibili: {{storedProd.qta}}</h2>
-      </ion-row>
-      <ion-row>
-        <ion-button expand="block" [disabled]="adminLogged() || !userLogged() " (click)="setOpen(true)">Aggiungi al
-          carrello</ion-button>
-        <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
-          [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
-      </ion-row>
-    </ion-col>
-  </ion-row>
-  <footer></footer>
+
+    </form>
+    <ion-row>
+      <ion-button expand="block" [disabled]="adminLogged() || !userLogged() || !myForm.value.qtaProd"
+        (click)="setOpen(true); aggiungiAlCarrello(storedProd)">Aggiungi al
+        carrello</ion-button>
+      <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
+        [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
+    </ion-row>
+  </ion-col>
+</ion-row>
+<footer></footer>

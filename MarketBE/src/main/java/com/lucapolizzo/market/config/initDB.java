@@ -129,7 +129,7 @@ public class initDB implements CommandLineRunner {
         storedProduct11.setPrezzo(12.00);
 
         //Creo nuovi prodotti per far vedere la paginazione
-        StoredProduct storedProduct12 = new StoredProduct();
+        /*StoredProduct storedProduct12 = new StoredProduct();
         storedProduct12.setNome("Creatine MonoHydrate");
         storedProduct12.setDescrizione("Creatina monoidratata 300gr.");
         storedProduct12.setQta(20);
@@ -204,8 +204,8 @@ public class initDB implements CommandLineRunner {
         storedProduct22.setNome("Hydro BCAA");
         storedProduct22.setDescrizione("BCAA 8.1.1 Amminoacidi ramificati");
         storedProduct22.setQta(10);
-        storedProduct22.setImg("..\\..\\assets\\images\\bcaa-hydro.jpg");
-        storedProduct22.setPrezzo(12.00);
+        storedProduct22.setImg("..\\..\\assets\\images\\bcaa-hydro.jpg");*/
+        //storedProduct22.setPrezzo(12.00);
 
 
 
@@ -222,7 +222,7 @@ public class initDB implements CommandLineRunner {
         productRepository.save(storedProduct10);
         productRepository.save(storedProduct11);
 
-        productRepository.save(storedProduct12);
+       /* productRepository.save(storedProduct12);
         productRepository.save(storedProduct13);
         productRepository.save(storedProduct14);
         productRepository.save(storedProduct15);
@@ -232,7 +232,7 @@ public class initDB implements CommandLineRunner {
         productRepository.save(storedProduct19);
         productRepository.save(storedProduct20);
         productRepository.save(storedProduct21);
-        productRepository.save(storedProduct22);
+        productRepository.save(storedProduct22);*/
 
 
 

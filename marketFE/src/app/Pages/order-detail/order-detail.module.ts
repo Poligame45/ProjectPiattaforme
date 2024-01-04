@@ -8,6 +8,7 @@ import { OrderDetailPageRoutingModule } from './order-detail-routing.module';
 
 import { OrderDetailPage } from './order-detail.page';
 import { TableModule } from 'src/app/components/table/table.module';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TableModule } from 'src/app/components/table/table.module';
     FormsModule,
     IonicModule,
     TableModule,
-    OrderDetailPageRoutingModule
+    OrderDetailPageRoutingModule,
+    FooterModule
   ],
   declarations: [OrderDetailPage]
 })

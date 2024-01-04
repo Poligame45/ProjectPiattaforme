@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormRecord, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { IonAlert } from '@ionic/angular';
+import { delay, firstValueFrom, timeout } from 'rxjs';
 import { LoginService } from 'src/app/Services/login.service';
 import { RegisterCommand } from 'src/app/models/command/authCommand/registerCommand';
 import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
@@ -18,7 +19,8 @@ export class RegisterPage implements OnInit {
   regex: boolean = false;
   adminLogged: boolean = false;
   isAlertOpen: boolean = false;
-  isAlertAdminOpen:boolean = false;
+  isAlertAdminOpen: boolean = false;
+  @ViewChild('alertCustomer') alert!: IonAlert;
 
   constructor(private serviceRegister: LoginService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events.subscribe(async (ev) => {
@@ -65,18 +67,17 @@ export class RegisterPage implements OnInit {
       sessionStorage.setItem("token", this.token.accessToken);
       sessionStorage.setItem("userId", this.token.user.id);
       sessionStorage.setItem("userRole", this.token.user.role);
-      this.isAlertOpen = true;
-    }else{
-      this.isAlertOpen = false;
+      this.alert.present();
+      setTimeout( () => { this.alert.dismiss(); }, 1200 );
     }
   }
 
   async registerAdmin() {
-    if(!this.myForm.value.email)
-    if (this.myForm.value.password != this.myForm.value.cpassword) {
-      alert('password diverse');
-      return;
-    }
+    if (!this.myForm.value.email)
+      if (this.myForm.value.password != this.myForm.value.cpassword) {
+        alert('password diverse');
+        return;
+      }
     const command: RegisterCommand = {
       firstname: this.myForm.value.firstname,
       lastname: this.myForm.value.lastname,
@@ -87,16 +88,15 @@ export class RegisterPage implements OnInit {
     }
     const user: UserDTO = await firstValueFrom(this.serviceRegister.registerAdmin(command));
     if (user!) {
-      this.isAlertAdminOpen = true;
-    }else{
-      this.isAlertAdminOpen = false;
+      this.alert.present();
+      setTimeout( () => { this.alert.dismiss(); }, 1500 );
     }
   }
 
-  checkForm(){
+  checkForm() {
     return this.isAlertOpen ? 'present-alert' : '';
   }
-  checkAdminForm(){
+  checkAdminForm() {
     return this.isAlertAdminOpen ? 'present-alert-admin' : '';
   }
   goToLoginPage() {
@@ -105,5 +105,9 @@ export class RegisterPage implements OnInit {
 
   goToHome() {
     this.router.navigate(['home']);
+  }
+
+  goAboutUs() {
+    this.router.navigate(['about-us']);
   }
 }

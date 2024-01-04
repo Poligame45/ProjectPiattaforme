@@ -25,9 +25,12 @@ export abstract class Utility {
     async goToLastPage(command: GenericSearchCommand, totale?: number) {
         if (!totale) return command.current;
         if(totale <= command.take) return command.current;
-        if (command.current === Math.floor(totale / command.take)) return command.current;
-    
-        command.current = Math.floor(totale / command.take) -1;
+        if(totale! % command.take === 0){
+            command.current = Math.floor(totale! / command.take) - 1;
+        }else if(totale! % command.take !== 0){
+        command.current = Math.floor(totale! / command.take) ;
+
+        }
         return command.current;
     }
 

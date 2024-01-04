@@ -1,3 +1,4 @@
+import { FooterModule } from 'src/app/components/footer/footer.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +19,8 @@ import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
     AdminProductsPageRoutingModule,
     TableModule, 
     PaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterModule
   ],
   declarations: [AdminProductsPage]
 })

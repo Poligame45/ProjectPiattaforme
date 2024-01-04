@@ -11,22 +11,22 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="!!basket && !!basket.basketItems && !!basket.basketItems.length">
+<ion-content *ngIf="!!basket && !!basket.basketItems && !!basket.basketItems.length" class="content">
   <ion-card>
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let item of basket.basketItems; index as i">
           <ion-thumbnail slot="start">
-            <img [src]="basket.basketItems[i].storedProduct.img"/>
+            <img [src]="basket.basketItems[i].storedProduct.img" />
           </ion-thumbnail>
           <ion-label>{{basket.basketItems[i].storedProduct.nome}}</ion-label>
           <ion-label>Quantità prodotti disponibili {{basket.basketItems[i].storedProduct.qta}}</ion-label>
-          <ion-label>Prezzo prodotto {{basket.basketItems[i].storedProduct.prezzo}}</ion-label>
+          <ion-label>Prezzo prodotto {{basket.basketItems[i].storedProduct.prezzo}}€</ion-label>
           <ion-button (click)="rimuoviItem(basket.basketItems[i])">Rimuovi</ion-button>
-          <ion-select *ngIf="!!basket && !!basket.basketItems && basket.basketItems[i].storedProduct.qta > 0" interface=popover
-            [value]="basket.basketItems[i].quantita" (ionChange)="changeSizeOfPages($event,basket.basketItems[i])">
-            <ion-select-option
-              *ngFor="let prova of [].constructor(basket.basketItems[i].storedProduct.qta); index as j "
+          <ion-select *ngIf="!!basket && !!basket.basketItems && basket.basketItems[i].storedProduct.qta > 0"
+            interface=popover [value]="basket.basketItems[i].quantita"
+            (ionChange)="changeSizeOfPages($event,basket.basketItems[i])">
+            <ion-select-option *ngFor="let qta of [].constructor(basket.basketItems[i].storedProduct.qta); index as j "
               [value]="j+1">{{j+1}}
             </ion-select-option>
           </ion-select>
@@ -51,9 +51,11 @@
         <ion-title>Procedi all'acquisto</ion-title>
       </ion-col>
       <ion-col>Totale : {{totaleCarrello}}€</ion-col>
-      <ion-col><ion-button id="present-alert"  [disabled]="productsNotAvailable()" (click)="acquista()">Procedi all'ordine</ion-button>
-        <ion-alert class="alert" trigger="present-alert" [isOpen]="isAlertOpen" header="Ordine effettuato"
-          message="Il tuo ordine è stato inviato." (didDismiss)="goToOrders()"></ion-alert></ion-col>
+      <ion-col><ion-button [disabled]="productsNotAvailable()" (click)="acquista()">Procedi
+          all'ordine</ion-button>
+        <ion-alert #alertCustomer class="alert" message="Ordine effettuato correttamente!"
+          (didDismiss)="goToOrders()"></ion-alert>
+      </ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-footer>

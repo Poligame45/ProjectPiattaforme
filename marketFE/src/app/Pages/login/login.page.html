@@ -1,12 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-label class="title">
+        GYM STORE
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goAboutUs()">
+        <ion-icon slot="icon-only" name="barbell-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">Home Page
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-grid [fixed]="true" class="content">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <ion-row size="3" class="ion-justify-content-center ion-align-items-center">
-      <ion-item>
+      <ion-item class="item">
         <ion-input formControlName="email" label="Email input" type="email" placeholder="email@domain.com"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row size="3" class="ion-justify-content-center ion-align-items-center">
-      <ion-item>
+      <ion-item class="item">
         <ion-input formControlName="password" label="Password input" type="password"
           placeholder="Inserisci password"></ion-input>
       </ion-item>
@@ -17,3 +36,5 @@
     </ion-row>
   </form>
 </ion-grid>
+
+<footer></footer>

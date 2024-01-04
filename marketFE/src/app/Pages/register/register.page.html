@@ -1,38 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-label class="title">
+        GYM STORE
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goAboutUs()">
+        <ion-icon slot="icon-only" name="barbell-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">Home Page
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-grid [fixed]="true" class="content">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form">
     <ion-row size="3" class="ion-justify-content-center ion-align-items-center">
       <ion-col>
-          <ion-input formControlName="firstname" label="Nome :"
-            placeholder="Inserisci il tuo nome"></ion-input>
+        <ion-input formControlName="firstname" label="Nome :" placeholder="Inserisci il tuo nome"></ion-input>
       </ion-col>
       <ion-col>
-          <ion-input formControlName="lastname" label="Cognome :" 
-            placeholder="Inserisci il tuo cognome"></ion-input>
+        <ion-input formControlName="lastname" label="Cognome :" placeholder="Inserisci il tuo cognome"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row size="3" class="ion-justify-content-center ion-align-items-center">
       <ion-col>
-        
-          <ion-input formControlName="email" label="Email :" placeholder="Inserisci la tua mail" [required]="true"></ion-input>
-          <ion-input formControlName="address" label="Indirizzo :"
-            placeholder="Inserisci il tuo indirizzo"></ion-input>
+
+        <ion-input formControlName="email" label="Email :" placeholder="Inserisci la tua mail"
+          [required]="true"></ion-input>
+        <ion-input formControlName="address" label="Indirizzo :" placeholder="Inserisci il tuo indirizzo"></ion-input>
       </ion-col>
       <ion-col>
-          <ion-input formControlName="password" label="Password :" 
-            placeholder="Inserisci la tua password">
-          </ion-input>
-          <ion-input formControlName="cpassword" label="Conferma password :" 
-            placeholder="Conferma la tua password">
-          </ion-input>
+        <ion-input formControlName="password" label="Password :" placeholder="Inserisci la tua password">
+        </ion-input>
+        <ion-input formControlName="cpassword" label="Conferma password :" placeholder="Conferma la tua password">
+        </ion-input>
       </ion-col>
     </ion-row>
-    <ion-button *ngIf="!adminLogged" [disabled]="myForm.invalid" [id]="checkForm()" type="submit">Registrati</ion-button>
+    <ion-button *ngIf="!adminLogged" [disabled]="myForm.invalid" [id]="checkForm()"
+      type="submit">Registrati</ion-button>
     <ion-button *ngIf="!adminLogged" (click)="goToLoginPage()">Hai già un account? Effettua il Login</ion-button>
-    <ion-button *ngIf="adminLogged" [disabled]="myForm.invalid" [id]="checkAdminForm()" (click)="registerAdmin()">Registra amministratore</ion-button>
+    <ion-button *ngIf="adminLogged" [disabled]="myForm.invalid" [id]="checkAdminForm()"
+      (click)="registerAdmin()">Registra amministratore</ion-button>
 
   </form>
-  <ion-alert class="alert" trigger="present-alert"  [isOpen]="isAlertOpen"
-          message="Utente registrato correttamente!" (didDismiss)="goToHome()"></ion-alert>
-  <ion-alert class="alert" trigger="present-alert-admin" [isOpen]="isAlertAdminOpen"
-          message="Utente registrato correttamente!" (didDismiss)="goToHome()"></ion-alert>
-</ion-grid>
+  <ion-alert #alertCustomer class="alert" message="Utente registrato correttamente!"
+    (didDismiss)="goToHome()" ></ion-alert>
+
+<footer></footer>

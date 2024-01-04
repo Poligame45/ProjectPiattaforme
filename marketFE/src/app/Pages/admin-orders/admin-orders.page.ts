@@ -1,6 +1,6 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from './../../Services/orders.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Column, Header, Riga, Table } from 'src/app/models/Table';
 import { OrderDTO } from 'src/app/models/dto/orders/OrderDTO';
@@ -8,6 +8,7 @@ import { OrderUtility } from 'src/app/utils/OrderUtility';
 import { SearchOrdersCommand } from 'src/app/models/command/orderCommand/searchOrderCommand';
 import { GetDeleteOrderCommand } from 'src/app/models/command/orderCommand/GetDeleteOrderCommand';
 import { firstValueFrom } from 'rxjs';
+import { IonAlert } from '@ionic/angular';
 
 @Component({
   selector: 'app-admin-orders',
@@ -20,6 +21,7 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
   dataAcquistoDaSelected: boolean = false;
   filtri: SearchOrdersCommand = new SearchOrdersCommand();
   today: String = new Date().toISOString();
+  @ViewChild('alertCustomer') alert!: IonAlert;
 
 
   constructor(orderService: OrdersService, private router: Router) {
@@ -93,11 +95,15 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
     }
     let order = await firstValueFrom(this.orderService.getOrder(command));
     if (!!order.deleted) {
-      alert("Ordine già annullato");
+      this.alert.message = "Ordine già eliminato!"
+      this.alert.present();
+      setTimeout(() => { this.alert.dismiss(); }, 1500);
       return;
     } else {
       firstValueFrom(await this.orderService.deleteOrder(command));
-      alert("Ordine annullato");
+      this.alert.message = "Ordine eliminato correttamente!"
+      this.alert.present();
+      setTimeout(() => { this.alert.dismiss(); }, 1500);
     }
   }
 

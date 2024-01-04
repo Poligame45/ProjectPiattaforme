@@ -51,6 +51,10 @@ public class BasketService {
                     item2.setQuantita(item2.getQuantita() + command.getQuantita());
                     basketRepository.save(basket);
                     return convertToDTO(item1);
+                }else if (item2.getId() == item1.getId() && command.getQuantita() + item1.getQuantita() > item2.getStoredProduct().getQta()){
+                    item2.setQuantita(item2.getStoredProduct().getQta());
+                    basketRepository.save(basket);
+                    return convertToDTO(item1);
                 }
             }
         } else {//Aggiungi nuovo

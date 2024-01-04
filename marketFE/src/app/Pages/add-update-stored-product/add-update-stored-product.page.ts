@@ -1,7 +1,8 @@
 import { StoredProduct } from './../../models/StoredProduct';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { IonAlert } from '@ionic/angular';
 import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { AddUpdateCommandStoredProduct } from 'src/app/models/command/storedProductCommand/AddUpdateCommandStoredProduct';
@@ -15,13 +16,8 @@ import { GetDeleteStoredProductCommand } from 'src/app/models/command/storedProd
 export class AddUpdateStoredProductPage implements OnInit {
   myForm!: FormGroup;
   storedProduct!: StoredProduct;
-  isAlertOpen: boolean = false;
+  @ViewChild('alertCustomer') alert!: IonAlert;
   constructor(private router: Router, private storedProductService: StoredProductService, private activatedRoute: ActivatedRoute) {
-    // this.router.events.subscribe((ev) => {
-    //   if (ev instanceof NavigationEnd) {
-    //     await this.configForm();
-    //   }
-    // });
   }
 
   async ngOnInit() {
@@ -43,12 +39,12 @@ export class AddUpdateStoredProductPage implements OnInit {
         codice: +codiceProdotto
       }
       this.storedProduct = await firstValueFrom(this.storedProductService.getStoredProduct(command));
-      this.myForm.setValue({ nome: this.storedProduct.nome, descrizione: this.storedProduct.descrizione, img: this.storedProduct.img, prezzo: this.storedProduct.prezzo, qta: this.storedProduct.qta, deleted:this.storedProduct.deleted });
+      this.myForm.setValue({ nome: this.storedProduct.nome, descrizione: this.storedProduct.descrizione, img: this.storedProduct.img, prezzo: this.storedProduct.prezzo, qta: this.storedProduct.qta, deleted: this.storedProduct.deleted });
     }
   }
 
   async onSubmit() {
-    if(sessionStorage.getItem("userRole") != "ADMIN") return;
+    if (sessionStorage.getItem("userRole") != "ADMIN") return;
     const command: AddUpdateCommandStoredProduct = {
       nome: this.myForm.value.nome,
       descrizione: this.myForm.value.descrizione,
@@ -64,7 +60,8 @@ export class AddUpdateStoredProductPage implements OnInit {
     } else {
       await firstValueFrom(this.storedProductService.addStoredProduct(command));
     }
-    this.isAlertOpen = true;
+    this.alert.present();
+    setTimeout(() => { this.alert.dismiss(); }, 1500);
   }
 
   goToStoredProducts() {

@@ -9,6 +9,7 @@ import { AdminRequestPageRoutingModule } from './admin-request-routing.module';
 import { AdminRequestPage } from './admin-request.page';
 import { TableModule } from 'src/app/components/table/table.module';
 import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
+import { FooterModule } from 'src/app/components/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
     IonicModule,
     AdminRequestPageRoutingModule,
     TableModule,
-    PaginatorModule
+    PaginatorModule,
+    FooterModule
   ],
   declarations: [AdminRequestPage]
 })

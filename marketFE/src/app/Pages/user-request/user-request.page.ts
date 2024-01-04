@@ -1,6 +1,6 @@
 import { firstValueFrom } from 'rxjs';
 import { UserInfoService } from './../../Services/user-info.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { GetDeleteUserInfoCommand } from 'src/app/models/command/userCommand/GetDeleteUserInfoCommand';
@@ -8,6 +8,7 @@ import { UserDTO } from 'src/app/models/dto/userDTO/userDTO';
 import { SearchRequestCommand } from 'src/app/models/command/requestCommand/searchRequestCommand';
 import { AddUpdateRequestCommand } from 'src/app/models/command/requestCommand/addUpdateRequestCommand';
 import { RequestService } from 'src/app/Services/request.service';
+import { IonAlert } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-request',
@@ -17,7 +18,7 @@ import { RequestService } from 'src/app/Services/request.service';
 export class UserRequestPage implements OnInit {
   myForm!: FormGroup;
   user!: UserDTO;
-  isAlertOpen: boolean = false;
+  @ViewChild('alertCustomer') alert!:IonAlert;
 
   constructor(private router: Router, private userInfoService: UserInfoService, private requestService: RequestService) {
     this.router.events.subscribe(async (ev) => {
@@ -70,7 +71,8 @@ export class UserRequestPage implements OnInit {
       content: this.myForm.value.content
     }
     const resp = await firstValueFrom(this.requestService.addRequest(command));
-    this.isAlertOpen = true;
+    this.alert.present();
+    setTimeout(() => { this.alert.dismiss(); }, 1500);
   }
 
 }

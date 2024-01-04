@@ -7,6 +7,7 @@ import { StoredProduct } from 'src/app/models/StoredProduct';
 import { AddUpdateBasketItemCommand } from 'src/app/models/command/basketCommand/AddUpdateBasketItemCommand';
 import { BasketService } from 'src/app/Services/basket.service';
 import { LoginService } from 'src/app/Services/login.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
@@ -17,6 +18,7 @@ export class ProductDetailsPage implements OnInit {
   storedProd!: StoredProduct;
   currentUser!: any;
   isToastOpen: boolean = false;
+  myForm!: FormGroup;
 
   constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute, private productService: StoredProductService, private basketService: BasketService, private router: Router) {
     this.router.events.subscribe((ev) => {
@@ -27,6 +29,9 @@ export class ProductDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.myForm = new FormGroup({
+      qtaProd: new FormControl('',Validators.required),
+    });
   }
 
   async searchProduct() {
@@ -42,9 +47,9 @@ export class ProductDetailsPage implements OnInit {
     const command: AddUpdateBasketItemCommand = {
       codiceCustomer: this.currentUser,
       codiceStoredProduct: product.codice,
-      quantita: 1
+      quantita: this.myForm.value.qtaProd
     }
-    const resp = await firstValueFrom(this.basketService.addItemInBasket(command));
+    await firstValueFrom(this.basketService.addItemInBasket(command));
   }
 
 
@@ -71,14 +76,13 @@ export class ProductDetailsPage implements OnInit {
 
   async setOpen(isOpen: boolean) {
     this.isToastOpen = isOpen;
-    await this.aggiungiAlCarrello(this.storedProd);
   }
 
-  goToBasket(){
+  goToBasket() {
     this.router.navigate(['basket']);
   }
-  
-  adminLogged(){
+
+  adminLogged() {
     return sessionStorage.getItem('userRole')!! === "ADMIN";
   }
 }

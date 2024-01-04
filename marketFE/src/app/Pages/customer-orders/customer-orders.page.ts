@@ -47,10 +47,13 @@ export class CustomerOrdersPage extends OrderUtility implements OnInit {
       let colId = new Column();
       colId.nome = order.id;
       let colData = new Column();
+      colData.type = 'date';
       colData.nome = order.dataAcquisto;
       let colTotale = new Column();
       colTotale.nome = order.totale + "€";
-      row.columns.push(colId, colData, colTotale);
+      let colNProdotti = new Column();
+      colNProdotti.nome = order.purchasedItemList.length;
+      row.columns.push(colId, colData, colTotale, colNProdotti);
       this.table.rows.push(row);
     });
   }
@@ -59,10 +62,12 @@ export class CustomerOrdersPage extends OrderUtility implements OnInit {
     let headerId = new Header();
     let headerData = new Header();
     let headerTotale = new Header();
+    let headerNProdotti = new Header();
     headerId.nome = "Codice ordine";
     headerData.nome = "Data ordine";
     headerTotale.nome = "Totale ordine";
-    this.table.headers.push(headerId, headerData, headerTotale);
+    headerNProdotti.nome = "Numero prodotti "
+    this.table.headers.push(headerId, headerData, headerTotale, headerNProdotti );
   }
 
   goToDetails(idOrdine:number){

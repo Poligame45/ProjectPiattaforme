@@ -35,3 +35,4 @@
   <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"
     [itemsPerPages]="this.command.take" (changeSize)="changeSize($event)"></paginator>
 </ion-footer>
+<footer *ngIf="!list"></footer>
