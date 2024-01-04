@@ -11,3 +11,9 @@
 .link{
     cursor: pointer;
 }
+
+ion-content{
+    width: 100%;
+    --background:none;
+    background-image: url(../../../assets/images/gym-background.jpg);
+}

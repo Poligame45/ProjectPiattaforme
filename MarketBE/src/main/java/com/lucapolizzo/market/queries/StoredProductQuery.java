@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
 import java.util.Objects;
 
 @Service
@@ -32,8 +33,8 @@ public class StoredProductQuery extends GenericQuery {
         }
         if (command.getNome() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.like(root.get("nome"), "%" + command.getNome() + "%");
-
+                //return criteriaBuilder.like(root.get("nome"), "%" + command.getNome() + "%");
+                return criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%" + command.getNome().toUpperCase() + "%");
             });
         }
         if (command.getDeleted() != null) {

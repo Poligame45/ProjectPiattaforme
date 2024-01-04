@@ -55,7 +55,7 @@
       <ion-col>Totale : {{totaleCarrello}}€</ion-col>
       <ion-col><ion-button [disabled]="productsNotAvailable()" (click)="acquista()">Procedi
           all'ordine</ion-button>
-        <ion-alert #alertCustomer class="alert"
+        <ion-alert #alertBasket class="alert"
           (didDismiss)="goToOrders()"></ion-alert>
       </ion-col>
     </ion-row>

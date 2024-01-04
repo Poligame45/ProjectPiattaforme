@@ -5,3 +5,12 @@
 .link-back{
     cursor: pointer;
 }
+
+ion-content{
+    --background:none;
+    background-image: url(../../../assets/images/motivation.jpg);
+}
+
+.input{
+    font-weight: bold;
+}

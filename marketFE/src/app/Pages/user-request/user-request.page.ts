@@ -21,11 +21,7 @@ export class UserRequestPage implements OnInit {
   @ViewChild('alertCustomer') alert!:IonAlert;
 
   constructor(private router: Router, private userInfoService: UserInfoService, private requestService: RequestService) {
-    this.router.events.subscribe(async (ev) => {
-      if (ev instanceof NavigationEnd) {
-        this.setForm();
-      }
-    });
+
    }
 
   async ngOnInit() {
@@ -49,7 +45,7 @@ export class UserRequestPage implements OnInit {
 
   setForm() {
     this.myForm.setValue({
-      firstname: this.user.firstname,
+      firstname: !!this.user.firstname,
       lastname: this.user.lastname,
       email: this.user.email,
       content: ""

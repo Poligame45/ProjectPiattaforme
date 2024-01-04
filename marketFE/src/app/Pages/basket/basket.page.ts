@@ -86,9 +86,9 @@ export class BasketPage implements OnInit {
     let elem = sessionStorage.getItem('userId');
     command.customerId = +elem!
     await firstValueFrom(this.basketService.acquista(command));
-    this.alert.message="Ordine effettuato correttamente!"
-    this.alert.present();
-    setTimeout(() => { this.alert.dismiss(); }, 1500);
+    this.alertBasket.message="Ordine effettuato correttamente!"
+    this.alertBasket.present();
+    setTimeout(() => { this.alertBasket.dismiss(); }, 1500);
   }
 
   goBack() {
@@ -111,8 +111,8 @@ export class BasketPage implements OnInit {
     if (prodotto.qta > 0) {
       this.router.navigate(['product-details'], { queryParams: { product: prodotto.codice } });
     }else{
-      this.alertBasket.message="Il prodotto non è disponibile!"
-      this.alertBasket.present();
+      this.alert.message="Il prodotto non è disponibile!"
+      this.alert.present();
       setTimeout(() => { this.alert.dismiss(); }, 1500);
     }
   }

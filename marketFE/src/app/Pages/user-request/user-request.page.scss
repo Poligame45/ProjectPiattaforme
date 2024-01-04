@@ -1,0 +1,25 @@
+ion-content{
+    --background:none;
+    background-image: url(../../../assets/images/motivation.jpg);
+}
+
+
+.input{
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn{
+    width: 250px;
+    height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+}

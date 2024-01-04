@@ -18,7 +18,7 @@
 
 
 <ion-row *ngIf="!!storedProd" class="row">
-  <ion-col><img [src]="storedProd.img" width="500" height="500"></ion-col>
+  <ion-col><img style="margin-left: 10px;" [src]="storedProd.img" width="500" height="500"></ion-col>
   <ion-col>
     <ion-row>
       <h1>{{storedProd.nome}}</h1>
@@ -36,8 +36,7 @@
       <ion-row>
         <ion-item class="item" *ngIf="!!storedProd && !!storedProd.qta">
           <ion-label>Seleziona la quantità da acquistare</ion-label>
-          <ion-select *ngIf="!!storedProd && !!storedProd.qta"
-            interface=popover  formControlName="qtaProd">
+          <ion-select *ngIf="!!storedProd && !!storedProd.qta" interface=popover formControlName="qtaProd">
             <ion-select-option *ngFor="let quantita of [].constructor(storedProd.qta); index as j "
               [value]="j+1">{{j+1}}
             </ion-select-option>
@@ -51,9 +50,13 @@
       <ion-button expand="block" [disabled]="adminLogged() || !userLogged() || !myForm.value.qtaProd"
         (click)="setOpen(true); aggiungiAlCarrello(storedProd)">Aggiungi al
         carrello</ion-button>
+
       <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello"
         [duration]="2000" (didDismiss)="setOpen(false)"></ion-toast>
     </ion-row>
+    <ion-row style="margin-top: 20px; font-weight: bold;"> <ion-label *ngIf="adminLogged() || !userLogged() ">Accedi per aggiungere prodotti al
+      carrello!</ion-label>
+  </ion-row>
   </ion-col>
 </ion-row>
 <footer></footer>

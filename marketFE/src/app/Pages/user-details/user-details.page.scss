@@ -14,3 +14,9 @@ ion-card:hover{
     height: 100%;
     width: 100%;
 }
+
+
+ion-content{
+    --background:none;
+    background-image: url(../../../assets/images/gym-background.jpg);
+}

@@ -51,7 +51,7 @@ public class initDB implements CommandLineRunner {
 
     private void initStoredProducts() {
         StoredProduct storedProduct1 = new StoredProduct();
-        storedProduct1.setNome("Creatine MonoHydrate");
+        storedProduct1.setNome("Creatine Monohydrate");
         storedProduct1.setDescrizione("Creatina monoidratata 300gr.");
         storedProduct1.setQta(20);
         storedProduct1.setImg("..\\..\\assets\\images\\creatine.jpg");

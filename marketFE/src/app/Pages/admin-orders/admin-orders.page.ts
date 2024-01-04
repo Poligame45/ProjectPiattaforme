@@ -161,6 +161,8 @@ export class AdminOrdersPage extends OrderUtility implements OnInit {
     this.configTable();
     this.configHeader();
   }
-
+  refresh() {
+    location.reload();
+  }
 
 }

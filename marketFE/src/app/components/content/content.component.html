@@ -17,9 +17,12 @@
                     <ion-card-subtitle>{{prodotto.prezzo}}€</ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content>
+                    <ion-row *ngIf="!userLogged() || adminLogged()">
+                        <ion-label>Accedi per aggiungere prodotti al carrello!</ion-label>
+                    </ion-row>
                     <ion-row class="ion-justify-content-center">
-                        <ion-col class="col">
-                            <ion-button expand="block" [disabled]="!userLogged() || adminLogged()"
+                        <ion-col class="col" *ngIf="userLogged() && !adminLogged()">
+                            <ion-button expand="block" 
                                 (click)="setOpen(true, prodotto)">Aggiungi al carrello</ion-button>
                             <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello" [duration]="120"
                                 (didDismiss)="setOpen(false)"></ion-toast>
