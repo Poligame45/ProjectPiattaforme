@@ -9,10 +9,10 @@
         <ion-col size="1" *ngFor="let prodotto of list">
             <ion-card class="card">
                 <ion-row class="img-row">
-                    <img *ngIf="prodotto.img!" [src]="prodotto.img" height="200px"
+                    <img (click)="goToDetails(prodotto)" *ngIf="prodotto.img!" [src]="prodotto.img" height="200px"
                         style="display: flex; align-items: center; flex-direction: row; justify-content: center;">
                 </ion-row>
-                <ion-card-header  (click)="goToDetails(prodotto)">
+                <ion-card-header (click)="goToDetails(prodotto)">
                     <ion-card-title>{{prodotto.nome}}</ion-card-title>
                     <ion-card-subtitle>{{prodotto.prezzo}}€</ion-card-subtitle>
                 </ion-card-header>

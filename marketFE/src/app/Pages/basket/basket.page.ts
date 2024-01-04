@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/Services/basket.service';
 import { Basket } from 'src/app/models/Basket';
 import { BasketItem } from 'src/app/models/BasketItem';
+import { StoredProduct } from 'src/app/models/StoredProduct';
 import { AddUpdateBasketItemCommand } from 'src/app/models/command/basketCommand/AddUpdateBasketItemCommand';
 import { GetBasketCommand } from 'src/app/models/command/basketCommand/GetBasketCommand';
 import { GetDeleteBasketItemCommand } from 'src/app/models/command/basketCommand/GetDeleteBasketItemCommand';
@@ -21,6 +22,7 @@ export class BasketPage implements OnInit {
   totaleCarrello: number = 0;
   showEmptyBasket: boolean = false;
   @ViewChild('alertCustomer') alert!: IonAlert;
+  @ViewChild('alertBasket') alertBasket!: IonAlert;
 
 
   async changeSizeOfPages(event: IonSelectCustomEvent<SelectChangeEventDetail<any>>, item: BasketItem) {
@@ -42,7 +44,7 @@ export class BasketPage implements OnInit {
   }
 
 
-   ngOnInit() {
+  ngOnInit() {
   }
 
   async startSearch() {
@@ -84,8 +86,9 @@ export class BasketPage implements OnInit {
     let elem = sessionStorage.getItem('userId');
     command.customerId = +elem!
     await firstValueFrom(this.basketService.acquista(command));
+    this.alert.message="Ordine effettuato correttamente!"
     this.alert.present();
-    setTimeout( () => { this.alert.dismiss(); }, 1500 );
+    setTimeout(() => { this.alert.dismiss(); }, 1500);
   }
 
   goBack() {
@@ -103,4 +106,19 @@ export class BasketPage implements OnInit {
     }
     return false;
   }
+
+  goToStoredProduct(prodotto: StoredProduct) {
+    if (prodotto.qta > 0) {
+      this.router.navigate(['product-details'], { queryParams: { product: prodotto.codice } });
+    }else{
+      this.alertBasket.message="Il prodotto non è disponibile!"
+      this.alertBasket.present();
+      setTimeout(() => { this.alert.dismiss(); }, 1500);
+    }
+  }
+
+  reload(){
+    location.reload();
+  }
+
 }
