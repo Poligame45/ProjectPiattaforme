@@ -33,7 +33,6 @@ public class StoredProductQuery extends GenericQuery {
         }
         if (command.getNome() != null) {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                //return criteriaBuilder.like(root.get("nome"), "%" + command.getNome() + "%");
                 return criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%" + command.getNome().toUpperCase() + "%");
             });
         }
@@ -47,10 +46,9 @@ public class StoredProductQuery extends GenericQuery {
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
                 return criteriaBuilder.greaterThanOrEqualTo(root.get("qta"), command.getQta());
             });
-        }
-        if (command.getQta() == null) {
+        }else{
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.gt(root.get("qta"), 0);
+                return criteriaBuilder.greaterThanOrEqualTo(root.get("qta"), 0);
             });
         }
 

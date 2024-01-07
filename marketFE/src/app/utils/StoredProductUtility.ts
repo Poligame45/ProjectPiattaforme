@@ -23,7 +23,6 @@ export class StoredProductUtility extends Utility {
             this.resp = await firstValueFrom(this.storedProductService.searchStoredProducts(this.command));
         } else {
             this.command = new SearchCommandStoredProduct();
-            this.command.deleted = false;
             await this.startSearch();
         }
         this.totProdotti = this.resp.totProdotti;

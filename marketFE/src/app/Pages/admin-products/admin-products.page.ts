@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { IonAlert } from '@ionic/angular';
 import { firstValueFrom } from 'rxjs';
 import { StoredProductService } from 'src/app/Services/stored-product.service';
 import { StoredProduct } from 'src/app/models/StoredProduct';
@@ -19,12 +20,13 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
   table!: Table;
   myForm!:FormGroup;
   filtri:SearchCommandStoredProduct = new SearchCommandStoredProduct();
+  @ViewChild('alert') alert!: IonAlert;
 
   constructor(storedProductService: StoredProductService, private router: Router) {
     super(storedProductService);
     this.router.events.subscribe(async (ev) => {
       if (ev instanceof NavigationEnd) {
-        this.list = await super.startSearch();
+        this.list = await super.startSearch(this.filtri);
         this.configTable();
         this.configHeader();
       }
@@ -34,9 +36,6 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
   async ngOnInit() {
     this.table = new Table();
     this.configForm();
-    // this.list = await super.startSearch();
-    // this.configTable();
-    // this.configHeader();
   }
 
   configForm(){
@@ -66,9 +65,21 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
     const command: GetDeleteStoredProductCommand = {
       codice: +idProd
     }
-    await firstValueFrom(this.storedProductService.deleteStoredProduct(command));
-    location.reload();
+    let prod = await firstValueFrom(this.storedProductService.getStoredProduct(command));
+    if (!!prod.deleted) {
+      this.alert.message = "Prodotto già eliminato!"
+      this.alert.present();
+      setTimeout(() => { this.alert.dismiss(); }, 1500);
+      return;
+    } else {
+      firstValueFrom(await this.storedProductService.deleteStoredProduct(command));
+      this.alert.message = "Prodotto eliminato correttamente!"
+      this.alert.present();
+      setTimeout(() => { this.alert.dismiss(); }, 1500);
+    }
   }
+
+ 
 
   configTable() {
     this.table = new Table();
@@ -134,5 +145,10 @@ export class AdminProductsPage extends StoredProductUtility implements OnInit {
   goBack() {
     this.router.navigate(['admin-home-page']);
   }
+
+  refresh() {
+    location.reload();
+  }
+
 
 }

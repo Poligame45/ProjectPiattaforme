@@ -30,6 +30,8 @@
   </ion-toolbar>
 
   <table [table]="table" (editRowEvent)="editProduct($event)" (deleteRowEvent)="deleteStoredProduct($event)"></table>
+  <ion-alert #alert class="alert"
+  (didDismiss)="refresh();"></ion-alert>
 </ion-content>
 <ion-footer style="bottom: 0; display: contents;">
   <paginator *ngIf="list && list.length" (changePage)="changePage($event)" [current]="this.command.current"

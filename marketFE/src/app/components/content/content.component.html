@@ -7,7 +7,7 @@
     </ion-card>
     <ion-row *ngIf="!!list && list.length>0">
         <ion-col size="1" *ngFor="let prodotto of list">
-            <ion-card class="card">
+            <ion-card class="card" *ngIf="prodotto.deleted === false">
                 <ion-row class="img-row">
                     <img (click)="goToDetails(prodotto)" *ngIf="prodotto.img!" [src]="prodotto.img" height="200px"
                         style="display: flex; align-items: center; flex-direction: row; justify-content: center;">
@@ -20,8 +20,11 @@
                     <ion-row *ngIf="!userLogged() || adminLogged()">
                         <ion-label>Accedi per aggiungere prodotti al carrello!</ion-label>
                     </ion-row>
+                    <ion-row *ngIf="userLogged() && prodotto.qta <=0">
+                        <ion-label>Prodotto non disponibile</ion-label>
+                    </ion-row>
                     <ion-row class="ion-justify-content-center">
-                        <ion-col class="col" *ngIf="userLogged() && !adminLogged()">
+                        <ion-col class="col" *ngIf="userLogged() && !adminLogged() && prodotto.qta >0">
                             <ion-button expand="block" 
                                 (click)="setOpen(true, prodotto)">Aggiungi al carrello</ion-button>
                             <ion-toast [isOpen]="isToastOpen" message="Il prodotto è stato aggiunto correttamente al carrello" [duration]="120"

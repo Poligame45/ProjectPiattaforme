@@ -40,9 +40,15 @@ public class OrderCustomerQuery extends GenericQuery {
         }
         if(command.getDataAcquistoDa() != null){
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
-                return criteriaBuilder.between(root.get("dataAcquisto"),command.getDataAcquistoDa(),command.getDataAcquistoA());
+            return criteriaBuilder.greaterThanOrEqualTo(root.get("dataAcquisto"),command.getDataAcquistoDa());
+        });
+        }
+        if(command.getDataAcquistoA() != null){
+            specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
+                return criteriaBuilder.lessThanOrEqualTo(root.get("dataAcquisto"),command.getDataAcquistoA());
             });
         }
+
         if(command.getTotale() != null){
             specification = Objects.requireNonNull(specification).and((root, query, criteriaBuilder) -> {
                 return criteriaBuilder.greaterThanOrEqualTo(root.get("totale"), command.getTotale());
